@@ -11,8 +11,18 @@ export class TripDB extends React.Component
     }
 
     addTrip(name){
-        var Trip = new Trip(name);
-        this.trips.push(Trip);
+        var trip = new Trip(name);
+        this.trips.push(trip);
+    }
+
+    deleteTrip(name){
+        let newTrips = [];
+        for (let i = 0; i< trips.length; i++){
+            if(trips[i].name != name){
+                newTrips.push(trips[i])
+            }
+        }
+        this.trips = newTrips;
     }
 
 }
