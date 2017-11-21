@@ -42,7 +42,6 @@ export class Apple extends Component {
     tripdb.addTrip(tripName);
     this.setState({trips : tripdb.trips})
   };
-
 };
 const styles = StyleSheet.create({
   container: {
@@ -60,4 +59,5 @@ const styles = StyleSheet.create({
 export default App = StackNavigator({
   Home : {screen: Apple},
   TripProfile : {screen: PersonOverview},
+
 });

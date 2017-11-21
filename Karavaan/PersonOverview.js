@@ -31,7 +31,6 @@ export default class PersonOverview extends Component {
       super(props);
       this.state = { refreshing: false, persons: []};
     }
-
     render() {
       peopleView = this.state.persons.map( p => {
         return <Text key={p.name} style={styles.item}>{p.name} : {p.amount}</Text>
@@ -54,7 +53,6 @@ export default class PersonOverview extends Component {
       this.setState({persons: db.persons})
     }
   }
-
   const styles = StyleSheet.create({
     container: {
      flex: 1,
@@ -67,4 +65,5 @@ export default class PersonOverview extends Component {
       color: 'black'
     },
   });
+
   
