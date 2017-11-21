@@ -1,62 +1,49 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
-import AddPersonView from './AddPersonView';
-import {PersonDB} from './InMemoryDatabase';
-var db = new PersonDB();
-var persons = db.persons;
+import { StackNavigator} from 'react-navigation';
+import AddTripView from './AddTripView';
+import PersonOverview from './PersonOverview';
+import {TripDB} from './TripDB';
+import {Trip} from './Trip';
 
-function enterAmount(from, amount)
-{
-  if (amount > 0)
-  {
-    amountPerPerson = amount / persons.length;
-    amountFrom = 0 - amount + amountPerPerson;
-    for (var person in persons)
-    {
-      if (person.name == from)
-      {
-        person.amount += amountFrom;
-      }
-      else
-      {
-        person.amount += amountPerPerson;
-      }
-    }
-  }
-}
+let tripdb = new TripDB();
+let trips = tripdb.trips;
 
-export default class App extends Component {
-  constructor(props)
-  {
+//console.log(PersonOverview);
+
+export class Apple extends Component {
+  static navigationOptions = ({navigation}) => ({
+
+  });
+  constructor(props){
     super(props);
-    this.state = { refreshing: false, persons: []};
+    this.state = {trips : tripdb.trips};
+    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
   }
 
+  render(){
+    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
+    const {navigate} = this.props.navigation;
 
-  render() {
-    peopleView = this.state.persons.map( p => {
-      return <Text key={p.name} style={styles.item}>{p.name} : {p.amount}</Text>
+    tripsView = this.state.trips.map( trip => {
+      return <View><Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
+                   <Button title='Show  Trip' onPress={() => navigate('TripProfile')} />
+             </View>
     });
-
-    return (
-      <View style={styles.container}>
-        {peopleView}
-        
-        <AddPersonView foo={(x) => this.onFoo(x)}/>
+    return(
+      <View>
+        {tripsView}
+        <AddTripView addTrip = {(tripName) => this.onAddTrip(tripName)}/>
       </View>
     );
-  }
+  };
 
-  onFoo(person)
-  {
-    // alert("prrrrts");
-    //this.setState({persons: this.state.persons.concat("extra" + this.state.persons.length)})
-    db.addPerson(person);
-    this.setState({persons: db.persons})
-  }
-}
+  onAddTrip (tripName){
+    tripdb.addTrip(tripName);
+    this.setState({trips : tripdb.trips})
+  };
 
-
+};
 const styles = StyleSheet.create({
   container: {
    flex: 1,
@@ -68,7 +55,9 @@ const styles = StyleSheet.create({
     height: 44,
     color: 'black'
   },
-})
+});
 
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);
+export default App = StackNavigator({
+  Home : {screen: Apple},
+  TripProfile : {screen: PersonOverview},
+});
