@@ -9,6 +9,7 @@ import {Trip} from './Trip';
 let tripdb = new TripDB();
 let trips = tripdb.trips;
 
+
 //console.log(PersonOverview);
 
 export class Apple extends Component {
