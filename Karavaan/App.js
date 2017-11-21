@@ -27,7 +27,7 @@ export class Apple extends Component {
 
     tripsView = this.state.trips.map( trip => {
       return <View><Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
-                   <Button title='Show  Trip' onPress={() => navigate('TripProfile')} />
+                   <Button title='Show Trip' onPress={() => navigate('TripProfile' , {tripje: trip})} />
              </View>
     });
     return(

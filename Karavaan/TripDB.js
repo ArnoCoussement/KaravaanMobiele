@@ -17,12 +17,20 @@ export class TripDB extends React.Component
 
     deleteTrip(name){
         let newTrips = [];
-        for (let i = 0; i< trips.length; i++){
-            if(trips[i].name != name){
+        for (let i = 0; i< this.trips.length; i++){
+            if(this.trips[i].name != name){
                 newTrips.push(trips[i])
             }
         }
         this.trips = newTrips;
+    }
+
+    getTrip(name){
+        for(let i =0 ; i < this.trips.length; i++){
+            if(this.trips[i].name == name){
+                return this.trips[i];
+            }
+        }
     }
 
 }
