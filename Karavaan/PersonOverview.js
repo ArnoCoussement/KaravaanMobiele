@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
 import AddPersonView from './AddPersonView';
 import {PersonDB} from './InMemoryDatabase';
+import {Trip} from './Trip';
 
-var db = new PersonDB();
-var persons = db.persons;
 
 function enterAmount(from, amount)
 {
@@ -26,12 +25,16 @@ function enterAmount(from, amount)
   }
 }
 export default class PersonOverview extends Component {
+    static navigationOptions = ({navigation}) => ({
+      title: `Trip to ${navigation.state.params.tripje.name}`,
+    });
     constructor(props)
     {
       super(props);
-      this.state = { refreshing: false, persons: []};
+      this.state = { refreshing: false, persons: this.props.navigation.state.params.tripje.persons};
     }
     render() {
+      console.log(`-----------------------> this.props.navigation.state.params.tripjs = ${this.props.navigation.state.params.tripje}`)
       peopleView = this.state.persons.map( p => {
         return <Text key={p.name} style={styles.item}>{p.name} : {p.amount}</Text>
       });
@@ -39,7 +42,6 @@ export default class PersonOverview extends Component {
       return (
         <View style={styles.container}>
           {peopleView}
-          
           <AddPersonView foo={(x) => this.onFoo(x)}/>
         </View>
       );
@@ -47,10 +49,9 @@ export default class PersonOverview extends Component {
   
     onFoo(person)
     {
-      // alert("prrrrts");
       //this.setState({persons: this.state.persons.concat("extra" + this.state.persons.length)})
-      db.addPerson(person);
-      this.setState({persons: db.persons})
+      this.props.navigation.state.params.tripje.addPerson(person)
+      this.setState({persons: this.props.navigation.state.params.tripje.persons})
     }
   }
   const styles = StyleSheet.create({
