@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import AddTripView from './AddTripView';
+import AddPersonView from './AddPersonView';
 import PersonOverview from './PersonOverview';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
@@ -14,7 +15,7 @@ let trips = tripdb.trips;
 
 export class Apple extends Component {
   static navigationOptions = ({navigation}) => ({
-
+    title: `Trip list`,
   });
   constructor(props){
     super(props);
@@ -27,23 +28,27 @@ export class Apple extends Component {
     const {navigate} = this.props.navigation;
 
     tripsView = this.state.trips.map( trip => {
-      return <View><Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
-                   <Button title='Show Trip' onPress={() => navigate('TripProfile' , {tripje: trip})} />
-             </View>
-    });
+      return(
+        <View>
+          <Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
+          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {tripje: trip})} />
+        </View>
+      )});
+    
     return(
       <View>
         {tripsView}
-        <AddTripView addTrip = {(tripName) => this.onAddTrip(tripName)}/>
+        <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
       </View>
     );
   };
 
-  onAddTrip (tripName){
+  updateData = (tripName) => {
     tripdb.addTrip(tripName);
     this.setState({trips : tripdb.trips})
   };
 };
+
 const styles = StyleSheet.create({
   container: {
    flex: 1,
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
 
 export default App = StackNavigator({
   Home : {screen: Apple},
-  TripProfile : {screen: PersonOverview},
-
+  TripProfileScreen : {screen: PersonOverview},
+  AddTripScreen : {screen: AddTripView},
+  AddPersonScreen : {screen: AddPersonView},
 });

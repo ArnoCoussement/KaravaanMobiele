@@ -1,20 +1,17 @@
 import React from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
-import { TripDB } from './TripDB'
 
 
 export default class AddTripView extends React.Component
 {
+    static navigationOptions = ({navigation}) => ({
+        title: `Add A NEW Trip`,
+    });
+
     constructor(props)
     {
         super(props);
-        this.state = { text: ''}
-    }
-
-
-    addOnClick()
-    {
-        this.props.addTrip(this.state.text);
+        this.state = { text: ''};
     }
 
     render()
@@ -24,8 +21,10 @@ export default class AddTripView extends React.Component
                 <Text>Enter a name for the trip:</Text>
                 <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}
                     value={this.state.text}/>
-                <Button title='Add Trip' onPress={() => this.addOnClick()}/>
-
+                <Button title='Add Trip' onPress={() => {
+                    this.props.navigation.goBack()
+                    this.props.navigation.state.params.updateData(this.state.text)
+                }}/>
             </View>
         );
     }
