@@ -24,10 +24,11 @@ function enterAmount(from, amount)
     }
   }
 }
-export default class PersonOverview extends Component {
+export default class TripOverview extends Component {
     static navigationOptions = ({navigation}) => ({
       title: `Trip to ${navigation.state.params.tripje.name}`,
     });
+    
     constructor(props)
     {
       super(props);
@@ -49,12 +50,14 @@ export default class PersonOverview extends Component {
         <View style={styles.container}>
           {peopleView}
           <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { updateData:this.updateData, })} />
+          if (this.state.persons.length != 0) {
+            <Button title='Add Expense' onPress={() => navigate('AddExpenseScreen')} />
+          }
         </View>
       );
     }
   
     updateData = (person) => {
-      //this.setState({persons: this.state.persons.concat("extra" + this.state.persons.length)})
       this.props.navigation.state.params.tripje.addPerson(person)
       this.setState({persons: this.props.navigation.state.params.tripje.persons})
     }

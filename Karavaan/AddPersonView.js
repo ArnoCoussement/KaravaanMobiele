@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
-import { PersonDB } from './InMemoryDatabase'
-
 
 export default class AddPersonView extends React.Component
 {
@@ -20,8 +18,7 @@ export default class AddPersonView extends React.Component
         return (
             <View>
                 <Text>Enter a name: {this.props.bar}</Text>
-                <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}/>
+                <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}/>
                 <Button title='ADD' onPress={() => {
                     this.props.navigation.goBack()
                     this.props.navigation.state.params.updateData(this.state.text)

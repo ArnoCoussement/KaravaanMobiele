@@ -19,8 +19,7 @@ export default class AddTripView extends React.Component
         return (
             <View>
                 <Text>Enter a name for the trip:</Text>
-                <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}/>
+                <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}/>
                 <Button title='Add Trip' onPress={() => {
                     this.props.navigation.goBack()
                     this.props.navigation.state.params.updateData(this.state.text)

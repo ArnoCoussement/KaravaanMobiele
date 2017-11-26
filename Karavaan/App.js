@@ -3,7 +3,8 @@ import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, Refre
 import { StackNavigator} from 'react-navigation';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
-import PersonOverview from './PersonOverview';
+import TripOverview from './TripOverview';
+import AddExpenseView from './AddExpenseView';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
@@ -29,7 +30,7 @@ export class Apple extends Component {
 
     tripsView = this.state.trips.map( trip => {
       return(
-        <View>
+        <View style={styles.item}>
           <Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
           <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {tripje: trip})} />
         </View>
@@ -39,6 +40,7 @@ export class Apple extends Component {
       <View>
         {tripsView}
         <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
+        <Button title='Add Expense' onPress={() => navigate('AddExpenseScreen')} />
       </View>
     );
   };
@@ -56,15 +58,14 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 10,
-    fontSize: 18,
-    height: 44,
     color: 'black'
   },
 });
 
 export default App = StackNavigator({
   Home : {screen: Apple},
-  TripProfileScreen : {screen: PersonOverview},
+  TripProfileScreen : {screen: TripOverview},
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
+  AddExpenseScreen : {screen: AddExpenseView},
 });
