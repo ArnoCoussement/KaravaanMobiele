@@ -8,7 +8,7 @@ export class Trip extends React.Component
     {
         super();
         this.name = name;
-        this.currency = "EUR";
+        this.currency = ["EUR"];
 
         this.persons = [];
         this.expenses = [];

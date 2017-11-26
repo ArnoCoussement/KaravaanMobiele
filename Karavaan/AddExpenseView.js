@@ -4,17 +4,22 @@ import { Picker, View, TextInput, Text, Button } from 'react-native';
 export default class AddExpenseView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
-        title: `Add an expanse`,
+        title: `Add an expense`,
     });
 
     constructor(props)
     {
         super(props);
-        this.state = { category: '', date: '', currency: '', splittingMethod: ''};
+        this.state = { category: '', date: '', currency: this.props.navigation.state.params.trip.currency, splittingMethod: ''};
     }
 
     render()
     {
+        currencyPicker = this.state.currency.map( c => {
+            return (
+                <Picker.Item label={c} value={c}/>
+        )});
+
         return (
             <View>
                 <Text>Choose a category: {this.props.bar}</Text>
@@ -26,6 +31,12 @@ export default class AddExpenseView extends React.Component
                     <Picker.Item label="Activity"       value="activity"/>
                     <Picker.Item label="Food"           value="food"/>
                     <Picker.Item label="Miscellaneous"  value="miscellaneous"/>
+                </Picker>
+                <Text>Add a date: {this.props.bar}</Text>
+                <TextInput placeholder='DD/MM/YYYY' onChangeText={(text) => this.setState({date})}/>
+                <Text>Choose a currency: {this.props.bar}</Text>
+                <Picker>
+                    {currencyPicker}
                 </Picker>
                 <Text>How to split the bill? {this.props.bar}</Text>
                 <Picker

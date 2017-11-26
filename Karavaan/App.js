@@ -31,8 +31,8 @@ export class Apple extends Component {
     tripsView = this.state.trips.map( trip => {
       return(
         <View style={styles.item}>
-          <Text key={trip.name}> {trip.name} : {trip.currency}</Text>
-          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {tripje: trip})} />
+          <Text key={trip.name}> {trip.name}</Text>
+          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {trip: trip})} />
         </View>
       )});
     
@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
    paddingTop: 22
   },
   item: {
-    padding: 10,
-    color: 'black'
+    padding: 10
   },
 });
 
