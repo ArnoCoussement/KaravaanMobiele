@@ -10,7 +10,7 @@ export default class AddExpenseView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { category: '', date: '', currency: ''};
+        this.state = { category: '', date: '', currency: '', splittingMethod: ''};
     }
 
     render()
@@ -26,6 +26,14 @@ export default class AddExpenseView extends React.Component
                     <Picker.Item label="Activity"       value="activity"/>
                     <Picker.Item label="Food"           value="food"/>
                     <Picker.Item label="Miscellaneous"  value="miscellaneous"/>
+                </Picker>
+                <Text>How to split the bill? {this.props.bar}</Text>
+                <Picker
+                    selectedValue={this.state.splittingMethod}
+                    onValueChange={(itemValue, itemIndex) => this.setState({splittingMethod: itemValue})}>
+                    <Picker.Item label="Everyone pays his own share" value="own_share"/>
+                    <Picker.Item label="Divided evenly"              value="divided_even"/>
+                    <Picker.Item label="By way of a bill"            value="way_of_bill"/>
                 </Picker>
                 <Button title='ADD' onPress={() => {
                     this.props.navigation.goBack()

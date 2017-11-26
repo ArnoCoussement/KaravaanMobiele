@@ -46,13 +46,17 @@ export default class TripOverview extends Component {
           </Text>
       )});
 
+      function ExpenseButton(props) {
+        if (this.props.persons.length != 0) {
+          return <Button title='Add Expense' onPress={() => navigate('AddExpenseScreen')} />;
+        }
+      }
+
       return (
         <View style={styles.container}>
           {peopleView}
           <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { updateData:this.updateData, })} />
-          if (this.state.persons.length != 0) {
-            <Button title='Add Expense' onPress={() => navigate('AddExpenseScreen')} />
-          }
+          <Button title='Add Expense' disabled={this.state.persons.length == 0} onPress={() => navigate('AddExpenseScreen')} />
         </View>
       );
     }
@@ -71,8 +75,6 @@ export default class TripOverview extends Component {
     item: {
       padding: 10,
       fontSize: 18,
-      height: 44,
-      color: 'black'
     },
   });
 

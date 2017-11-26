@@ -31,7 +31,7 @@ export class Apple extends Component {
     tripsView = this.state.trips.map( trip => {
       return(
         <View style={styles.item}>
-          <Text key={trip.name}> {trip.name} : {trip.currency}</Text> 
+          <Text key={trip.name}> {trip.name} : {trip.currency}</Text>
           <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {tripje: trip})} />
         </View>
       )});
@@ -40,7 +40,6 @@ export class Apple extends Component {
       <View>
         {tripsView}
         <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
-        <Button title='Add Expense' onPress={() => navigate('AddExpenseScreen')} />
       </View>
     );
   };
