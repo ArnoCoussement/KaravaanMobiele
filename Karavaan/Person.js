@@ -7,7 +7,7 @@ export class Person extends React.Component
         super();
 
         this.name = name;
-        this.amount = 0;
+        // this.amount = 0;
     }
 
 }
