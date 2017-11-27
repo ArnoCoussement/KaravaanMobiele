@@ -33,7 +33,7 @@ export default class AddExpenseView extends React.Component
                     <Picker.Item label="Miscellaneous"  value="miscellaneous"/>
                 </Picker>
                 <Text>Add a date: {this.props.bar}</Text>
-                <TextInput placeholder='DD/MM/YYYY' onChangeText={(text) => this.setState({date})}/>
+                <TextInput placeholder='DD/MM/YYYY' onChangeText={(text) => this.setState({date: text})}/>
                 <Text>Choose a currency: {this.props.bar}</Text>
                 <Picker>
                     {currencyPicker}
