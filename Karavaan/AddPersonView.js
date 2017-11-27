@@ -7,14 +7,12 @@ export default class AddPersonView extends React.Component
         title: `Add A Travel Companion`,
     });
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         this.state = { text: ''}
     }
 
-    render()
-    {
+    render() {
         return (
             <View>
                 <Text>Enter a name: {this.props.bar}</Text>

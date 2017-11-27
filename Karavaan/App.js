@@ -44,9 +44,9 @@ export class Apple extends Component {
     );
   };
 
-  updateData = (tripName) => {
-    tripdb.addTrip(tripName);
-    this.setState({trips : tripdb.trips})
+  updateData = (tripName, currencies) => {
+    tripdb.addTrip(tripName, currencies);
+    this.setState({trips : tripdb.trips});
   };
 };
 

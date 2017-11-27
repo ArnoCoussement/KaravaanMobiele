@@ -10,8 +10,8 @@ export class TripDB extends React.Component
         this.trips = [];
     }
 
-    addTrip(name){
-        var trip = new Trip(name);
+    addTrip(name, currencies){
+        var trip = new Trip(name, currencies);
         this.trips.push(trip);
     }
 

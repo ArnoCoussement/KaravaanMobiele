@@ -10,12 +10,12 @@ export default class AddExpenseView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { category: '', date: '', currency: this.props.navigation.state.params.trip.currency, splittingMethod: ''};
+        this.state = { category: '', date: '', currencies: this.props.navigation.state.params.trip.currencies, splittingMethod: ''};
     }
 
     render()
     {
-        currencyPicker = this.state.currency.map( c => {
+        currencyPicker = this.state.currencies.map( c => {
             return (
                 <Picker.Item label={c} value={c}/>
         )});
