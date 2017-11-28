@@ -16,8 +16,7 @@ export class Expense extends React.Component
         }
     }
 
-    addPerson(name)
-    {
+    addPerson(name) {
         var person = new ExpensePerson(name);
         this.expensePersons[name] = person;
     }
