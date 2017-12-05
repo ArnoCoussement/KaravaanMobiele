@@ -21,16 +21,11 @@ export default class ExpensePaidView extends React.Component
     }
 
     onChanged = (name, amount) => {
-        console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${this.state.expense.expensePersons[0].paid}`);
         this.state.expense.setPayAmount(name, amount);
-        console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${this.state.expense.expensePersons[0].paid}`);
-        //        alert(this.state.expense.getPayAmount(name));
     }
 
     nextEvent = () => {
-        this.state.expense.expensePersons.forEach(function(element) {
-            console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${element.name}: ${element.paid}`)
-        }, this);
+        // navigate to 
     }
 
     render()

@@ -69,30 +69,8 @@ export default class AddExpenseView extends React.Component
                     <Picker.Item label={SPLITMETHOD.WAY_OF_BILL.name} value={SPLITMETHOD.WAY_OF_BILL}/>
                 </Picker>
                 <Button title='NEXT' onPress={() => {
-                    this.nextEvent()
+                    nextEvent()
                 }}/>
-            </View>
-        );
-    }
-}
-
-export class ExpenseOwedView extends React.Component
-{
-    static navigationOptions = ({navigation}) => ({
-        title: `Who owes what?`,
-        headerLeft: null,
-    });
-
-    constructor(props)
-    {
-        super(props);
-        this.state = { };
-    }
-
-    render()
-    {
-        return (
-            <View>
             </View>
         );
     }
