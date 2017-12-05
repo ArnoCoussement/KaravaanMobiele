@@ -69,7 +69,7 @@ export default class AddExpenseView extends React.Component
                     <Picker.Item label={SPLITMETHOD.WAY_OF_BILL.name} value={SPLITMETHOD.WAY_OF_BILL}/>
                 </Picker>
                 <Button title='NEXT' onPress={() => {
-                    nextEvent()
+                    this.nextEvent()
                 }}/>
             </View>
         );
