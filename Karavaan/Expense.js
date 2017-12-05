@@ -27,7 +27,9 @@ export class Expense extends React.Component
         this.expensePersons.forEach( (element) => {
             console.log(`******************** ${name} ?=? ${element.name}`);
             if (element.name == name) {
-                element.setPaid(amount);                
+                console.log(`******************** ${amount}`);
+                element.paid = amount;
+                console.log(`°°°°°°°°°°°°°°°°° ${element.paid}`);
             }
         }, this);
     }

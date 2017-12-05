@@ -14,8 +14,4 @@ export class ExpensePerson extends React.Component
     setOwed(owed) {
         this.owed = owed;
     }
-
-    setPaid(paid) {
-        this.paid = paid;
-    }
 }

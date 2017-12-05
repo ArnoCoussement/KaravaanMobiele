@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
-import AddTripView from './AddTripView';
-import AddPersonView from './AddPersonView';
-import TripOverview from './TripOverview';
-import Startup from './App.js';
-import AddExpenseView from './AddExpenseView';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
@@ -15,7 +10,7 @@ let trips = tripdb.trips;
 
 //console.log(PersonOverview);
 
-export class MainView extends Component {
+export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Trip list`,
   });
@@ -60,14 +55,4 @@ const styles = StyleSheet.create({
     padding: 10
   },
 });
-
-
-export default App = StackNavigator({
-  Home : {screen: MainView},
-  TripProfileScreen : {screen: TripOverview},
-  AddTripScreen : {screen: AddTripView},
-  AddPersonScreen : {screen: AddPersonView},
-  AddExpenseScreen : {screen: AddExpenseView},
-});
-
 

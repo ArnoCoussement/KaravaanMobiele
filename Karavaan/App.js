@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+import MainView from './MainView';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
 import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
-import MainView from './MainView';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
 });
 
 export default App = StackNavigator({
-  Startup : {screen: Startup},
-  MainView : {screen: MainView}
+  Home : {screen: Startup},
+  MainView : {screen: MainView},
+  TripProfileScreen : {screen: TripOverview},
+  AddTripScreen : {screen: AddTripView},
+  AddPersonScreen : {screen: AddPersonView},
+  AddExpenseScreen : {screen: AddExpenseView},
 });
