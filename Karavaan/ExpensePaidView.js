@@ -29,7 +29,7 @@ export default class ExpensePaidView extends React.Component
 
     nextEvent = () => {
         this.state.expense.expensePersons.forEach(function(element) {
-            console.log(`<><><><><><><>${element.paid}: ${element.paid}`)
+            console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${element.name}: ${element.paid}`)
         }, this);
     }
 
@@ -53,7 +53,7 @@ export default class ExpensePaidView extends React.Component
             <View>
                 {peopleView}
                 <Button title='NEXT' onPress={() => {
-                    nextEvent()
+                    this.nextEvent()
                 }}/>
             </View>
         );
