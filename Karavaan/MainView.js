@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
@@ -38,10 +38,10 @@ export class MainView extends Component {
       )});
     
     return(
-      <View>
+      <ScrollView>
         {tripsView}
         <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
-      </View>
+      </ScrollView>
     );
   };
 

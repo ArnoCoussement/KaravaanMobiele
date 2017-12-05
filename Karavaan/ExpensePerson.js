@@ -15,15 +15,7 @@ export class ExpensePerson extends React.Component
         this.owed = owed;
     }
 
-    getOwed() {
-        return this.owed;
-    }
-
     setPaid(paid) {
         this.paid = paid;
-    }
-
-    getPaid() {
-        return this.paid;
     }
 }

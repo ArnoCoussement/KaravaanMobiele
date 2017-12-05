@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
@@ -28,7 +28,7 @@ export class Startup extends Component {
     
     return(
       <View>
-        <Button title='Show trips' onPress={() => navigate('MainView', { })} />
+        <Button title='Add New Trip' onPress={() => navigate('MainView', {  })} />
       </View>
     );
   };
