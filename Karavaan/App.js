@@ -46,16 +46,10 @@ const styles = StyleSheet.create({
 });
 
 export default App = StackNavigator({
-<<<<<<< HEAD
-  Startup : {screen: Startup},
-  MainView : {screen: MainView},
-  AddTripScreen : {screen: AddTripView},
-=======
   Home : {screen: Startup},
   MainView : {screen: MainView},
   TripProfileScreen : {screen: TripOverview},
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
   AddExpenseScreen : {screen: AddExpenseView},
->>>>>>> ec8b7ec7954d89f63e9b930e47e0f1143d004bd5
 });
