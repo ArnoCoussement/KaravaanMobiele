@@ -1,5 +1,6 @@
 import React from 'react';
 import { Picker, View, TextInput, Text, Button } from 'react-native';
+import {Expense} from './Expense';
 
 var SPLITMETHOD = {
     OWN_SHARE    : { name: "Everyone pays his own share"},
@@ -16,21 +17,25 @@ export default class AddExpenseView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { category: '', date: '', currency: '', splittingMethod: ''};
+        this.state = { category: 'overnight_stay', date: '', currency: this.props.navigation.state.params.trip.currencies[0], splittingMethod: SPLITMETHOD.OWN_SHARE};
+        console.log(SPLITMETHOD.OWN_SHARE);
     }
 
     render()
     {
+        const {navigate} = this.props.navigation;
+
         currencyPicker = this.props.navigation.state.params.trip.currencies.map( c => {
             return (
                 <Picker.Item label={c} value={c}/>
         )});
 
-        splitPicker = this.SPLITMETHOD.map( s => {
-            return (
-                <Picker.Item label={s.name} value={s}/>
-        )});
-
+        nextEvent = () => {
+            var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
+            console.log(`><><><><><><><><><>< ${expense.currency}`);
+            navigate("ExpensePaidScreen", {expense: expense});
+        }
+        
         return (
             <View>
                 <Text>Choose a category: {this.props.bar}</Text>
@@ -55,10 +60,13 @@ export default class AddExpenseView extends React.Component
                 <Picker
                     selectedValue={this.state.splittingMethod}
                     onValueChange={(itemValue, itemIndex) => this.setState({splittingMethod: itemValue})}>
-                    {splitPicker}
+                    <Picker.Item label={SPLITMETHOD.OWN_SHARE.name} value={SPLITMETHOD.OWN_SHARE}/>
+                    <Picker.Item label={SPLITMETHOD.DIVIDED_EVEN.name} value={SPLITMETHOD.DIVIDED_EVEN}/>
+                    <Picker.Item label={SPLITMETHOD.WAY_OF_BILL.name} value={SPLITMETHOD.WAY_OF_BILL}/>
                 </Picker>
-                <Button title='ADD' onPress={() => {
-                    this.props.navigation.goBack()
+                <Button title='NEXT' onPress={() => {
+                    nextEvent()
+                    // this.props.navigation.goBack()
                     // this.props.navigation.state.params.updateData(this.state.text)
                 }}/>
             </View>
