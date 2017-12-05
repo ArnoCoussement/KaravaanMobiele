@@ -31,9 +31,13 @@ export default class AddExpenseView extends React.Component
         )});
 
         nextEvent = () => {
-            var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
-            console.log(`><><><><><><><><><>< ${expense.currency}`);
-            navigate("ExpensePaidScreen", {expense: expense});
+            if(this.state.date == '') {
+                alert("Don't forget to fill in a date");
+            } else {
+                var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
+                console.log(`><><><><><><><><><>< ${expense.currency}`);
+                navigate("ExpensePaidScreen", {expense: expense});    
+            }
         }
         
         return (
@@ -66,8 +70,6 @@ export default class AddExpenseView extends React.Component
                 </Picker>
                 <Button title='NEXT' onPress={() => {
                     nextEvent()
-                    // this.props.navigation.goBack()
-                    // this.props.navigation.state.params.updateData(this.state.text)
                 }}/>
             </View>
         );
