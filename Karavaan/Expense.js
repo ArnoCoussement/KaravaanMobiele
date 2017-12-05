@@ -14,6 +14,7 @@ export class Expense extends React.Component
 
         for (i = 0; i < persons.length; i++) {
             this.addPerson(persons[i].name);
+            console.log(`******************** ${this.expensePersons[i].name}: ${this.expensePersons[i].paid}: ${this.expensePersons[i].owed}`);
         }
     }
 
@@ -24,6 +25,7 @@ export class Expense extends React.Component
 
     setPayAmount(name, amount) {
         this.expensePersons.forEach( (element) => {
+            console.log(`******************** ${name} ?=? ${element.name}`);
             if (element.name == name) {
                 element.setPaid(amount);                
             }

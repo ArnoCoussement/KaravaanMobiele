@@ -17,11 +17,20 @@ export default class ExpensePaidView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { persons: this.props.navigation.state.params.expense.expensePersons };
+        this.state = { expense: this.props.navigation.state.params.expense, persons : this.props.navigation.state.params.expense.expensePersons };
     }
 
     onChanged = (name, amount) => {
-        this.props.navigation.state.params.expense.setPayAmount(name, amount);
+        console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${this.state.expense.expensePersons[0].paid}`);
+        this.state.expense.setPayAmount(name, amount);
+        console.log(`/\/\/\/\/\/\/\/\/\/\/\/\ ${this.state.expense.expensePersons[0].paid}`);
+        //        alert(this.state.expense.getPayAmount(name));
+    }
+
+    nextEvent = () => {
+        this.state.expense.expensePersons.forEach(function(element) {
+            console.log(`<><><><><><><>${element.paid}: ${element.paid}`)
+        }, this);
     }
 
     render()
@@ -34,8 +43,8 @@ export default class ExpensePaidView extends React.Component
                     </Text>
                     <TextInput 
                         keyboardType = 'numeric'
-                        placeholder={this.props.navigation.state.params.expense.currency}
-                        onChangeText = {(amount)=> onChanged(p.name, amount)}
+                        placeholder={this.state.expense.currency}
+                        onChangeText = {(amount)=> this.onChanged(p.name, amount)}
                     />
                 </View>
         )});
@@ -43,7 +52,9 @@ export default class ExpensePaidView extends React.Component
         return (
             <View>
                 {peopleView}
-                <Button title='NEXT' onPress={() => this.props.navigation.goBack()}/>
+                <Button title='NEXT' onPress={() => {
+                    nextEvent()
+                }}/>
             </View>
         );
     }
