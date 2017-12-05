@@ -28,7 +28,7 @@ export class Startup extends Component {
     
     return(
       <View>
-        <Button title='Add New Trip' onPress={() => navigate('MainView', {  })} />
+        <Button title='Show trips' onPress={() => navigate('MainView', {  })} />
       </View>
     );
   };
@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
 
 export default App = StackNavigator({
   Startup : {screen: Startup},
-  MainView : {screen: MainView}
+  MainView : {screen: MainView},
+  AddTripScreen : {screen: AddTripView},
 });
