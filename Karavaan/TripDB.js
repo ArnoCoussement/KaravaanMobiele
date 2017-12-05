@@ -1,5 +1,5 @@
 import React from 'react';
-import {Trip} from './Trip';
+import {Trip} from './Trip.js';
 import {AsyncStorage} from 'react-native';
 
 export class TripDB
@@ -14,9 +14,17 @@ export class TripDB
         this.trips = []
 
         AsyncStorage.getItem('trips').then((x) => {
+            
             if (x.length !== 0)
             {
-                this.trips = JSON.parse(x)
+                let items = JSON.parse(x)
+                for (var i  =0; i < items.length; i++)
+                {
+                    console.log(items[i])
+                    var trip = makeTripFromRawData(items[i])
+                    this.trips.push(trip)
+                }
+
             }
         });
         
@@ -47,4 +55,11 @@ export class TripDB
         }
     }
 
+}
+
+function makeTripFromRawData(data)
+{
+    let trip = new Trip(data.name, data.currencies);
+    let result = Object.assign(trip, data);
+    return result;
 }

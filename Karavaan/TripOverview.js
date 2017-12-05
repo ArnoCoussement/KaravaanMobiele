@@ -63,7 +63,7 @@ export default class TripOverview extends Component {
       console.log(`-> this.props.navigation.state.params = ${this.props.navigation.state.params}`)
       console.log(`-> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
       
-
+      console.log(this.props.navigation.state.params.trip);
       this.props.navigation.state.params.trip.addPerson(person)
       this.setState({persons: this.props.navigation.state.params.trip.persons})
     }

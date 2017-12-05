@@ -35,3 +35,5 @@ export class Trip extends React.Component
         this.expenses.push(expense);
     }
 }
+
+

@@ -9,8 +9,8 @@ import AddExpenseView from './AddExpenseView';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
-let tripdb = new TripDB();
-let trips = tripdb.trips;
+//let tripdb = new TripDB();
+//let trips = tripdb.trips;
 
 
 //console.log(PersonOverview);
