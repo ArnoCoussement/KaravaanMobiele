@@ -66,7 +66,7 @@ export default class AddExpenseView extends React.Component
     }
 }
 
-export default class ExpensePaidView extends React.Component
+export class ExpensePaidView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who paid?`,
@@ -88,7 +88,7 @@ export default class ExpensePaidView extends React.Component
     }
 }
 
-export default class ExpenseOwedView extends React.Component
+export class ExpenseOwedView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who owes what?`,
