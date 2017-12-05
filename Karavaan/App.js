@@ -5,6 +5,7 @@ import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
 import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
+import ExpensePaidView from './ExpensePaidView';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
@@ -66,4 +67,5 @@ export default App = StackNavigator({
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
   AddExpenseScreen : {screen: AddExpenseView},
+  ExpensePaidScreen : {screen: ExpensePaidView},
 });

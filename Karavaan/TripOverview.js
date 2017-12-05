@@ -57,6 +57,13 @@ export default class TripOverview extends Component {
     }
   
     updateData = (person) => {
+      console.log(`-> this.props = ${this.props}`)
+      console.log(`-> this.props.navigation = ${this.props.navigation}`)
+      console.log(`-> this.props.navigation.state = ${this.props.navigation.state}`)
+      console.log(`-> this.props.navigation.state.params = ${this.props.navigation.state.params}`)
+      console.log(`-> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
+      
+
       this.props.navigation.state.params.trip.addPerson(person)
       this.setState({persons: this.props.navigation.state.params.trip.persons})
     }
