@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+
 import MainView from './MainView';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
 import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
+import ExpensePaidView from './ExpensePaidView';
+import ExpenseOwedView from './ExpenseOwedView';
+
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
@@ -19,6 +23,7 @@ export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Let's get started!`,
   });
+
   constructor(props){
     super(props);
     console.disableYellowBox = true;
@@ -52,4 +57,6 @@ export default App = StackNavigator({
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
   AddExpenseScreen : {screen: AddExpenseView},
+  ExpensePaidScreen : {screen: ExpensePaidView},
+  ExpenseOwedScreen : {screen: ExpenseOwedView},
 });
