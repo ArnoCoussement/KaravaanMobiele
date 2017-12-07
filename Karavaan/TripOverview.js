@@ -12,13 +12,13 @@ export default class TripOverview extends Component {
     constructor(props)
     {
       super(props);
-      this.state = { refreshing: false, persons: this.props.navigation.state.params.trip.persons};
+      this.state = { tripdb: this.props.navigation.state.params.tripdb, trip: this.props.navigation.state.params.trip };
     }
 
     render() {
       const {navigate} = this.props.navigation;
 
-      peopleView = this.state.persons.map( p => {
+      peopleView = this.state.trip.persons.map( p => {
         return (
           <Text key={p.name} style={styles.item}>
             {p.name} : {p.totalPaid}
@@ -28,16 +28,16 @@ export default class TripOverview extends Component {
       return (
         <View style={styles.container}>
           {peopleView}
-          <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { updateData:this.updateData, })} />
-          <Button title='Add Expense' disabled={this.state.persons.length == 0}
-            onPress={() => navigate('AddExpenseScreen',{trip:this.props.navigation.state.params.trip})} />
+          <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { updateData: this.updateData })} />
+          <Button title='Add Expense' disabled={this.state.trip.persons.length == 0}
+            onPress={() => navigate('AddExpenseScreen', { tripdb: this.state.tripdb, trip: this.state.trip })} />
         </View>
       );
     }
   
     updateData = (name) => {
-      this.props.navigation.state.params.tripdb.addPersonToTrip(name, this.props.navigation.state.params.trip)
-      this.setState({persons: this.props.navigation.state.params.trip.persons})
+      this.state.tripdb.addPersonToTrip(name, this.state.trip)
+      this.setState({trip: this.props.navigation.state.params.trip})
     }
   };
 

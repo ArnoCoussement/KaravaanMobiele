@@ -12,8 +12,12 @@ export default class ExpensePaidView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { expense: this.props.navigation.state.params.expense, persons : this.props.navigation.state.params.expense.expensePersons };
-        console.log(`ùùùùùùùùùùùùùùùù ${SPLITMETHOD.DIVIDED_EVEN.name}`)
+        this.state = {
+            expense: this.props.navigation.state.params.expense,
+            persons : this.props.navigation.state.params.expense.expensePersons,
+            tripdb: this.props.navigation.state.params.tripdb,
+            trip: this.props.navigation.state.params.trip
+        };
     }
 
     onChanged = (name, amount) => {
@@ -25,7 +29,8 @@ export default class ExpensePaidView extends React.Component
 
         nextEvent = () => {
             if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
-                this.state.expense.dividedEven();
+                this.state.expense.divideEvenly();
+                this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
             } else {
                 navigate("ExpenseOwedScreen", {expense: this.state.expense});
             }

@@ -63,7 +63,7 @@ export class Expense extends React.Component
         })
     }
 
-    dividedEven() {
+    divideEvenly() {
         var amount = this.getTotalPaid();
         amount /= this.expensePersons.length;
 

@@ -63,11 +63,15 @@ export class TripDB
     addExpenseToTrip(expense, trip) {
         trip.addExpense(expense);
 
-        expense.persons.forEach( (p) => {
-            trip.persons[p.name].totalPaid += Number(experson.paid);
-            trip.persons[p.name].totalOwed += Number(experson.owed);
+         expense.expensePersons.forEach( (p1) => {
+            trip.persons.forEach( (p2) => {
+                if(p1.name == p2.name) {
+                    p2.totalPaid += Number(p1.paid);
+                    p2.totalOwed += Number(p1.owed);
+                }
+            }, this);
         }, this);
-
+ 
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 }

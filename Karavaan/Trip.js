@@ -22,7 +22,7 @@ export class Trip extends React.Component
 
     addPerson(name) {
         var person = new Person(name);
-        this.persons[name] = person;
+        this.persons.push(person);
     }
 
     addExpense(expense) {

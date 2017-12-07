@@ -23,6 +23,7 @@ export default class ExpenseOwedView extends React.Component
         const {navigate} = this.props.navigation;
         
         nextEvent = () => {
+            this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip)
             // Add expense to trip, set trip person info and go back to tripProfileScreen
         }
     

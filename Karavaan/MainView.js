@@ -4,9 +4,6 @@ import { StackNavigator} from 'react-navigation';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
-//let tripdb = new TripDB();
-//let trips = tripdb.trips;
-
 export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Trip list`,
@@ -41,7 +38,7 @@ export default class MainView extends Component {
   };
 
   updateData = (tripName, currencies) => {
-    tripdb.addTrip(tripName, currencies);
+    this.state.tripdb.addTrip(tripName, currencies);
     this.setState({trips : this.state.tripdb.trips});
   };
 };
