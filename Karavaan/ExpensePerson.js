@@ -2,16 +2,12 @@ import React from 'react';
 
 export class ExpensePerson extends React.Component
 {
-    constructor(name)
+    constructor(name, owed = 0, paid = 0)
     {
         super();
 
         this.name = name;
-        this.owed = 0;
-        this.paid = 0;
-    }
-
-    setOwed(owed) {
         this.owed = owed;
+        this.paid = paid;
     }
 }

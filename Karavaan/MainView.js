@@ -14,6 +14,7 @@ export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Trip list`,
   });
+
   constructor(props){
     super(props);
     this.state = {trips : tripdb.trips};
@@ -28,7 +29,7 @@ export default class MainView extends Component {
       return(
         <View style={styles.item}>
           <Text key={trip.name}> {trip.name}</Text>
-          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {trip: trip})} />
+          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen', {tripdb: tripdb, trip: trip})} />
         </View>
       )});
     

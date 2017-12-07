@@ -4,26 +4,6 @@ import AddPersonView from './AddPersonView';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
 
-
-function enterAmount(from, amount)
-{
-  if (amount > 0)
-  {
-    amountPerPerson = amount / persons.length;
-    amountFrom = 0 - amount + amountPerPerson;
-    for (var person in persons)
-    {
-      if (person.name == from)
-      {
-        person.amount += amountFrom;
-      }
-      else
-      {
-        person.amount += amountPerPerson;
-      }
-    }
-  }
-}
 export default class TripOverview extends Component {
     static navigationOptions = ({navigation}) => ({
       title: `Trip to ${navigation.state.params.trip.name}`,
@@ -38,11 +18,10 @@ export default class TripOverview extends Component {
     render() {
       const {navigate} = this.props.navigation;
 
-      console.log(`-----------------------> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
       peopleView = this.state.persons.map( p => {
         return (
           <Text key={p.name} style={styles.item}>
-            {p.name} : {p.amount}
+            {p.name} : {p.totalPaid}
           </Text>
       )});
 
@@ -56,15 +35,8 @@ export default class TripOverview extends Component {
       );
     }
   
-    updateData = (person) => {
-      console.log(`-> this.props = ${this.props}`)
-      console.log(`-> this.props.navigation = ${this.props.navigation}`)
-      console.log(`-> this.props.navigation.state = ${this.props.navigation.state}`)
-      console.log(`-> this.props.navigation.state.params = ${this.props.navigation.state.params}`)
-      console.log(`-> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
-      
-      console.log(this.props.navigation.state.params.trip);
-      this.props.navigation.state.params.trip.addPerson(person)
+    updateData = (name) => {
+      this.props.navigation.state.params.tripdb.addPersonToTrip(name, this.props.navigation.state.params.trip)
       this.setState({persons: this.props.navigation.state.params.trip.persons})
     }
   };

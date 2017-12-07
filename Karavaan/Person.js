@@ -5,9 +5,9 @@ export class Person extends React.Component
     constructor(name)
     {
         super();
-
+        
         this.name = name;
-        // this.amount = 0;
+        this.totalOwed = 0;
+        this.totalPaid = 0;
     }
-
 }

@@ -24,12 +24,13 @@ export default class ExpensePaidView extends React.Component
         this.state.expense.setPayAmount(name, amount);
     }
 
-    nextEvent = () => {
-        // navigate to 
-    }
+    render() {
+        const {navigate} = this.props.navigation;
 
-    render()
-    {
+        nextEvent = () => {
+            navigate("ExpenseOwedScreen", {expense: this.state.expense});
+        }
+    
         peopleView = this.state.persons.map( p => {
             return (
                 <View>
@@ -48,7 +49,7 @@ export default class ExpensePaidView extends React.Component
             <View>
                 {peopleView}
                 <Button title='NEXT' onPress={() => {
-                    this.nextEvent()
+                    nextEvent()
                 }}/>
             </View>
         );

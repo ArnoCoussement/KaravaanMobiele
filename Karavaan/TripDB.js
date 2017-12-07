@@ -1,16 +1,16 @@
 import React from 'react';
-import {Trip} from './Trip.js';
+import {Trip} from './Trip';
+import {Person} from './Person';
+import {Expense} from './Expense';
+import {ExpensePerson} from './ExpensePerson';
 import {AsyncStorage} from 'react-native';
 
 export class TripDB
 {
-    static async createDB() // : Promise<TripDB>
-    {
+    // : Promise<TripDB>
+    static async createDB() {}
 
-    }
-
-    constructor()
-    {
+    constructor() {
         this.trips = []
 
         AsyncStorage.getItem('trips').then((x) => {
@@ -18,23 +18,22 @@ export class TripDB
             if (x.length !== 0)
             {
                 let items = JSON.parse(x)
+                console.log(JSON.stringify(items))
                 for (var i  =0; i < items.length; i++)
                 {
-                    console.log(items[i])
                     var trip = makeTripFromRawData(items[i])
                     this.trips.push(trip)
                 }
 
             }
         });
-        
     }
 
     addTrip(name, currencies){
         var trip = new Trip(name, currencies);
         this.trips.push(trip);
 
-        AsyncStorage.setItem('trips', JSON.stringify(this.trips)).then(() => {});
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 
     deleteTrip(name){
@@ -45,6 +44,8 @@ export class TripDB
             }
         }
         this.trips = newTrips;
+
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 
     getTrip(name){
@@ -55,10 +56,24 @@ export class TripDB
         }
     }
 
+    addPersonToTrip(name, trip) {
+        trip.addPerson(name);
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
+    }
+
+    addExpenseToTrip(category, date, currency, trip) {
+        trip.addExpense(category, date, currency);
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
+    }
+
+    addExpenseToTrip(expense, trip) {
+        trip.addExpense(expense);
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
+    }
 }
 
-function makeTripFromRawData(data)
-{
+function makeTripFromRawData(data) {
+//    AsyncStorage.removeItem('trips');
     let trip = new Trip(data.name, data.currencies);
     let result = Object.assign(trip, data);
     return result;

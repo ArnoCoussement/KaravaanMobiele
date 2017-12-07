@@ -16,13 +16,14 @@ export default class ExpenseOwedView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { };
+        this.state = { expense: this.props.navigation.state.params.expense, persons : this.props.navigation.state.params.expense.expensePersons };
     }
 
     render()
     {
         return (
             <View>
+                <Text>Total paid: {this.state.expense.getTotalPaid()}</Text>
             </View>
         );
     }

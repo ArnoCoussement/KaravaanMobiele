@@ -17,8 +17,12 @@ export default class AddExpenseView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { category: 'overnight_stay', date: '', currency: this.props.navigation.state.params.trip.currencies[0], splittingMethod: SPLITMETHOD.OWN_SHARE};
-        console.log(SPLITMETHOD.OWN_SHARE);
+        this.state = {
+            category: 'overnight_stay',
+            date: '',
+            currency: this.props.navigation.state.params.trip.currencies[0],
+            splittingMethod: SPLITMETHOD.OWN_SHARE
+        };
     }
 
     render()
@@ -35,7 +39,6 @@ export default class AddExpenseView extends React.Component
                 alert("Don't forget to fill in a date");
             } else {
                 var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
-                console.log(`><><><><><><><><><>< ${expense.currency}`);
                 navigate("ExpensePaidScreen", {expense: expense});    
             }
         }

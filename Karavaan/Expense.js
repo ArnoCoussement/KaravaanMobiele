@@ -3,7 +3,7 @@ import {ExpensePerson} from './ExpensePerson';
 
 export class Expense extends React.Component
 {
-    constructor(persons, category, date, currency, splitMethod)
+    constructor(persons = [], category, date, currency, splitMethod, expensePersons = [])
     {
         super();
         this.expensePersons = [];
@@ -12,9 +12,12 @@ export class Expense extends React.Component
         this.currency = currency;
         this.splitMethod = splitMethod;
 
-        for (i = 0; i < persons.length; i++) {
-            this.addPerson(persons[i].name);
-            console.log(`******************** ${this.expensePersons[i].name}: ${this.expensePersons[i].paid}: ${this.expensePersons[i].owed}`);
+        if (persons.length == 0) {
+            this.expensePersons = expensePersons;
+        } else {
+            for (i = 0; i < persons.length; i++) {
+                this.addPerson(persons[i].name);
+            }
         }
     }
 
@@ -25,11 +28,8 @@ export class Expense extends React.Component
 
     setPayAmount(name, amount) {
         this.expensePersons.forEach( (element) => {
-            console.log(`******************** ${name} ?=? ${element.name}`);
             if (element.name == name) {
-                console.log(`******************** ${amount}`);
                 element.paid = amount;
-                console.log(`°°°°°°°°°°°°°°°°° ${element.paid}`);
             }
         }, this);
     }
@@ -42,11 +42,27 @@ export class Expense extends React.Component
         }, this);        
     }
 
+    setOweAmount(name, amount) {
+        this.expensePersons.forEach( (element) => {
+            if (element.name == name) {
+                element.owed = amount;
+            }
+        }, this);
+    }
+
+    getOweAmount(name) {
+        this.expensePersons.forEach( (element) => {
+            if (element.name == name) {
+                return element.owed;
+            }
+        }, this);        
+    }
+
     getTotalPaid() {
-        var amount = 0;
-        for (var x in this.expensePersons){
-            amount += this.expensePersons[x].getPaid();
-        }
+        var amount = Number(0);
+        this.expensePersons.forEach( (element) => {
+            amount += Number(element.paid);
+        }, this);        
         return amount;
     }
 }
