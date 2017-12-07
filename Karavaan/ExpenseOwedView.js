@@ -1,11 +1,7 @@
 import React from 'react';
+import {SPLITMETHOD} from './SplitMethods';
 import { View, TextInput, Text, Button } from 'react-native';
 
-var SPLITMETHOD = {
-    OWN_SHARE    : { name: "Everyone pays his own share"},
-    DIVIDED_EVEN : { name: "Divided evenly"},
-    WAY_OF_BILL  : { name: "By way of a bill"}
-}
 export default class ExpenseOwedView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
@@ -16,15 +12,63 @@ export default class ExpenseOwedView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { expense: this.props.navigation.state.params.expense, persons : this.props.navigation.state.params.expense.expensePersons };
+        this.state = { expense: this.props.navigation.state.params.expense, sharedAmount: 0 };
     }
 
-    render()
-    {
+    onChanged = (name, amount) => {
+        this.state.expense.setOweAmount(name, amount);
+    }
+
+    render() {
+        const {navigate} = this.props.navigation;
+        
+        nextEvent = () => {
+            // Add expense to trip, set trip person info and go back to tripProfileScreen
+        }
+    
+        peopleView = this.state.expense.expensePersons.map( p => {
+            return (
+                <View>
+                    <Text key={p.name}>
+                        {p.name}
+                    </Text>
+                    <TextInput 
+                        keyboardType = 'numeric'
+                        placeholder={this.state.expense.currency}
+                        onChangeText = {(amount)=> this.onChanged(p.name, amount)}
+                    />
+                </View>
+            )
+        });
+
         return (
             <View>
-                <Text>Total paid: {this.state.expense.getTotalPaid()}</Text>
+                {peopleView}
+                <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name}/>
+                <Button title='NEXT' onPress={() => {
+                    nextEvent()
+                }}/>
             </View>
         );
     }
 }
+
+function SharedExpenses(props) {
+    if (props.splitMethod == SPLITMETHOD.WAY_OF_BILL.name) {
+        return (
+            <View>
+                <Text>Shared Expenses</Text>
+                <TextInput 
+                    keyboardType = 'numeric'
+                    placeholder={props.placeholder}
+                    onChangeText = {(amount)=> {
+                        this.setState(sharedAmount=amount);
+                        console.log(`]]]]]]]]]]]]]]]]] ${this.state.sharedAmount}`)
+                    }}
+                />
+            </View>
+        )
+    } else {
+        return null;
+    }
+};

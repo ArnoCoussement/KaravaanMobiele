@@ -1,12 +1,7 @@
 import React from 'react';
-import { Picker, View, TextInput, Text, Button } from 'react-native';
 import {Expense} from './Expense';
-
-var SPLITMETHOD = {
-    OWN_SHARE    : { name: "Everyone pays his own share"},
-    DIVIDED_EVEN : { name: "Divided evenly"},
-    WAY_OF_BILL  : { name: "By way of a bill"}
-}
+import {SPLITMETHOD} from './SplitMethods';
+import { Picker, View, TextInput, Text, Button } from 'react-native';
 
 export default class AddExpenseView extends React.Component
 {

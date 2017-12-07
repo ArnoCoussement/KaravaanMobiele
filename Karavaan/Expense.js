@@ -3,7 +3,7 @@ import {ExpensePerson} from './ExpensePerson';
 
 export class Expense extends React.Component
 {
-    constructor(persons = [], category, date, currency, splitMethod, expensePersons = [])
+    constructor(persons = [], category, date, currency, splitMethod)
     {
         super();
         this.expensePersons = [];
@@ -12,12 +12,8 @@ export class Expense extends React.Component
         this.currency = currency;
         this.splitMethod = splitMethod;
 
-        if (persons.length == 0) {
-            this.expensePersons = expensePersons;
-        } else {
-            for (i = 0; i < persons.length; i++) {
-                this.addPerson(persons[i].name);
-            }
+        for (i = 0; i < persons.length; i++) {
+            this.addPerson(persons[i].name);
         }
     }
 
@@ -56,6 +52,24 @@ export class Expense extends React.Component
                 return element.owed;
             }
         }, this);        
+    }
+
+    setDividedEven(amount) {
+        var amount = Number(amount);
+        amount /= this.expensePersons.length;
+
+        this.expensePersons.forEach( (element) => {
+            element.owed = amount;
+        })
+    }
+
+    dividedEven() {
+        var amount = this.getTotalPaid();
+        amount /= this.expensePersons.length;
+
+        this.expensePersons.forEach( (element) => {
+            element.owed = amount;
+        })
     }
 
     getTotalPaid() {

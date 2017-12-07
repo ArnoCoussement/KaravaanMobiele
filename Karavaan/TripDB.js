@@ -60,13 +60,14 @@ export class TripDB
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 
-    addExpenseToTrip(category, date, currency, trip) {
-        trip.addExpense(category, date, currency);
-        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
-    }
-
     addExpenseToTrip(expense, trip) {
         trip.addExpense(expense);
+
+        expense.persons.forEach( (p) => {
+            trip.persons[p.name].totalPaid += Number(experson.paid);
+            trip.persons[p.name].totalOwed += Number(experson.owed);
+        }, this);
+
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 }

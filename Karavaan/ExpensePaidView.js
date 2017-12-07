@@ -1,11 +1,6 @@
 import React from 'react';
+import {SPLITMETHOD} from './SplitMethods';
 import { View, TextInput, Text, Button } from 'react-native';
-
-var SPLITMETHOD = {
-    OWN_SHARE    : { name: "Everyone pays his own share"},
-    DIVIDED_EVEN : { name: "Divided evenly"},
-    WAY_OF_BILL  : { name: "By way of a bill"}
-}
 
 export default class ExpensePaidView extends React.Component
 {
@@ -18,6 +13,7 @@ export default class ExpensePaidView extends React.Component
     {
         super(props);
         this.state = { expense: this.props.navigation.state.params.expense, persons : this.props.navigation.state.params.expense.expensePersons };
+        console.log(`ùùùùùùùùùùùùùùùù ${SPLITMETHOD.DIVIDED_EVEN.name}`)
     }
 
     onChanged = (name, amount) => {
@@ -28,7 +24,11 @@ export default class ExpensePaidView extends React.Component
         const {navigate} = this.props.navigation;
 
         nextEvent = () => {
-            navigate("ExpenseOwedScreen", {expense: this.state.expense});
+            if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
+                this.state.expense.dividedEven();
+            } else {
+                navigate("ExpenseOwedScreen", {expense: this.state.expense});
+            }
         }
     
         peopleView = this.state.persons.map( p => {
