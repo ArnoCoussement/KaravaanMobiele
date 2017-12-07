@@ -18,7 +18,6 @@ export class TripDB
             if (x.length !== 0)
             {
                 let items = JSON.parse(x)
-                console.log(JSON.stringify(items))
                 for (var i  =0; i < items.length; i++)
                 {
                     var trip = makeTripFromRawData(items[i])
@@ -36,11 +35,11 @@ export class TripDB
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
 
-    deleteTrip(name){
+    deleteTrip(trip) {
         let newTrips = [];
         for (let i = 0; i< this.trips.length; i++){
-            if(this.trips[i].name != name){
-                newTrips.push(trips[i])
+            if(this.trips[i] != trip){
+                newTrips.push(this.trips[i])
             }
         }
         this.trips = newTrips;

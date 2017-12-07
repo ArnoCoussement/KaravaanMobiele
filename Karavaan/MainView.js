@@ -4,11 +4,8 @@ import { StackNavigator} from 'react-navigation';
 import {TripDB} from './TripDB';
 import {Trip} from './Trip';
 
-let tripdb = new TripDB();
-let trips = tripdb.trips;
-
-
-//console.log(PersonOverview);
+//let tripdb = new TripDB();
+//let trips = tripdb.trips;
 
 export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -17,33 +14,35 @@ export default class MainView extends Component {
 
   constructor(props){
     super(props);
-    this.state = {trips : tripdb.trips};
-    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
+    this.state = {tripdb : this.props.navigation.state.params.tripdb};
   }
 
   render(){
-    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
     const {navigate} = this.props.navigation;
 
-    tripsView = this.state.trips.map( trip => {
+    tripsView = this.state.tripdb.trips.map( trip => {
       return(
         <View style={styles.item}>
           <Text key={trip.name}> {trip.name}</Text>
-          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen', {tripdb: tripdb, trip: trip})} />
+          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen', {tripdb: this.state.tripdb, trip: trip})} />
+          <Button title='Delete Trip' onPress={() => {
+            this.state.tripdb.deleteTrip(trip);
+            this.setState({trips : this.state.tripdb.trips});
+          }}/>
         </View>
       )});
     
     return(
       <ScrollView>
         {tripsView}
-        <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
+        <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData })} />
       </ScrollView>
     );
   };
 
   updateData = (tripName, currencies) => {
     tripdb.addTrip(tripName, currencies);
-    this.setState({trips : tripdb.trips});
+    this.setState({trips : this.state.tripdb.trips});
   };
 };
 
