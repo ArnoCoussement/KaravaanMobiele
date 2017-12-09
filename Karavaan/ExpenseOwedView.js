@@ -12,7 +12,8 @@ export default class ExpenseOwedView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { expense: this.props.navigation.state.params.expense, sharedAmount: 0 };
+        this.state = { expense: this.props.navigation.state.params.expense, sharedAmount: 0 , key: this.props.navigation.state.params.key};
+        console.log(`********************* ${this.props.navigation.state.key}`);
     }
 
     onChanged = (name, amount) => {
@@ -20,12 +21,12 @@ export default class ExpenseOwedView extends React.Component
     }
 
     render() {
-        const {navigate} = this.props.navigation;
+        const {goBack} = this.props.navigation;
         
-        nextEvent = () => {
-            this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip)
+        //nextEvent = () => {
+        //    this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip)
             // Add expense to trip, set trip person info and go back to tripProfileScreen
-        }
+        //}
     
         peopleView = this.state.expense.expensePersons.map( p => {
             return (
@@ -46,9 +47,8 @@ export default class ExpenseOwedView extends React.Component
             <View>
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name}/>
-                <Button title='NEXT' onPress={() => {
-                    nextEvent()
-                }}/>
+                
+                <Button title='NEXT' onPress={() => goBack(this.state.key) }/>
             </View>
         );
     }

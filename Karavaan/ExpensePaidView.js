@@ -16,7 +16,8 @@ export default class ExpensePaidView extends React.Component
             expense: this.props.navigation.state.params.expense,
             persons : this.props.navigation.state.params.expense.expensePersons,
             tripdb: this.props.navigation.state.params.tripdb,
-            trip: this.props.navigation.state.params.trip
+            trip: this.props.navigation.state.params.trip,
+            key: this.props.navigation.state.params.key
         };
     }
 
@@ -32,7 +33,7 @@ export default class ExpensePaidView extends React.Component
                 this.state.expense.divideEvenly();
                 this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
             } else {
-                navigate("ExpenseOwedScreen", {expense: this.state.expense});
+                navigate("ExpenseOwedScreen", {expense: this.state.expense, key: this.state.key});
             }
         }
     
