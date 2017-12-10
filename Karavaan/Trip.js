@@ -2,6 +2,7 @@ import React from 'react';
 import {Person} from './Person';
 import {Expense} from './Expense';
 
+let counter = 0;
 export class Trip extends React.Component
 {
     constructor(name, currencies = []) {
@@ -21,8 +22,9 @@ export class Trip extends React.Component
     }
 
     addPerson(name) {
-        var person = new Person(name);
+        var person = new Person(counter, name);
         this.persons.push(person);
+        counter++;
     }
 
     addExpense(expense) {

@@ -33,6 +33,7 @@ export default class ExpensePaidView extends React.Component
             if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
                 this.state.expense.divideEvenly();
                 this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
+                console.log(`****************************** ${this.state.expense.expensePersons[0].id}`)
                 goBack(this.state.key);
             } else {
                 navigate("ExpenseOwedScreen", {expense: this.state.expense, key: this.state.key});
