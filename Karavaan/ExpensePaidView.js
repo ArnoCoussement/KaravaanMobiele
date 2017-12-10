@@ -27,11 +27,13 @@ export default class ExpensePaidView extends React.Component
 
     render() {
         const {navigate} = this.props.navigation;
+        const {goBack} = this.props.navigation;
 
         nextEvent = () => {
             if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
                 this.state.expense.divideEvenly();
                 this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
+                goBack(this.state.key);
             } else {
                 navigate("ExpenseOwedScreen", {expense: this.state.expense, key: this.state.key});
             }
