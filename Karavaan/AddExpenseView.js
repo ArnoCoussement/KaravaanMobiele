@@ -17,7 +17,6 @@ export default class AddExpenseView extends React.Component
             date: '',
             currency: this.props.navigation.state.params.trip.currencies[0],
             splittingMethod: SPLITMETHOD.OWN_SHARE,
-            tripdb: this.props.navigation.state.params.tripdb,
             trip: this.props.navigation.state.params.trip,
             key: this.props.navigation.state.key
         };
@@ -37,7 +36,7 @@ export default class AddExpenseView extends React.Component
                 alert("Don't forget to fill in a date");
             } else {
                 var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
-                navigate("ExpensePaidScreen", {expense: expense, tripdb: this.state.tripdb, trip: this.state.trip, key: this.state.key});
+                navigate("ExpensePaidScreen", {expense: expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
             }
         }
         

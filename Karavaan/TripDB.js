@@ -65,7 +65,7 @@ export class TripDB
 
          expense.expensePersons.forEach( (p1) => {
             trip.persons.forEach( (p2) => {
-                if(p1.name == p2.name) {
+                if(p1.id == p2.id) {
                     p2.totalPaid += Number(p1.paid);
                     p2.totalOwed += Number(p1.owed);
                 }

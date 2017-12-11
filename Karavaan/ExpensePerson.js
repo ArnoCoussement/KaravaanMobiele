@@ -2,7 +2,7 @@ import React from 'react';
 
 export class ExpensePerson extends React.Component
 {
-    constructor(id ,name, owed = 0, paid = 0)
+    constructor(id, name, owed = 0, paid = 0)
     {
         super();
         this.id = id;

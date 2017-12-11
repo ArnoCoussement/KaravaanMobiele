@@ -1,6 +1,7 @@
 import React from 'react';
 import {SPLITMETHOD} from './SplitMethods';
 import { View, TextInput, Text, Button } from 'react-native';
+import {tripdb} from './App';
 
 export default class ExpensePaidView extends React.Component
 {
@@ -15,7 +16,6 @@ export default class ExpensePaidView extends React.Component
         this.state = {
             expense: this.props.navigation.state.params.expense,
             persons : this.props.navigation.state.params.expense.expensePersons,
-            tripdb: this.props.navigation.state.params.tripdb,
             trip: this.props.navigation.state.params.trip,
             key: this.props.navigation.state.params.key
         };
@@ -32,11 +32,11 @@ export default class ExpensePaidView extends React.Component
         nextEvent = () => {
             if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
                 this.state.expense.divideEvenly();
-                this.state.tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
-                console.log(`****************************** ${this.state.expense.expensePersons[0].id}`)
+                tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
                 goBack(this.state.key);
+                this.props.navigation.state.params.refresh()
             } else {
-                navigate("ExpenseOwedScreen", {expense: this.state.expense, key: this.state.key});
+                navigate("ExpenseOwedScreen", {expense: this.state.expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
             }
         }
     
@@ -44,7 +44,7 @@ export default class ExpensePaidView extends React.Component
             return (
                 <View>
                     <Text key={p.name}>
-                        {p.name}
+                        {p.id} -> {p.name}
                     </Text>
                     <TextInput 
                         keyboardType = 'numeric'

@@ -11,9 +11,8 @@ import ExpensePaidView from './ExpensePaidView';
 import ExpenseOwedView from './ExpenseOwedView';
 
 import {TripDB} from './TripDB';
-import {Trip} from './Trip';
 
-let tripdb = new TripDB();
+export let tripdb = new TripDB();
 
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -30,7 +29,7 @@ export class Startup extends Component {
     
     return(
       <View>
-        <Button title='Show trips' onPress={() => navigate('MainView', { tripdb: tripdb })} />
+        <Button title='Show trips' onPress={() => navigate('MainView')} />
       </View>
     );
   };

@@ -13,7 +13,7 @@ export class Expense extends React.Component
         this.splitMethod = splitMethod;
 
         for (i = 0; i < persons.length; i++) {
-            this.addPerson(persons[i].name);
+            this.addPerson(persons[i].id, persons[i].name);
         }
     }
 
