@@ -10,12 +10,15 @@ export default class MainView extends Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      trips : tripdb.trips
+    };
   }
 
   render(){
     const {navigate} = this.props.navigation;
 
-    tripsView = tripdb.trips.map( trip => {
+    tripsView = this.state.trips.map( trip => {
       return(
         <View style={styles.item}>
           <Text key={trip.name}> {trip.name}</Text>

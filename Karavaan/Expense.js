@@ -22,33 +22,33 @@ export class Expense extends React.Component
         this.expensePersons.push(person);
     }
 
-    setPayAmount(name, amount) {
+    setPayAmount(id, amount) {
         this.expensePersons.forEach( (element) => {
-            if (element.name == name) {
+            if (element.id == id) {
                 element.paid = amount;
             }
         }, this);
     }
 
-    getPayAmount(name) {
+    getPayAmount(id) {
         this.expensePersons.forEach( (element) => {
-            if (element.name == name) {
+            if (element.id == id) {
                 return element.paid;
             }
         }, this);        
     }
 
-    setOweAmount(name, amount) {
+    setOweAmount(id, amount) {
         this.expensePersons.forEach( (element) => {
-            if (element.name == name) {
+            if (element.id == id) {
                 element.owed = amount;
             }
         }, this);
     }
 
-    getOweAmount(name) {
+    getOweAmount(id) {
         this.expensePersons.forEach( (element) => {
-            if (element.name == name) {
+            if (element.id == id) {
                 return element.owed;
             }
         }, this);        
@@ -59,7 +59,7 @@ export class Expense extends React.Component
         amount /= this.expensePersons.length;
 
         this.expensePersons.forEach( (element) => {
-            element.owed = amount;
+            element.owed += amount;
         })
     }
 

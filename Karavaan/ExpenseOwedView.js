@@ -15,14 +15,32 @@ export default class ExpenseOwedView extends React.Component
         super(props);
         this.state = {
             expense: this.props.navigation.state.params.expense,
+            persons : this.props.navigation.state.params.expense.expensePersons,
             trip : this.props.navigation.state.params.trip,
             sharedAmount: 0,
-            key: this.props.navigation.state.params.key
+            key: this.props.navigation.state.params.key,
+            toBeOwed:this.props.navigation.state.params.expense.getTotalPaid()
         };
     }
 
-    onChanged = (name, amount) => {
-        this.state.expense.setOweAmount(name, amount);
+    onChanged = (id, amount) => {
+        // Set oweAmount to the given amount
+        this.state.expense.setOweAmount(id, amount);
+
+        // calculate what's been owed.
+        var totalOwed = this.state.expense.getTotalPaid();
+        this.state.expense.expensePersons.forEach((element) => {
+            totalOwed -= Number(element.owed);
+        }, this);
+        totalOwed -= Number(this.state.sharedAmount);
+
+        // reset oweAmount to 0 if it's a wrong amount
+        if (Number(totalOwed) < Number(0)) {
+            this.state.expense.setOweAmount(id, 0);
+            totalOwed += Number(amount);
+            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.");
+        }
+        this.setState({toBeOwed : totalOwed});
     }
 
     render() {
@@ -34,7 +52,7 @@ export default class ExpenseOwedView extends React.Component
             this.props.navigation.state.params.refresh();
         }
     
-        peopleView = this.state.expense.expensePersons.map( p => {
+        peopleView = this.state.persons.map( p => {
             return (
                 <View>
                     <Text key={p.name}>
@@ -42,8 +60,10 @@ export default class ExpenseOwedView extends React.Component
                     </Text>
                     <TextInput 
                         keyboardType = 'numeric'
-                        placeholder={this.state.expense.currency}
-                        onChangeText = {(amount)=> this.onChanged(p.name, amount)}
+                        value = {String(p.owed)}
+                        placeholder = { this.state.expense.currency }
+                        onChangeText = {(amount)=> this.onChanged(p.id, amount)}
+                        
                     />
                 </View>
             )
@@ -51,6 +71,7 @@ export default class ExpenseOwedView extends React.Component
 
         return (
             <View>
+                <Text>To be divided among travellers: {this.state.toBeOwed} {this.state.expense.currency}</Text>
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name}/>
                 <Button title='NEXT' onPress={() => {
@@ -58,6 +79,10 @@ export default class ExpenseOwedView extends React.Component
                 }}/>
             </View>
         );
+    }
+
+    refreshFunction = () => {
+        this.setState({persons : this.state.expense.expensePersons});
     }
 }
 

@@ -21,8 +21,8 @@ export default class ExpensePaidView extends React.Component
         };
     }
 
-    onChanged = (name, amount) => {
-        this.state.expense.setPayAmount(name, amount);
+    onChanged = (id, amount) => {
+        this.state.expense.setPayAmount(id, amount);
     }
 
     render() {
@@ -44,12 +44,12 @@ export default class ExpensePaidView extends React.Component
             return (
                 <View>
                     <Text key={p.name}>
-                        {p.id} -> {p.name}
+                        {p.name}
                     </Text>
                     <TextInput 
                         keyboardType = 'numeric'
                         placeholder={this.state.expense.currency}
-                        onChangeText = {(amount)=> this.onChanged(p.name, amount)}
+                        onChangeText = {(amount)=> this.onChanged(p.id, amount)}
                     />
                 </View>
         )});

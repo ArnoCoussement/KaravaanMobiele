@@ -10,4 +10,8 @@ export class ExpensePerson extends React.Component
         this.owed = owed;
         this.paid = paid;
     }
+
+    getOwed = () => {
+        return String(this.owed);
+    }
 }
