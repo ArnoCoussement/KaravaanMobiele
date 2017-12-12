@@ -22,6 +22,55 @@ export default class AddExpenseView extends React.Component
         };
     }
 
+    validDateFormat = () => {
+        var re = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/;
+        console.log(`€€€€€€€€€€€€€€€€€€€€ ${re.test(this.state.date)}`)
+        if (!re.test(this.state.date)) {
+            return false;
+        }
+        return true;
+    }
+
+    validDate = () => {
+        var res = this.state.date.split("/");
+        
+        var day = Number(res[0]);
+        var month = Number(res[1]);
+        var year = Number(res[2]);
+
+        switch (month) {
+            case 2:
+                if (day > 29 || day < 1) {
+                    return false;
+                } else if (day == 29) {
+                    if (res[2] % 4 == 0) {
+                        if (res[2] % 100 == 0) {
+                            if (res[2] % 400 != 0) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                break;
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                if (day > 31 || day < 1) {
+                    return false;
+                }
+                break;
+            case 4: case 6: case 9: case 11:
+                if (day > 30 || day < 1) {
+                    return false;
+                }
+                break;
+            default:
+                return false;
+                break;
+        }
+        return true;
+    }
+
     render()
     {
         const {navigate} = this.props.navigation;
@@ -32,8 +81,10 @@ export default class AddExpenseView extends React.Component
         )});
 
         nextEvent = () => {
-            if(this.state.date == '') {
-                alert("Don't forget to fill in a date");
+            if (!this.validDateFormat()) {
+                alert("The date hasn't got a valid format:\nDD/MM/YYYY");
+            } else if (!this.validDate()) {
+                alert("The date doesn't seems to exist.")
             } else {
                 var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
                 navigate("ExpensePaidScreen", {expense: expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
