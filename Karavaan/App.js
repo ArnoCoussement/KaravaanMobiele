@@ -1,53 +1,37 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+
+import MainView from './MainView';
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
 import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
 import ExpensePaidView from './ExpensePaidView';
+import ExpenseOwedView from './ExpenseOwedView';
+
 import {TripDB} from './TripDB';
-import {Trip} from './Trip';
 
-let tripdb = new TripDB();
-let trips = tripdb.trips;
+export let tripdb = new TripDB();
 
-
-//console.log(PersonOverview);
-
-export class Apple extends Component {
+export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
-    title: `Trip list`,
+    title: `Let's get started!`,
   });
+
   constructor(props){
     super(props);
-    this.state = {trips : tripdb.trips};
-    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
+    console.disableYellowBox = true;
   }
 
   render(){
-    console.log(`-----------------------> this.props.navigation = ${this.props.navigation}`)
     const {navigate} = this.props.navigation;
-
-    tripsView = this.state.trips.map( trip => {
-      return(
-        <View style={styles.item}>
-          <Text key={trip.name}> {trip.name}</Text>
-          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen' , {trip: trip})} />
-        </View>
-      )});
     
     return(
       <View>
-        {tripsView}
-        <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { updateData:this.updateData, })} />
+        <Button title='Show trips' onPress={() => navigate('MainView')} />
       </View>
     );
-  };
-
-  updateData = (tripName, currencies) => {
-    tripdb.addTrip(tripName, currencies);
-    this.setState({trips : tripdb.trips});
   };
 };
 
@@ -62,10 +46,12 @@ const styles = StyleSheet.create({
 });
 
 export default App = StackNavigator({
-  Home : {screen: Apple},
+  Home : {screen: Startup},
+  MainView : {screen: MainView},
   TripProfileScreen : {screen: TripOverview},
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
   AddExpenseScreen : {screen: AddExpenseView},
   ExpensePaidScreen : {screen: ExpensePaidView},
+  ExpenseOwedScreen : {screen: ExpenseOwedView},
 });

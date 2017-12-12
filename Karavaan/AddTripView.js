@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-
+import {tripdb} from './App';
 
 const currencies = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
 
@@ -32,8 +32,9 @@ export default class AddTripView extends React.Component
                     selectedItems={this.state.selectedCurrencies}
                     onSelectionsChange={this.onSelectionsChange}/>
                 <Button title='Add Trip' onPress={() => {
+                    tripdb.addTrip(this.state.text, this.state.selectedCurrencies)
                     this.props.navigation.goBack()
-                    this.props.navigation.state.params.updateData(this.state.text, this.state.selectedCurrencies)
+                    this.props.navigation.state.params.refresh()
                 }}/>
             </View>
         );

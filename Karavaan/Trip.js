@@ -4,13 +4,13 @@ import {Expense} from './Expense';
 
 export class Trip extends React.Component
 {
-    constructor(name, currencies = [])
-    {
+    constructor(name, currencies = []) {
         super();
         this.name = name;
         this.currencies = [];
         this.persons = [];
         this.expenses = [];
+        this.counter = 0;
         
         if (currencies.length != 0) {
             for (i = 0; i < currencies.length; i++) {
@@ -22,16 +22,14 @@ export class Trip extends React.Component
     }
 
     addPerson(name) {
-        var person = new Person(name);
+        var person = new Person(this.counter, name);
         this.persons.push(person);
-    }
-
-    addExpense(category, date, currency) {
-        var expense = new Expense(this.persons, category, date, currency);
-        this.expenses.push(expense);
+        this.counter++;
     }
 
     addExpense(expense) {
         this.expenses.push(expense);
     }
 }
+
+

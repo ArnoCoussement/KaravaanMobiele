@@ -4,26 +4,6 @@ import AddPersonView from './AddPersonView';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
 
-
-function enterAmount(from, amount)
-{
-  if (amount > 0)
-  {
-    amountPerPerson = amount / persons.length;
-    amountFrom = 0 - amount + amountPerPerson;
-    for (var person in persons)
-    {
-      if (person.name == from)
-      {
-        person.amount += amountFrom;
-      }
-      else
-      {
-        person.amount += amountPerPerson;
-      }
-    }
-  }
-}
 export default class TripOverview extends Component {
     static navigationOptions = ({navigation}) => ({
       title: `Trip to ${navigation.state.params.trip.name}`,
@@ -32,40 +12,31 @@ export default class TripOverview extends Component {
     constructor(props)
     {
       super(props);
-      this.state = { refreshing: false, persons: this.props.navigation.state.params.trip.persons};
+      this.state = { trip: this.props.navigation.state.params.trip };
     }
 
     render() {
       const {navigate} = this.props.navigation;
 
-      console.log(`-----------------------> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
-      peopleView = this.state.persons.map( p => {
+      peopleView = this.state.trip.persons.map( p => {
         return (
           <Text key={p.name} style={styles.item}>
-            {p.name} : {p.amount}
+            {p.name} : {p.totalPaid} ::: {p.totalOwed}
           </Text>
       )});
 
       return (
         <View style={styles.container}>
           {peopleView}
-          <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { updateData:this.updateData, })} />
-          <Button title='Add Expense' disabled={this.state.persons.length == 0}
-            onPress={() => navigate('AddExpenseScreen',{trip:this.props.navigation.state.params.trip})} />
+          <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })} />
+          <Button title='Add Expense' disabled={this.state.trip.persons.length == 0}
+            onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })} />
         </View>
       );
     }
-  
-    updateData = (person) => {
-      console.log(`-> this.props = ${this.props}`)
-      console.log(`-> this.props.navigation = ${this.props.navigation}`)
-      console.log(`-> this.props.navigation.state = ${this.props.navigation.state}`)
-      console.log(`-> this.props.navigation.state.params = ${this.props.navigation.state.params}`)
-      console.log(`-> this.props.navigation.state.params.trip = ${this.props.navigation.state.params.trip}`)
-      
 
-      this.props.navigation.state.params.trip.addPerson(person)
-      this.setState({persons: this.props.navigation.state.params.trip.persons})
+    refreshFunction = () => {
+      this.setState({trip: this.props.navigation.state.params.trip})
     }
   };
 

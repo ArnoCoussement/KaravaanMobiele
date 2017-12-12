@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
+import {tripdb} from './App';
 
 export default class AddPersonView extends React.Component
 {
@@ -9,7 +10,7 @@ export default class AddPersonView extends React.Component
 
     constructor(props) {
         super(props);
-        this.state = { text: ''}
+        this.state = { text: '', trip: this.props.navigation.state.params.trip }
     }
 
     render() {
@@ -18,8 +19,9 @@ export default class AddPersonView extends React.Component
                 <Text>Enter a name: {this.props.bar}</Text>
                 <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}/>
                 <Button title='ADD' onPress={() => {
+                    tripdb.addPersonToTrip(this.state.text, this.state.trip)
                     this.props.navigation.goBack()
-                    this.props.navigation.state.params.updateData(this.state.text)
+                    this.props.navigation.state.params.refresh()
                 }}/>
             </View>
         );

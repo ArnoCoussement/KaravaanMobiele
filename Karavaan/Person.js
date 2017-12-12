@@ -2,12 +2,12 @@ import React from 'react';
 
 export class Person extends React.Component
 {
-    constructor(name)
+    constructor(id ,name)
     {
         super();
-
+        this.id =id;
         this.name = name;
-        // this.amount = 0;
+        this.totalOwed = 0;
+        this.totalPaid = 0;
     }
-
 }

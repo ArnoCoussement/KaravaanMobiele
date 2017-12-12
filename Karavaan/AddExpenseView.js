@@ -1,12 +1,7 @@
 import React from 'react';
-import { Picker, View, TextInput, Text, Button } from 'react-native';
 import {Expense} from './Expense';
-
-var SPLITMETHOD = {
-    OWN_SHARE    : { name: "Everyone pays his own share"},
-    DIVIDED_EVEN : { name: "Divided evenly"},
-    WAY_OF_BILL  : { name: "By way of a bill"}
-}
+import {SPLITMETHOD} from './SplitMethods';
+import { Picker, View, TextInput, Text, Button } from 'react-native';
 
 export default class AddExpenseView extends React.Component
 {
@@ -17,8 +12,14 @@ export default class AddExpenseView extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = { category: 'overnight_stay', date: '', currency: this.props.navigation.state.params.trip.currencies[0], splittingMethod: SPLITMETHOD.OWN_SHARE};
-        console.log(SPLITMETHOD.OWN_SHARE);
+        this.state = {
+            category: 'overnight_stay',
+            date: '',
+            currency: this.props.navigation.state.params.trip.currencies[0],
+            splittingMethod: SPLITMETHOD.OWN_SHARE,
+            trip: this.props.navigation.state.params.trip,
+            key: this.props.navigation.state.key
+        };
     }
 
     render()
@@ -31,9 +32,12 @@ export default class AddExpenseView extends React.Component
         )});
 
         nextEvent = () => {
-            var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
-            console.log(`><><><><><><><><><>< ${expense.currency}`);
-            navigate("ExpensePaidScreen", {expense: expense});
+            if(this.state.date == '') {
+                alert("Don't forget to fill in a date");
+            } else {
+                var expense = new Expense( this.props.navigation.state.params.trip.persons, this.state.category, this.state.date, this.state.currency, this.state.splittingMethod);
+                navigate("ExpensePaidScreen", {expense: expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
+            }
         }
         
         return (
@@ -66,53 +70,7 @@ export default class AddExpenseView extends React.Component
                 </Picker>
                 <Button title='NEXT' onPress={() => {
                     nextEvent()
-                    // this.props.navigation.goBack()
-                    // this.props.navigation.state.params.updateData(this.state.text)
                 }}/>
-            </View>
-        );
-    }
-}
-
-export class ExpensePaidView extends React.Component
-{
-    static navigationOptions = ({navigation}) => ({
-        title: `Who paid?`,
-        headerLeft: null,
-    });
-
-    constructor(props)
-    {
-        super(props);
-        this.state = { };
-    }
-
-    render()
-    {
-        return (
-            <View>
-            </View>
-        );
-    }
-}
-
-export class ExpenseOwedView extends React.Component
-{
-    static navigationOptions = ({navigation}) => ({
-        title: `Who owes what?`,
-        headerLeft: null,
-    });
-
-    constructor(props)
-    {
-        super(props);
-        this.state = { };
-    }
-
-    render()
-    {
-        return (
-            <View>
             </View>
         );
     }
