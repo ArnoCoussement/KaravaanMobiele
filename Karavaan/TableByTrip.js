@@ -14,23 +14,19 @@ export default class TableByTrip extends Component {
         super(props);
     }
   
-    translateCategory = (category) => {
-
-    }
-
     render() {
         const {navigate} = this.props.navigation;
         const tableHead = ['Date', 'Category', 'Currency', ''];
         const but = (value) => (
-            <View>
-                <Button  title='INFO' onPress={() => navigate('TableByExpenseScreen', {trip: value})} />
+            <View style={styles.btn}>
+                <Button  title='INFO' onPress={() => navigate('TableByExpenseScreen', {expense: value})} />
             </View>
         );
 
         expensesView = tripdb.getExpensesFromTrip('test').map( expense => {
             return(
                 <Row
-                    data={[expense.date, expense.category, expense.currency, '']}
+                    data={[expense.date, expense.category, expense.currency, but(expense)]}
                     style={styles.row}
                     textStyle={styles.text}
                 />
@@ -65,6 +61,12 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     row: {
-        height: 30
-    }
+        height: 40
+    },
+    btn: {
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 5,
+        marginBottom: 5
+    },    
 });

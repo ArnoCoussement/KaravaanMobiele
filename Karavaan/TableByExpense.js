@@ -11,15 +11,29 @@ export default class TableByExpense extends Component {
       
     constructor(props) {
         super(props);
+        this.state = {
+            expense: this.props.navigation.state.params.expense
+        };
     }
   
     render() {
         const tableHead = ['Name', 'Paid', 'Owed', 'Receives/Still needs to pay'];
 
+        personView = this.state.expense.expensePersons.map( p => {
+            return(
+                <Row
+                    data={[p.name, p.paid, p.owed, p.owed-p.paid]}
+                    style={styles.row}
+                    textStyle={styles.text}
+                />
+            )
+        });
+
         return (
             <View style={styles.container}>
                 <Table>
-
+                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                    {personView}
                 </Table>
             </View>
         );
