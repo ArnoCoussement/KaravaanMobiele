@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+import { Table, Row, Cell } from 'react-native-table-component';
+import {tripdb} from './App';
 
-export default class SummaryView extends Component {
+export default class TableByExpense extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: `Summaries`,
+        title: `Table by expense`,
     });
       
     constructor(props) {
@@ -12,11 +14,13 @@ export default class SummaryView extends Component {
     }
   
     render() {
-        const {navigate} = this.props.navigation;
+        const tableHead = ['Name', 'Paid', 'Owed', 'Receives/Still needs to pay'];
 
         return (
             <View style={styles.container}>
-                <Button  title='Expenses' onPress={() => navigate('TableByTripScreen')} />
+                <Table>
+
+                </Table>
             </View>
         );
     }
@@ -31,4 +35,14 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 18,
     },
+    head: {
+        height: 40,
+        backgroundColor: '#f1f8ff'
+    },
+    text: {
+        marginLeft: 5
+    },
+    row: {
+        height: 30
+    }
 });

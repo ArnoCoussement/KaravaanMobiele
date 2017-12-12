@@ -74,10 +74,18 @@ export class TripDB
  
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
+
+    getExpensesFromTrip(name) {
+        for(let i =0 ; i < this.trips.length; i++){
+            if(this.trips[i].name == name){
+                return this.trips[i].expenses;
+                console.log(this.trips[i].expenses)
+            }
+        }
+    }
 }
 
 function makeTripFromRawData(data) {
-//    AsyncStorage.removeItem('trips');
     let trip = new Trip(data.name, data.currencies);
     let result = Object.assign(trip, data);
     return result;
