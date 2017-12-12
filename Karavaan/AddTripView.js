@@ -2,8 +2,14 @@ import React from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
 import {tripdb} from './App';
+import {Currencies} from './Currencies'
 
 const currencies = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
+
+//let currenciesDB = new Currencies();
+//let currencies = currenciesDB.currencies;
+//let codes = currenciesDB.codes;
+
 
 export default class AddTripView extends React.Component
 {
