@@ -11,6 +11,7 @@ export class Expense extends React.Component
         this.date = date;
         this.currency = currency;
         this.splitMethod = splitMethod;
+        this.sharedAmount = 0;
 
         for (i = 0; i < persons.length; i++) {
             this.addPerson(persons[i].id, persons[i].name);
@@ -54,12 +55,13 @@ export class Expense extends React.Component
         }, this);        
     }
 
-    setDividedEven(amount) {
-        var amount = Number(amount);
+    calculateOwed() {
+        var amount = Number(this.sharedAmount);
         amount /= this.expensePersons.length;
 
         this.expensePersons.forEach( (element) => {
-            element.owed += amount;
+            var temp = Number(element.owed) + amount;
+            element.owed = temp;
         })
     }
 
