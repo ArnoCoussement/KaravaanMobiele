@@ -31,7 +31,7 @@ export default class TripOverview extends Component {
           <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })} />
           <Button title='Add Expense' disabled={this.state.trip.persons.length == 0}
             onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })} />
-          <Button title='View Summary' onPress={() => navigate('SummaryScreen')} />
+          <Button title='View Summary' onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})} />
         </View>
       );
     }

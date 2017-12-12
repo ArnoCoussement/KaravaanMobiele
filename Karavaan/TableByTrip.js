@@ -12,6 +12,7 @@ export default class TableByTrip extends Component {
       
     constructor(props) {
         super(props);
+        this.state = { tripName: this.props.navigation.state.params.tripName };
     }
   
     render() {
@@ -23,7 +24,7 @@ export default class TableByTrip extends Component {
             </View>
         );
 
-        expensesView = tripdb.getExpensesFromTrip('test').map( expense => {
+        expensesView = tripdb.getExpensesFromTrip(this.state.tripName).map( expense => {
             return(
                 <Row
                     data={[expense.date, expense.category, expense.currency, but(expense)]}
