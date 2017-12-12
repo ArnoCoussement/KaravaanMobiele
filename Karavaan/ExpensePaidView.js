@@ -7,7 +7,6 @@ export default class ExpensePaidView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who paid?`,
-        headerLeft: null,
     });
 
     constructor(props)
@@ -21,8 +20,22 @@ export default class ExpensePaidView extends React.Component
         };
     }
 
+    validateAmounts = () => {
+        var re = /^[0-9]+(\.[0-9]{1,2})?$/;
+        var result = true;
+
+        this.state.persons.forEach((p) => {
+            if (!re.test(p.paid)) {
+                result = false;
+            }
+        }, this);
+
+        return result;
+    }
+
     onChanged = (id, amount) => {
         this.state.expense.setPayAmount(id, amount);
+        this.setState({persons : this.state.expense.expensePersons});
     }
 
     render() {
@@ -30,13 +43,17 @@ export default class ExpensePaidView extends React.Component
         const {goBack} = this.props.navigation;
 
         nextEvent = () => {
-            if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
-                this.state.expense.divideEvenly();
-                tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
-                goBack(this.state.key);
-                this.props.navigation.state.params.refresh()
+            if (this.validateAmounts()) {
+                if (this.state.expense.splitMethod.name == SPLITMETHOD.DIVIDED_EVEN.name) {
+                    this.state.expense.divideEvenly();
+                    tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
+                    goBack(this.state.key);
+                    this.props.navigation.state.params.refresh()
+                } else {
+                    navigate("ExpenseOwedScreen", {expense: this.state.expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
+                }
             } else {
-                navigate("ExpenseOwedScreen", {expense: this.state.expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
+                alert("You stupid morron! Couldn't you give valid numbers?\nExample: 12.34");
             }
         }
     
@@ -48,8 +65,9 @@ export default class ExpensePaidView extends React.Component
                     </Text>
                     <TextInput 
                         keyboardType = 'numeric'
+                        value={String(p.paid)}
                         placeholder={this.state.expense.currency}
-                        onChangeText = {(amount)=> this.onChanged(p.id, amount)}
+                        onChangeText = {(amount) => this.onChanged(p.id, amount)}
                     />
                 </View>
         )});

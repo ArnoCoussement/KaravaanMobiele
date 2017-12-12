@@ -7,7 +7,6 @@ export default class ExpenseOwedView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who owes what?`,
-        headerLeft: null,
     });
 
     constructor(props)
@@ -23,9 +22,19 @@ export default class ExpenseOwedView extends React.Component
         };
     }
 
+    validateAmount = (amount) => {
+        var re = /^[0-9]+(\.[0-9]{1,2})?$/;
+        return re.test(amount);
+    }
+
     onChanged = (id, amount) => {
         // Set oweAmount to the given amount
         this.state.expense.setOweAmount(id, amount);
+        
+        if (!this.validateAmount(amount)) {
+            this.state.expense.setOweAmount(id, 0);            
+            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.\nIt wasn't a valid number.\nExample: 12.34");
+        }
 
         // calculate what's been owed.
         var totalOwed = this.state.expense.getTotalPaid();
@@ -46,6 +55,11 @@ export default class ExpenseOwedView extends React.Component
     setShared = (amount) => {
         this.state.expense.sharedAmount = amount;
         
+        if (!this.validateAmount(amount)) {
+            this.state.expense.sharedAmount = 0;
+            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.\nIt wasn't a valid number.\nExample: 12.34");
+        }
+
         // calculate what's been owed.
         var totalOwed = this.state.expense.getTotalPaid();
         this.state.expense.expensePersons.forEach((element) => {
