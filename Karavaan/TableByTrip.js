@@ -12,22 +12,34 @@ export default class TableByTrip extends Component {
       
     constructor(props) {
         super(props);
-        this.state = { tripName: this.props.navigation.state.params.tripName };
+        this.state = {
+            tripName: this.props.navigation.state.params.tripName,
+            expenses : tripdb.getExpensesFromTrip(this.props.navigation.state.params.tripName)
+        };
     }
   
     render() {
         const {navigate} = this.props.navigation;
         const tableHead = ['Date', 'Category', 'Currency', ''];
-        const but = (value) => (
+        const butInfo = (value) => (
             <View style={styles.btn}>
                 <Button  title='INFO' onPress={() => navigate('TableByExpenseScreen', {expense: value})} />
             </View>
         );
 
-        expensesView = tripdb.getExpensesFromTrip(this.state.tripName).map( expense => {
+        const butDelete = (expense) => (
+            <View style={styles.btn}>
+                <Button  title='Delete' onPress={() => {
+                    tripdb.deleteExpensesFromTrip(expense, this.state.tripName);
+                    this.refreshFunction();
+                }} />
+            </View>
+        );
+
+        expensesView = this.state.expenses.map( expense => {
             return(
                 <Row
-                    data={[expense.date, expense.category, expense.currency, but(expense)]}
+                    data={[expense.date, expense.category, expense.currency, butInfo(expense)]}
                     style={styles.row}
                     textStyle={styles.text}
                 />
@@ -42,6 +54,10 @@ export default class TableByTrip extends Component {
                 </Table>
             </View>
         );
+    }
+
+    refreshFunction = () => {
+        this.setState({expenses : tripdb.getExpensesFromTrip(this.state.tripName)});
     }
 }
 
