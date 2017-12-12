@@ -9,6 +9,7 @@ export default class SummaryView extends Component {
       
     constructor(props) {
         super(props);
+        this.state = { tripName: this.props.navigation.state.params.tripName };
     }
   
     render() {
@@ -16,11 +17,11 @@ export default class SummaryView extends Component {
 
         return (
             <View style={styles.container}>
+                <Button  title='Expenses' onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})} />
             </View>
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

@@ -10,6 +10,8 @@ import AddExpenseView from './AddExpenseView';
 import ExpensePaidView from './ExpensePaidView';
 import ExpenseOwedView from './ExpenseOwedView';
 import SummaryView from './SummaryView';
+import TableByExpense from './TableByExpense';
+import TableByTrip from './TableByTrip';
 
 import {TripDB} from './TripDB';
 
@@ -56,4 +58,6 @@ export default App = StackNavigator({
   ExpensePaidScreen : {screen: ExpensePaidView},
   ExpenseOwedScreen : {screen: ExpenseOwedView},
   SummaryScreen : {screen: SummaryView},
+  TableByExpenseScreen : {screen: TableByExpense},
+  TableByTripScreen : {screen: TableByTrip},
 });

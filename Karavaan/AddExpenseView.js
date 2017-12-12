@@ -13,7 +13,7 @@ export default class AddExpenseView extends React.Component
     {
         super(props);
         this.state = {
-            category: 'overnight_stay',
+            category: 'Overnight Stay',
             date: '',
             currency: this.props.navigation.state.params.trip.currencies[0],
             splittingMethod: SPLITMETHOD.OWN_SHARE,
@@ -97,11 +97,11 @@ export default class AddExpenseView extends React.Component
                 <Picker
                     selectedValue={this.state.category}
                     onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
-                    <Picker.Item label="Overnight Stay" value="overnight_stay"/>
-                    <Picker.Item label="Transport"      value="transport"/>
-                    <Picker.Item label="Activity"       value="activity"/>
-                    <Picker.Item label="Food"           value="food"/>
-                    <Picker.Item label="Miscellaneous"  value="miscellaneous"/>
+                    <Picker.Item label="Overnight Stay" value="Overnight Stay"/>
+                    <Picker.Item label="Transport"      value="Transport"/>
+                    <Picker.Item label="Activity"       value="Activity"/>
+                    <Picker.Item label="Food"           value="Food"/>
+                    <Picker.Item label="Miscellaneous"  value="Miscellaneous"/>
                 </Picker>
                 <Text>Add a date: {this.props.bar}</Text>
                 <TextInput placeholder='DD/MM/YYYY' onChangeText={(text) => this.setState({date: text})}/>
