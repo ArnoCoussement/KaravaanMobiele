@@ -18,6 +18,7 @@ export default class SummaryView extends Component {
         return (
             <View style={styles.container}>
                 <Button  title='Expenses' onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})} />
+                <Button  title='Expenses by Category' onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} />
             </View>
         );
     }

@@ -102,7 +102,21 @@ export class TripDB
         }
     }
 
-    deleteExpensesFromTrip(expense, name) {
+    getExpensesByCategory(tripName) {
+        var expByCat = {
+            "Overnight Stay": [], "Transport": [], "Activity": [], "Food": [], "Miscellaneous": []
+        };
+
+        var expenses = this.getExpensesFromTrip(tripName);
+
+        expenses.forEach( (element) => {
+            expByCat[String(element.category)].push(element);
+        }, this);
+
+        return expByCat;
+    }
+
+    deleteExpenseFromTrip(expense, name) {
         let newExpenses = [];
 
         var trip = this.getTrip(name);

@@ -30,12 +30,12 @@ export default class TableByExpense extends Component {
         });
 
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Table>
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
                     {personView}
                 </Table>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -43,6 +43,7 @@ export default class TableByExpense extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 5,
         paddingTop: 22
     },
     item: {

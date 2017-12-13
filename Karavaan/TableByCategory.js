@@ -7,57 +7,67 @@ import {SPLITMETHOD} from './SplitMethods';
 
 export default class TableByTrip extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: `Table by expense`,
+        title: `Expense per Category`,
     });
       
     constructor(props) {
         super(props);
         this.state = {
             tripName: this.props.navigation.state.params.tripName,
-            expenses : tripdb.getExpensesFromTrip(this.props.navigation.state.params.tripName)
+            expenses : tripdb.getExpensesByCategory(this.props.navigation.state.params.tripName)
         };
     }
-  
-    render() {
+
+    getTotalPaid(expense) {
+        var amount = Number(0);
+        expense.expensePersons.forEach( (element) => {
+            amount += Number(element.paid);
+        }, this);        
+        return amount;
+    }
+
+    contentRow = (category) => {
         const {navigate} = this.props.navigation;
-        const tableHead = ['Date', 'Category', 'Currency', ''];
+        const rows = [];
         const butInfo = (value) => (
             <View style={styles.btn}>
                 <Button  title='INFO' onPress={() => navigate('TableByExpenseScreen', {expense: value})} />
             </View>
         );
-
-        const butDelete = (expense) => (
-            <View style={styles.btn}>
-                <Button  title='Delete' onPress={() => {
-                    tripdb.deleteExpenseFromTrip(expense, this.state.tripName);
-                    this.refreshFunction();
-                }} />
-            </View>
-        );
-
-        expensesView = this.state.expenses.map( expense => {
-            return(
+            
+        this.state.expenses[category].forEach((element) => {
+            rows.push(
                 <Row
-                    data={[expense.date, expense.category, expense.currency, butInfo(expense)]}
+                    data={[element.date, this.getTotalPaid(element), element.currency, butInfo(element)]}
                     style={styles.row}
                     textStyle={styles.text}
                 />
+            )
+        }, this);
+
+        return rows;
+    }
+  
+    render() {
+        const tableHead = ['Date', 'Total paid', 'Currency', ''];
+
+        categoryView = Object.keys(this.state.expenses).map( category => {
+            return(
+                <View style={styles.item}>
+                    <Text>{category}</Text>
+                    <Table>
+                        <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                        {this.contentRow(category)}
+                    </Table>
+                </View>
             )
         });
 
         return (
             <ScrollView style={styles.container}>
-                <Table>
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-                    {expensesView}
-                </Table>
+                {categoryView}
             </ScrollView>
         );
-    }
-
-    refreshFunction = () => {
-        this.setState({expenses : tripdb.getExpensesFromTrip(this.state.tripName)});
     }
 }
 
@@ -68,8 +78,7 @@ const styles = StyleSheet.create({
         paddingTop: 22
     },
     item: {
-        padding: 10,
-        fontSize: 18,
+        paddingTop: 10
     },
     head: {
         height: 40,
