@@ -5,51 +5,42 @@ import { Table, Row, Cell } from 'react-native-table-component';
 import {tripdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
 
-export default class TableByCategory extends Component {
+export default class TableByCategoryPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: `Expense per Category`,
+        title: `Expense per Category per Person`,
     });
       
     constructor(props) {
         super(props);
         this.state = {
             tripName: this.props.navigation.state.params.tripName,
-            expenses : tripdb.getExpensesByCategory(this.props.navigation.state.params.tripName)
+            expenses : tripdb.getExpensesByCategoryPerPerson(this.props.navigation.state.params.tripName)
         };
     }
 
-    getTotalPaid(expense) {
-        var amount = Number(0);
-        expense.expensePersons.forEach( (element) => {
-            amount += Number(element.paid);
-        }, this);        
-        return amount;
-    }
-
     contentRow = (category) => {
-        const {navigate} = this.props.navigation;
         const rows = [];
-        const butInfo = (value) => (
-            <View style={styles.btn}>
-                <Button  title='INFO' onPress={() => navigate('TableByExpenseScreen', {expense: value})} />
-            </View>
-        );
-            
-        this.state.expenses[category].forEach((element) => {
+        
+        Object.keys(this.state.expenses[category]).forEach( name => {
             rows.push(
                 <Row
-                    data={[element.date, this.getTotalPaid(element), element.currency, butInfo(element)]}
+                    data={[
+                        name,
+                        this.state.expenses[category][name].paid,
+                        this.state.expenses[category][name].owed,
+                        this.state.expenses[category][name].owed - this.state.expenses[category][name].paid
+                    ]}
                     style={styles.row}
                     textStyle={styles.text}
                 />
             )
-        }, this);
+        })
 
         return rows;
     }
   
     render() {
-        const tableHead = ['Date', 'Total paid', 'Currency', ''];
+        const tableHead = ['Name', 'Paid', 'Owed', 'Receives/Still needs to pay'];
 
         categoryView = Object.keys(this.state.expenses).map( category => {
             return(
@@ -75,10 +66,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 5,
-        paddingTop: 22
     },
     item: {
-        paddingTop: 10
+        paddingTop: 15
     },
     head: {
         height: 40,

@@ -116,6 +116,29 @@ export class TripDB
         return expByCat;
     }
 
+    getExpensesByCategoryPerPerson(tripName) {
+        var expByCat = {
+            "Overnight Stay": {}, "Transport": {}, "Activity": {}, "Food": {}, "Miscellaneous": {}
+        };
+
+        var expenses = this.getExpensesFromTrip(tripName);
+        
+        expenses.forEach( (exp) => {
+            exp.expensePersons.forEach((pers) => {
+                if (pers.name in expByCat[String(exp.category)]) {
+                    expByCat[String(exp.category)][String(pers.name)].paid += Number(pers.paid);
+                    expByCat[String(exp.category)][String(pers.name)].owed += Number(pers.owed);
+                } else {
+                    expByCat[String(exp.category)][String(pers.name)] = {paid: 0, owed: 0};
+                    expByCat[String(exp.category)][String(pers.name)].paid = Number(pers.paid);
+                    expByCat[String(exp.category)][String(pers.name)].owed = Number(pers.owed);
+                }
+            }, this);
+        }, this);
+
+        return expByCat;
+    }
+
     deleteExpenseFromTrip(expense, name) {
         let newExpenses = [];
 
