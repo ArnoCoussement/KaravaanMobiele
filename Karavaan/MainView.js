@@ -28,7 +28,7 @@ export default class MainView extends Component {
             this.refreshFunction();
           }}/>
         </View>
-      )});
+    )});
     
     return(
       <ScrollView>
