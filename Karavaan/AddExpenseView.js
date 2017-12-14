@@ -13,7 +13,7 @@ export default class AddExpenseView extends React.Component
     {
         super(props);
         this.state = {
-            category: '',
+            category: 'Overnight Stay',
             date: '',
             currency: this.props.navigation.state.params.trip.currencies[0],
             splittingMethod: SPLITMETHOD.OWN_SHARE,
@@ -74,7 +74,6 @@ export default class AddExpenseView extends React.Component
     render()
     {
         const {navigate} = this.props.navigation;
-        const categories = ["Overnight Stay", "Transport", "Activity", "Food", "Miscellaneous"];
 
         currencyPicker = this.props.navigation.state.params.trip.currencies.map( c => {
             return (
