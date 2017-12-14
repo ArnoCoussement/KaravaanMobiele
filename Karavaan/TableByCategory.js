@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
-import { Table, Row, Cell } from 'react-native-table-component';
+import { Table, Row } from 'react-native-table-component';
 import {tripdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
 

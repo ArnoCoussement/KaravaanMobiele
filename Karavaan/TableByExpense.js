@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
-import { Table, Row, Cell } from 'react-native-table-component';
+import { Table, Row } from 'react-native-table-component';
 import {tripdb} from './App';
 
 export default class TableByExpense extends Component {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 5,
-        paddingTop: 22
+        paddingTop: 15
     },
     item: {
         padding: 10,
