@@ -103,14 +103,15 @@ export class TripDB
     }
 
     getExpensesByCategory(tripName) {
-        var expByCat = {
-            "Overnight Stay": [], "Transport": [], "Activity": [], "Food": [], "Miscellaneous": []
-        };
+        var expByCat = {};
 
         var expenses = this.getExpensesFromTrip(tripName);
 
-        expenses.forEach( (element) => {
-            expByCat[String(element.category)].push(element);
+        expenses.forEach( (exp) => {
+            if (!(exp.category in expByCat)) {
+                expByCat[exp.category] = [];
+            }
+            expByCat[exp.category].push(exp);
         }, this);
 
         return expByCat;

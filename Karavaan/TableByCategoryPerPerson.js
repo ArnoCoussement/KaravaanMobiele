@@ -18,17 +18,17 @@ export default class TableByCategoryPerPerson extends Component {
         };
     }
 
-    contentRow = (category) => {
+    contentRow = (values) => {
         const rows = [];
         
-        Object.keys(this.state.expenses[category]).forEach( id => {
+        Object.keys(values).forEach( id => {
             rows.push(
                 <Row
                     data={[
-                        this.state.expenses[category][id].name,
-                        this.state.expenses[category][id].paid,
-                        this.state.expenses[category][id].owed,
-                        this.state.expenses[category][id].owed - this.state.expenses[category][id].paid
+                        values[id].name,
+                        values[id].paid,
+                        values[id].owed,
+                        values[id].owed - values[id].paid
                     ]}
                     style={styles.row}
                     textStyle={styles.text}
@@ -48,7 +48,7 @@ export default class TableByCategoryPerPerson extends Component {
                     <Text style={styles.headText}>{category}</Text>
                     <Table>
                         <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-                        {this.contentRow(category)}
+                        {this.contentRow(this.state.expenses[category])}
                     </Table>
                 </View>
             )

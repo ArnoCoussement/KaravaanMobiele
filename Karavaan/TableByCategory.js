@@ -54,7 +54,7 @@ export default class TableByCategory extends Component {
         categoryView = Object.keys(this.state.expenses).map( category => {
             return(
                 <View style={styles.item}>
-                    <Text>{category}</Text>
+                    <Text style={styles.headText}>{category}</Text>
                     <Table>
                         <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
                         {this.contentRow(category)}
@@ -75,7 +75,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 5,
-        paddingTop: 22
+    },
+    headText: {
+        fontSize: 18,
+        fontWeight: 'bold'
     },
     item: {
         paddingTop: 10

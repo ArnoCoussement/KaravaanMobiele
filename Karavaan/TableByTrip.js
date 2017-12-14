@@ -7,7 +7,7 @@ import {SPLITMETHOD} from './SplitMethods';
 
 export default class TableByTrip extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: `Table by expense`,
+        title: `All Expenses of this Trip`,
     });
       
     constructor(props) {
