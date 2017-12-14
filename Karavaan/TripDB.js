@@ -117,26 +117,46 @@ export class TripDB
     }
 
     getExpensesByCategoryPerPerson(tripName) {
-        var expByCat = {
-            "Overnight Stay": {}, "Transport": {}, "Activity": {}, "Food": {}, "Miscellaneous": {}
-        };
+        var expByCat = {};
 
         var expenses = this.getExpensesFromTrip(tripName);
         
         expenses.forEach( (exp) => {
             exp.expensePersons.forEach((pers) => {
-                if (pers.name in expByCat[String(exp.category)]) {
-                    expByCat[String(exp.category)][String(pers.name)].paid += Number(pers.paid);
-                    expByCat[String(exp.category)][String(pers.name)].owed += Number(pers.owed);
-                } else {
-                    expByCat[String(exp.category)][String(pers.name)] = {paid: 0, owed: 0};
-                    expByCat[String(exp.category)][String(pers.name)].paid = Number(pers.paid);
-                    expByCat[String(exp.category)][String(pers.name)].owed = Number(pers.owed);
+                if (!(exp.category in expByCat)) {
+                    expByCat[exp.category] = {};
                 }
-            }, this);
+                if (!(pers.id in expByCat[exp.category])) {
+                    expByCat[exp.category][pers.id] = {name: pers.name, paid: 0, owed: 0};
+                }
+                expByCat[exp.category][pers.id].paid += Number(pers.paid);
+                expByCat[exp.category][pers.id].owed += Number(pers.owed);
+        }, this);
         }, this);
 
         return expByCat;
+    }
+
+    getExpensesByPersonPerDay(tripName) {
+        var expByPers = {};
+
+        var expenses = this.getExpensesFromTrip(tripName);
+        
+        expenses.forEach( (exp) => {
+            exp.expensePersons.forEach((pers) => {
+                if (!(pers.id in expByPers)) {
+                    expByPers[pers.id] = {name:pers.name, dates:{}};
+                }
+                if (!(exp.date in expByPers[pers.id].dates)) {
+                    expByPers[pers.id].dates[exp.date] = [];
+                }
+                expByPers[pers.id].dates[exp.date].push({category:exp.category, paid:pers.paid, owed:pers.owed, currency:exp.currency});
+            }, this);
+        }, this);
+
+        console.log(expByPers);
+
+        return expByPers;
     }
 
     deleteExpenseFromTrip(expense, name) {

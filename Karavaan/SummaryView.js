@@ -26,6 +26,9 @@ export default class SummaryView extends Component {
                 <View style={styles.button}>
                     <Button  title='Expenses by Category per Person' onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} />
                 </View>
+                <View style={styles.button}>
+                    <Button  title='Expenses per Person per Day' onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} />
+                </View>
             </View>
         );
     }

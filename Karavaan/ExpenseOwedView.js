@@ -84,7 +84,7 @@ export default class ExpenseOwedView extends React.Component
     render() {
         const {goBack} = this.props.navigation;
         
-        nextEvent = () => {
+        addEvent = () => {
             if (this.validateAmounts()) {
                 if (this.state.toBeOwed != Number(0)) {
                     alert("Not yet everything is divided among the travellers.");                
@@ -121,7 +121,7 @@ export default class ExpenseOwedView extends React.Component
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name} current={this.state.expense.sharedAmount} onChangeText={this.setShared}/>
                 <Button title='NEXT' onPress={() => {
-                    nextEvent()
+                    addEvent()
                 }}/>
             </View>
         );
