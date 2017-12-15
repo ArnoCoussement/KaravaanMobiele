@@ -22,19 +22,29 @@ export default class ExpenseOwedView extends React.Component
         };
     }
 
-    validateAmount = (amount) => {
+    validateAmounts = () => {
         var re = /^[0-9]+(\.[0-9]{1,2})?$/;
-        return re.test(amount);
+        var result = true;
+
+        this.state.persons.forEach((p) => {
+            if (!re.test(p.owed)) {
+                p.owed = 0;
+                result = false;
+            }
+        }, this);
+
+        if (!re.test(this.state.sharedAmount)) {
+            this.setShared(0)
+            result = false;
+        }
+
+
+        return result;
     }
 
     onChanged = (id, amount) => {
         // Set oweAmount to the given amount
         this.state.expense.setOweAmount(id, amount);
-        
-        if (!this.validateAmount(amount)) {
-            this.state.expense.setOweAmount(id, 0);            
-            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.\nIt wasn't a valid number.\nExample: 12.34");
-        }
 
         // calculate what's been owed.
         var totalOwed = this.state.expense.getTotalPaid();
@@ -54,11 +64,6 @@ export default class ExpenseOwedView extends React.Component
 
     setShared = (amount) => {
         this.state.expense.sharedAmount = amount;
-        
-        if (!this.validateAmount(amount)) {
-            this.state.expense.sharedAmount = 0;
-            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.\nIt wasn't a valid number.\nExample: 12.34");
-        }
 
         // calculate what's been owed.
         var totalOwed = this.state.expense.getTotalPaid();
@@ -73,20 +78,24 @@ export default class ExpenseOwedView extends React.Component
             totalOwed += Number(amount);
             alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.");
         }
-        this.setState({toBeOwed : totalOwed});
+        this.setState({sharedAmount:amount, toBeOwed : totalOwed});
     }
 
     render() {
         const {goBack} = this.props.navigation;
         
-        nextEvent = () => {
-            if (this.state.toBeOwed != Number(0)) {
-                alert("Not yet everything is divided among the travellers.");                
+        addEvent = () => {
+            if (this.validateAmounts()) {
+                if (this.state.toBeOwed != Number(0)) {
+                    alert("Not yet everything is divided among the travellers.");                
+                } else {
+                    this.state.expense.calculateOwed();
+                    tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
+                    goBack(this.state.key);
+                    this.props.navigation.state.params.refresh();
+                }
             } else {
-                this.state.expense.calculateOwed();
-                tripdb.addExpenseToTrip(this.state.expense, this.state.trip);
-                goBack(this.state.key);
-                this.props.navigation.state.params.refresh();
+                alert("You stupid morron! Couldn't you give valid numbers?\nExample: 12.34");
             }
         }
     
@@ -112,7 +121,7 @@ export default class ExpenseOwedView extends React.Component
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name} current={this.state.expense.sharedAmount} onChangeText={this.setShared}/>
                 <Button title='NEXT' onPress={() => {
-                    nextEvent()
+                    addEvent()
                 }}/>
             </View>
         );

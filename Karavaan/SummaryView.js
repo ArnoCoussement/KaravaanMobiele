@@ -17,7 +17,18 @@ export default class SummaryView extends Component {
 
         return (
             <View style={styles.container}>
-                <Button  title='Expenses' onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})} />
+                <View style={styles.button}>
+                    <Button  title='Expenses' onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})} />
+                </View>
+                <View style={styles.button}>
+                    <Button  title='Expenses by Category' onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} />
+                </View>
+                <View style={styles.button}>
+                    <Button  title='Expenses by Category per Person' onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} />
+                </View>
+                <View style={styles.button}>
+                    <Button  title='Expenses per Person per Day' onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} />
+                </View>
             </View>
         );
     }
@@ -28,8 +39,8 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 22
     },
-    item: {
+    button: {
         padding: 10,
-        fontSize: 18,
+        paddingTop: 15
     },
 });

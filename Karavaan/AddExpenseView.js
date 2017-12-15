@@ -90,7 +90,7 @@ export default class AddExpenseView extends React.Component
                 navigate("ExpensePaidScreen", {expense: expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
             }
         }
-        
+
         return (
             <View>
                 <Text>Choose a category: {this.props.bar}</Text>

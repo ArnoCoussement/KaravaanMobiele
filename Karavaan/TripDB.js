@@ -102,7 +102,65 @@ export class TripDB
         }
     }
 
-    deleteExpensesFromTrip(expense, name) {
+    getExpensesByCategory(tripName) {
+        var expByCat = {};
+
+        var expenses = this.getExpensesFromTrip(tripName);
+
+        expenses.forEach( (exp) => {
+            if (!(exp.category in expByCat)) {
+                expByCat[exp.category] = [];
+            }
+            expByCat[exp.category].push(exp);
+        }, this);
+
+        return expByCat;
+    }
+
+    getExpensesByCategoryPerPerson(tripName) {
+        var expByCat = {};
+
+        var expenses = this.getExpensesFromTrip(tripName);
+        
+        expenses.forEach( (exp) => {
+            exp.expensePersons.forEach((pers) => {
+                if (!(exp.category in expByCat)) {
+                    expByCat[exp.category] = {};
+                }
+                if (!(pers.id in expByCat[exp.category])) {
+                    expByCat[exp.category][pers.id] = {name: pers.name, paid: 0, owed: 0};
+                }
+                expByCat[exp.category][pers.id].paid += Number(pers.paid);
+                expByCat[exp.category][pers.id].owed += Number(pers.owed);
+        }, this);
+        }, this);
+
+        return expByCat;
+    }
+
+    getExpensesByPersonPerDay(tripName) {
+        var expByPers = {};
+
+        var expenses = this.getExpensesFromTrip(tripName);
+        
+        expenses.forEach( (exp) => {
+            exp.expensePersons.forEach((pers) => {
+                if (!(pers.id in expByPers)) {
+                    expByPers[pers.id] = {name:pers.name, dates:{}};
+                }
+                if (!(exp.date in expByPers[pers.id].dates)) {
+                    expByPers[pers.id].dates[exp.date] = [];
+                }
+                expByPers[pers.id].dates[exp.date].push({category:exp.category, paid:pers.paid, owed:pers.owed, currency:exp.currency});
+            }, this);
+        }, this);
+
+        console.log(expByPers);
+
+        return expByPers;
+    }
+
+    deleteExpenseFromTrip(expense, name) {
         let newExpenses = [];
 
         var trip = this.getTrip(name);
