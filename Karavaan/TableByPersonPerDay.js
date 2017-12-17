@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import { Table, Row } from 'react-native-table-component';
-import {tripdb} from './App';
+import {tripdb, currenciesdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
 
 export default class TableByCategoryPerPerson extends Component {
@@ -31,13 +31,13 @@ export default class TableByCategoryPerPerson extends Component {
                     textStyle={styles.text}
                 />
             )
-            totalPaid += Number(exp.paid);
-            totalOwed += Number(exp.owed);
+            totalPaid += currenciesdb.convertToEURFrom(Number(exp.paid), exp.currency);
+            totalOwed += currenciesdb.convertToEURFrom(Number(exp.owed), exp.currency);
         })
 
         rows.push(
             <Row
-                data={['', totalPaid, totalOwed, '']}
+                data={['Total:', totalPaid, totalOwed, 'EUR']}
                 style={styles.row}
                 textStyle={styles.textBold}
             />

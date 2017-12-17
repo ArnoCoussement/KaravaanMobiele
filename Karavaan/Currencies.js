@@ -50,10 +50,10 @@ export class Currencies
 
     getRate(code)
     {
-        console.log('code: ' + code)
+        //console.log('code: ' + code)
         for (var i = 0; i < this.currencies.length; ++i)
         {
-            console.log('currency: ' + this.currencies[i])
+            //console.log('currency: ' + this.currencies[i])
             if (this.currencies[i].code == code)
             {
                 return this.currencies[i].rate;
@@ -70,7 +70,7 @@ export class Currencies
     convertToEURFrom(amount, code)
     {
         let rate = this.getRate(code);
-        console.log('rate: ' + rate);
+        //console.log('rate: ' + rate);
         return amount / rate; 
     }
 

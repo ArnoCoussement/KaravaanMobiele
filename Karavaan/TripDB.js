@@ -4,6 +4,7 @@ import {Person} from './Person';
 import {Expense} from './Expense';
 import {ExpensePerson} from './ExpensePerson';
 import {AsyncStorage} from 'react-native';
+import {currenciesdb} from './App'
 
 export class TripDB
 {
@@ -66,8 +67,17 @@ export class TripDB
          expense.expensePersons.forEach( (p1) => {
             trip.persons.forEach( (p2) => {
                 if(p1.id == p2.id) {
-                    p2.totalPaid += Number(p1.paid);
-                    p2.totalOwed += Number(p1.owed);
+                    let paid = Number(p1.paid);
+                    let owed = Number(p1.owed);
+                    console.log('paid before: ' + paid);
+                    console.log('owed before: ' + owed);
+                    paid = currenciesdb.convertToEURFrom(paid, expense.currency);
+                    owed = currenciesdb.convertToEURFrom(owed, expense.currency);
+                    console.log('paid after: ' + paid);
+                    console.log('owed after: ' + owed);
+
+                    p2.totalPaid += paid;
+                    p2.totalOwed += owed;
                 }
             }, this);
         }, this);
@@ -130,8 +140,8 @@ export class TripDB
                 if (!(pers.id in expByCat[exp.category])) {
                     expByCat[exp.category][pers.id] = {name: pers.name, paid: 0, owed: 0};
                 }
-                expByCat[exp.category][pers.id].paid += Number(pers.paid);
-                expByCat[exp.category][pers.id].owed += Number(pers.owed);
+                expByCat[exp.category][pers.id].paid += currenciesdb.convertToEURFrom(Number(pers.paid), exp.currency);
+                expByCat[exp.category][pers.id].owed += currenciesdb.convertToEURFrom(Number(pers.owed), exp.currency);
         }, this);
         }, this);
 

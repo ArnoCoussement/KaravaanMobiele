@@ -31,6 +31,7 @@ export default class TableByExpense extends Component {
 
         return (
             <ScrollView style={styles.container}>
+                <Text style={styles.text}>Currency for this expense: {this.state.expense.currency}</Text>
                 <Table>
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
                     {personView}
