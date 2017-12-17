@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button,TouchableOpacity,Image } from 'react-native';
 import {tripdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
+
+const styles = require('./css/stylesheet.js')
 
 export default class ExpensePaidView extends React.Component
 {
@@ -61,10 +63,11 @@ export default class ExpensePaidView extends React.Component
         peopleView = this.state.persons.map( p => {
             return (
                 <View>
-                    <Text key={p.name}>
+                
+                    <Text style={styles.text} key={p.name}>
                         {p.name}
                     </Text>
-                    <TextInput 
+                    <TextInput style={styles.textInput}
                         keyboardType = 'numeric'
                         value={String(p.paid)}
                         placeholder={this.state.expense.currency}
@@ -74,12 +77,16 @@ export default class ExpensePaidView extends React.Component
         )});
           
         return (
-            <View>
+            <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+            
                 {peopleView}
-                <Button title='NEXT' onPress={() => {
+                <TouchableOpacity style={[styles.button,styles.marginTop]} onPress={() => {
                     nextEvent()
-                }}/>
-            </View>
+                }}>
+
+                    <Text style={styles.buttonText}>NEXT</Text>
+                </TouchableOpacity>
+            </Image>
         );
     }
 }

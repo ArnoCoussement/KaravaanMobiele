@@ -34,7 +34,7 @@ export default class TripOverview extends Component {
       return (
         <ScrollView contentContainerStyle={styles.tableContainer}>
           <Table>
-            <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+            <Row data={tableHead} style={styles.head} textStyle={styles.tableText}/>
             {peopleView}
           </Table>
           <View style={styles.container}>

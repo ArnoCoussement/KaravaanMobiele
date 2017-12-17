@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, TouchableOpacity,Image, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
+
+const styles = require('./css/stylesheet.js')
 
 export default class SummaryView extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -16,31 +18,29 @@ export default class SummaryView extends Component {
         const {navigate} = this.props.navigation;
 
         return (
-            <View style={styles.container}>
-                <View style={styles.button}>
-                    <Button  title='Expenses' onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})} />
-                </View>
-                <View style={styles.button}>
-                    <Button  title='Expenses by Category' onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} />
-                </View>
-                <View style={styles.button}>
-                    <Button  title='Expenses by Category per Person' onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} />
-                </View>
-                <View style={styles.button}>
-                    <Button  title='Expenses per Person per Day' onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} />
-                </View>
-            </View>
+            <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+            
+                
+                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})}>
+                        <Text style={styles.buttonText}>Expenses</Text>
+                    </TouchableOpacity>
+                
+                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} >
+
+                        <Text style={styles.buttonText}>Expenses by Category</Text>
+                    </TouchableOpacity>
+             
+                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} >
+
+                    <Text style={styles.buttonText}>Expenses by Category per Person</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} >
+
+                    <Text style={styles.buttonText}>Expenses per Person per Day</Text>
+                    </TouchableOpacity>
+            </Image>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 22
-    },
-    button: {
-        padding: 10,
-        paddingTop: 15
-    },
-});

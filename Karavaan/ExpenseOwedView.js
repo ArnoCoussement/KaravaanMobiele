@@ -1,7 +1,9 @@
 import React from 'react';
 import {SPLITMETHOD} from './SplitMethods';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button,TouchableOpacity,Image } from 'react-native';
 import {tripdb} from './App';
+
+const styles = require('./css/stylesheet.js')
 
 export default class ExpenseOwedView extends React.Component
 {
@@ -102,10 +104,10 @@ export default class ExpenseOwedView extends React.Component
         peopleView = this.state.persons.map( p => {
             return (
                 <View>
-                    <Text key={p.name}>
+                    <Text style={styles.text} key={p.name}>
                         {p.name}
                     </Text>
-                    <TextInput 
+                    <TextInput style={styles.textInput}
                         keyboardType = 'numeric'
                         value = {String(p.owed)}
                         placeholder = { this.state.expense.currency }
@@ -116,14 +118,18 @@ export default class ExpenseOwedView extends React.Component
         });
 
         return (
-            <View>
-                <Text>To be divided among travellers: {this.state.toBeOwed} {this.state.expense.currency}</Text>
+            <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+                <Text style={[styles.text, styles.marginBottom]}>To be divided among travellers: {this.state.toBeOwed} {this.state.expense.currency}</Text>
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name} current={this.state.expense.sharedAmount} onChangeText={this.setShared}/>
-                <Button title='NEXT' onPress={() => {
+                <TouchableOpacity style={[styles.button,styles.marginTop]}  onPress={() => {
                     addEvent()
-                }}/>
-            </View>
+                }}>
+
+                    <Text style={styles.buttonText}>NEXT</Text>
+
+                </TouchableOpacity>
+            </Image>
         );
     }
 }

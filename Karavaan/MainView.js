@@ -23,30 +23,38 @@ export default class MainView extends Component {
 
     tripsView = this.state.trips.map( trip => {
       return(
-        <View style={styles.listContainer}>
+        <View style={styles.container}>
           <Text style={styles.subject} key={trip.name}> {trip.name}</Text>
-          <TouchableOpacity style={styles.listButton} onPress={() => navigate('TripProfileScreen', {trip: trip})} >
 
-            <Text style={styles.buttonText}>Show Trip</Text>
-          </TouchableOpacity>
+          <View style={styles.listContainer}>
+            <TouchableOpacity style={styles.listButton} onPress={() => navigate('TripProfileScreen', {trip: trip})} >
 
-          <TouchableOpacity style={styles.listButton} onPress={() => {
-            tripdb.deleteTrip(trip);
-            this.refreshFunction();
-          }}>
-            <Text style={styles.buttonText}>Delete Trip</Text>
-          </TouchableOpacity>
+              <Text style={styles.buttonText}>Show Trip</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.listButton} onPress={() => {
+              tripdb.deleteTrip(trip);
+              this.refreshFunction();
+            }}>
+              <Text style={styles.buttonText}>Delete Trip</Text>
+            </TouchableOpacity>
+          </View>
         </View>
     )});
     
     return(
-      <ScrollView contentContainerStyle={styles.container}>
+
+      
+      <ScrollView style={{backgroundColor : 'white'}}>
         {tripsView}
-        <TouchableOpacity style={styles.button}  
-        onPress={() => navigate('AddTripScreen', { refresh: this.refreshFunction })} 
-        >
-        <Text style={styles.buttonText}>Add New Trip</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <TouchableOpacity style={[styles.button, styles.marginTop]}  
+          onPress={() => navigate('AddTripScreen', { refresh: this.refreshFunction })} 
+          >
+          
+          <Text style={styles.buttonText}>Add New Trip</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   };

@@ -38,20 +38,23 @@ export class Startup extends Component {
     const {navigate} = this.props.navigation;
     
     return(
-      <View style={styles.container}>
+
+      
+      
+        <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+
+          <Image style={styles.image} source={require('./images/logo.png')} />
+            
+
+          <TouchableOpacity style={styles.button} 
+          onPress={() => navigate('MainView')} >
+          <Text style={styles.buttonText}>Show trips</Text>
+          </TouchableOpacity>
+
+         </Image>
         
-
-        <Image style={styles.image} source={require('./images/logo.png')} />
-          
-
-        <TouchableOpacity style={styles.button} 
-         onPress={() => navigate('MainView')} >
-        <Text style={styles.buttonText}>Show trips</Text>
-         </TouchableOpacity>
-
-          
-        
-      </View>
+      
+      
     );
   };
 };
