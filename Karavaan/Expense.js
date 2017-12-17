@@ -24,12 +24,10 @@ export class Expense extends React.Component
     }
 
     setPayAmount(id, amount) {
-        console.log(`===================== ${amount}`)
         this.expensePersons.forEach( (element) => {
             if (element.id == id) {
                 element.paid = amount;
             }
-            console.log(`------------------- ${element.paid}`)
         }, this);
     }
 

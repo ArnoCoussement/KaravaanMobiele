@@ -12,6 +12,9 @@ import ExpenseOwedView from './ExpenseOwedView';
 import SummaryView from './SummaryView';
 import TableByExpense from './TableByExpense';
 import TableByTrip from './TableByTrip';
+import TableByCategory from './TableByCategory';
+import TableByCategoryPerPerson from './TableByCategoryPerPerson';
+import TableByPersonPerDay from './TableByPersonPerDay';
 
 import {TripDB} from './TripDB';
 
@@ -60,4 +63,7 @@ export default App = StackNavigator({
   SummaryScreen : {screen: SummaryView},
   TableByExpenseScreen : {screen: TableByExpense},
   TableByTripScreen : {screen: TableByTrip},
+  TableByCategoryScreen : {screen: TableByCategory},
+  TableByCategoryPerPersonScreen : {screen: TableByCategoryPerPerson},
+  TableByPersonPerDayScreen : {screen: TableByPersonPerDay},
 });

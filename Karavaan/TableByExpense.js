@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
-import { Table, Row, Cell } from 'react-native-table-component';
+import { Table, Row } from 'react-native-table-component';
 import {tripdb} from './App';
 
 export default class TableByExpense extends Component {
@@ -30,12 +30,12 @@ export default class TableByExpense extends Component {
         });
 
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Table>
                     <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
                     {personView}
                 </Table>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -43,7 +43,8 @@ export default class TableByExpense extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22
+        padding: 5,
+        paddingTop: 15
     },
     item: {
         padding: 10,
