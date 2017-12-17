@@ -1,14 +1,11 @@
 import React from 'react';
 import { View, TextInput, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import {tripdb} from './App';
-import {Currencies} from './Currencies'
+import {tripdb, currenciesdb} from './App';
 
-//const currencies = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
+//const codes = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
 
-let currenciesDB = new Currencies();
-let currencies = currenciesDB.currencies;
-let codes = currenciesDB.getCodes();
+//let codes = currenciesdb.getCodes();
 
 
 export default class AddTripView extends React.Component
@@ -39,7 +36,7 @@ export default class AddTripView extends React.Component
                 <Text>Choose the associated currencies (default: EUR):</Text>
                 <ScrollView>
                     <SelectMultiple
-                        items={codes}
+                        items={currenciesdb.getCodes()}
                         selectedItems={this.state.selectedCurrencies}
                         onSelectionsChange={this.onSelectionsChange}/>
                     <Button title='Add Trip' onPress={() => {

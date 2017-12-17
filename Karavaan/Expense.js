@@ -1,5 +1,6 @@
 import React from 'react';
 import {ExpensePerson} from './ExpensePerson';
+import {currenciesdb} from './App.js';
 
 export class Expense extends React.Component
 {
@@ -59,6 +60,8 @@ export class Expense extends React.Component
         var amount = Number(this.sharedAmount);
         amount /= this.expensePersons.length;
 
+        amount = currenciesdb.convertToEURFrom(amount, this.currency);
+
         this.expensePersons.forEach( (element) => {
             var temp = Number(element.owed) + amount;
             element.owed = temp;
@@ -68,6 +71,8 @@ export class Expense extends React.Component
     divideEvenly() {
         var amount = this.getTotalPaid();
         amount /= this.expensePersons.length;
+
+        amount = currenciesdb.convertToEURFrom(amount, this.currency);
 
         this.expensePersons.forEach( (element) => {
             element.owed = amount;

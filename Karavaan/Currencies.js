@@ -11,7 +11,9 @@ export class Currencies
         this.codes = [];
         
         this.currencies.push(new Currency('EUR', 1.0));
-        this.codes.push('EUR')
+        this.currencies.push(new Currency('AAA', 2.0));
+        this.codes.push('EUR');
+        this.codes.push('AAA');
         fetch('https://api.fixer.io/latest')
         .then((resp) => resp.json())
         .then((data) => this.addCurrenciesFromList(data.rates))
@@ -32,8 +34,8 @@ export class Currencies
             this.currencies.push(currency);
             this.codes.push(element);
         }
-        console.log('currencies: ' + this.currencies)
-        console.log('codes: ' + this.codes)
+        //console.log('currencies: ' + this.currencies)
+        //console.log('codes: ' + this.codes)
     }
 
     getCurrencies()
@@ -44,6 +46,32 @@ export class Currencies
     getCodes()
     {
         return this.codes;
+    }
+
+    getRate(code)
+    {
+        console.log('code: ' + code)
+        for (var i = 0; i < this.currencies.length; ++i)
+        {
+            console.log('currency: ' + this.currencies[i])
+            if (this.currencies[i].code == code)
+            {
+                return this.currencies[i].rate;
+            }
+        }
+    }
+
+    convertFromEURTo(amount, code)
+    {
+        let rate = this.getRate(code);
+        return amount * rate;
+    }
+
+    convertToEURFrom(amount, code)
+    {
+        let rate = this.getRate(code);
+        console.log('rate: ' + rate);
+        return amount / rate; 
     }
 
 }

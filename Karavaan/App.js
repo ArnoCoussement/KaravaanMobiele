@@ -17,8 +17,10 @@ import TableByCategoryPerPerson from './TableByCategoryPerPerson';
 import TableByPersonPerDay from './TableByPersonPerDay';
 
 import {TripDB} from './TripDB';
+import {Currencies} from './Currencies'
 
 export let tripdb = new TripDB();
+export let currenciesdb = new Currencies();
 
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
