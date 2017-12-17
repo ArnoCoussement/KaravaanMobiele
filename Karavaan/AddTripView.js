@@ -3,6 +3,8 @@ import { View, TextInput, Text, Button, ScrollView, StyleSheet } from 'react-nat
 import SelectMultiple from 'react-native-select-multiple';
 import {tripdb, currenciesdb} from './App';
 
+const styles = require('./css/stylesheet.js');
+
 //const codes = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
 
 //let codes = currenciesdb.getCodes();
@@ -51,9 +53,3 @@ export default class AddTripView extends React.Component
     }
 }
 
-//Anders is de button niet zichtbaar
-const styles = StyleSheet.create({
-    bottompadding: {
-      minHeight: 75,
-    },
-  });

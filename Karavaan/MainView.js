@@ -3,6 +3,9 @@ import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, Refre
 import { StackNavigator} from 'react-navigation';
 import {tripdb} from './App';
 
+import {TouchableOpacity} from 'react-native';
+const styles = require('./css/stylesheet.js')
+
 export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Trip list`,
@@ -20,20 +23,30 @@ export default class MainView extends Component {
 
     tripsView = this.state.trips.map( trip => {
       return(
-        <View style={styles.item}>
-          <Text key={trip.name}> {trip.name}</Text>
-          <Button title='Show Trip' onPress={() => navigate('TripProfileScreen', {trip: trip})} />
-          <Button title='Delete Trip' onPress={() => {
+        <View style={styles.listContainer}>
+          <Text style={styles.subject} key={trip.name}> {trip.name}</Text>
+          <TouchableOpacity style={styles.listButton} onPress={() => navigate('TripProfileScreen', {trip: trip})} >
+
+            <Text style={styles.buttonText}>Show Trip</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.listButton} onPress={() => {
             tripdb.deleteTrip(trip);
             this.refreshFunction();
-          }}/>
+          }}>
+            <Text style={styles.buttonText}>Delete Trip</Text>
+          </TouchableOpacity>
         </View>
     )});
     
     return(
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
         {tripsView}
-        <Button title='Add New Trip' onPress={() => navigate('AddTripScreen', { refresh: this.refreshFunction })} />
+        <TouchableOpacity style={styles.button}  
+        onPress={() => navigate('AddTripScreen', { refresh: this.refreshFunction })} 
+        >
+        <Text style={styles.buttonText}>Add New Trip</Text>
+        </TouchableOpacity>
       </ScrollView>
     );
   };
@@ -43,13 +56,5 @@ export default class MainView extends Component {
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  item: {
-    padding: 10
-  },
-});
+
 

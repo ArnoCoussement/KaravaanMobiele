@@ -4,6 +4,9 @@ import { Table, Row } from 'react-native-table-component';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
 
+import {TouchableOpacity} from 'react-native';
+const styles = require('./css/stylesheet.js');
+
 export default class TripOverview extends Component {
     static navigationOptions = ({navigation}) => ({
       title: `Trip to ${navigation.state.params.trip.name}`,
@@ -29,20 +32,28 @@ export default class TripOverview extends Component {
       )});
 
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.tableContainer}>
           <Table>
             <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
             {peopleView}
           </Table>
-          <View style={styles.button}>
-            <Button title='Add A Fellow Traveller' onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}/>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}  onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
+            <Text style={styles.buttonText}>Add companion</Text>
+            </TouchableOpacity>
+          
           </View>
-          <View style={styles.button}>
-            <Button title='Add Expense' disabled={this.state.trip.persons.length == 0}
-              onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}/>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}  disabled={this.state.trip.persons.length == 0}
+              onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
+              <Text style={styles.buttonText}>Add Expense</Text>
+            </TouchableOpacity>
+          
           </View>
-          <View style={styles.button}>
-            <Button title='View Summary' onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}/>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}  onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}>
+              <Text style={styles.buttonText}>View Summary</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       );
@@ -53,26 +64,6 @@ export default class TripOverview extends Component {
     }
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 5,
-      paddingTop: 15
-    },
-    button: {
-        padding: 5,
-        paddingTop: 10
-    },
-    head: {
-        height: 40,
-        backgroundColor: '#f1f8ff'
-    },
-    text: {
-        marginLeft: 5
-    },
-    row: {
-        height: 30
-    }
-  });
+
 
   

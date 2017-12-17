@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
+import { AppRegistry, Image,FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 
 import MainView from './MainView';
@@ -17,10 +17,12 @@ import TableByCategoryPerPerson from './TableByCategoryPerPerson';
 import TableByPersonPerDay from './TableByPersonPerDay';
 
 import {TripDB} from './TripDB';
-import {Currencies} from './Currencies'
+import {Currencies} from './Currencies';
+import {TouchableOpacity} from 'react-native';
 
 export let tripdb = new TripDB();
 export let currenciesdb = new Currencies();
+const styles = require('./css/stylesheet.js');
 
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -36,22 +38,26 @@ export class Startup extends Component {
     const {navigate} = this.props.navigation;
     
     return(
-      <View>
-        <Button title='Show trips' onPress={() => navigate('MainView')} />
+      <View style={styles.container}>
+        
+
+        <Image style={styles.image} source={require('./images/logo.png')} />
+          
+
+        <TouchableOpacity style={styles.button} 
+         onPress={() => navigate('MainView')} >
+        <Text style={styles.buttonText}>Show trips</Text>
+         </TouchableOpacity>
+
+          
+        
       </View>
     );
   };
 };
 
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  item: {
-    padding: 10
-  },
-});
+
+
 
 export default App = StackNavigator({
   Home : {screen: Startup},
