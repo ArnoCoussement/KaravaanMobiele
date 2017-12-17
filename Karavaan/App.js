@@ -9,10 +9,18 @@ import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
 import ExpensePaidView from './ExpensePaidView';
 import ExpenseOwedView from './ExpenseOwedView';
+import SummaryView from './SummaryView';
+import TableByExpense from './TableByExpense';
+import TableByTrip from './TableByTrip';
+import TableByCategory from './TableByCategory';
+import TableByCategoryPerPerson from './TableByCategoryPerPerson';
+import TableByPersonPerDay from './TableByPersonPerDay';
 
 import {TripDB} from './TripDB';
+import {Currencies} from './Currencies'
 
 export let tripdb = new TripDB();
+export let currenciesdb = new Currencies();
 
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -54,4 +62,10 @@ export default App = StackNavigator({
   AddExpenseScreen : {screen: AddExpenseView},
   ExpensePaidScreen : {screen: ExpensePaidView},
   ExpenseOwedScreen : {screen: ExpenseOwedView},
+  SummaryScreen : {screen: SummaryView},
+  TableByExpenseScreen : {screen: TableByExpense},
+  TableByTripScreen : {screen: TableByTrip},
+  TableByCategoryScreen : {screen: TableByCategory},
+  TableByCategoryPerPersonScreen : {screen: TableByCategoryPerPerson},
+  TableByPersonPerDayScreen : {screen: TableByPersonPerDay},
 });

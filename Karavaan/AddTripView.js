@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import {tripdb} from './App';
-import {Currencies} from './Currencies'
+import {tripdb, currenciesdb} from './App';
 
-const currencies = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
+//const codes = [ "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF" ];
 
-//let currenciesDB = new Currencies();
-//let currencies = currenciesDB.currencies;
-//let codes = currenciesDB.codes;
+//let codes = currenciesdb.getCodes();
 
 
 export default class AddTripView extends React.Component
@@ -27,22 +24,36 @@ export default class AddTripView extends React.Component
         this.setState({ selectedCurrencies: selection });
     }
 
+    selectCurrencyView = {
+        
+    }
+
     render() {
         return (
             <View>
                 <Text>Enter a name for the trip:</Text>
                 <TextInput placeholder='name' onChangeText={(text) => this.setState({text})}/>
                 <Text>Choose the associated currencies (default: EUR):</Text>
-                <SelectMultiple
-                    items={currencies}
-                    selectedItems={this.state.selectedCurrencies}
-                    onSelectionsChange={this.onSelectionsChange}/>
-                <Button title='Add Trip' onPress={() => {
-                    tripdb.addTrip(this.state.text, this.state.selectedCurrencies)
-                    this.props.navigation.goBack()
-                    this.props.navigation.state.params.refresh()
-                }}/>
+                <ScrollView>
+                    <SelectMultiple
+                        items={currenciesdb.getCodes()}
+                        selectedItems={this.state.selectedCurrencies}
+                        onSelectionsChange={this.onSelectionsChange}/>
+                    <Button title='Add Trip' onPress={() => {
+                        tripdb.addTrip(this.state.text, this.state.selectedCurrencies)
+                        this.props.navigation.goBack()
+                        this.props.navigation.state.params.refresh()
+                    }}/>
+                    <Text style={styles.bottompadding}/> 
+                </ScrollView>
             </View>
         );
     }
 }
+
+//Anders is de button niet zichtbaar
+const styles = StyleSheet.create({
+    bottompadding: {
+      minHeight: 75,
+    },
+  });

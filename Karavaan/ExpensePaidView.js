@@ -1,7 +1,7 @@
 import React from 'react';
-import {SPLITMETHOD} from './SplitMethods';
 import { View, TextInput, Text, Button } from 'react-native';
 import {tripdb} from './App';
+import {SPLITMETHOD} from './SplitMethods';
 
 export default class ExpensePaidView extends React.Component
 {
@@ -26,6 +26,7 @@ export default class ExpensePaidView extends React.Component
 
         this.state.persons.forEach((p) => {
             if (!re.test(p.paid)) {
+                p.paid = 0;
                 result = false;
             }
         }, this);
