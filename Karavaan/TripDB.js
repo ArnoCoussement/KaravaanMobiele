@@ -69,12 +69,16 @@ export class TripDB
 
     getPersonNameFromTripById(tripName, id) {
         var trip = this.getTrip(tripName);
+        console.log(`888888888888 ${id} 88888888`);
 
-        trip.persons.forEach((element) => {
-            if (element.id == id) {
-                return element.name;
-            }
-        }, this);
+        return trip.persons.find( (element) => element.id === id ).name;
+        
+       // trip.persons.forEach((element) => {
+       //     if (element.id == id) {
+       //         console.log(`99999999 ${element.name} 99999`);
+       //         return element.name;
+       //     }
+       // }, this);
     }
 
 
@@ -125,8 +129,12 @@ export class TripDB
                 })
 
                 transactionsCopy.forEach((trans) => {
-                    trans.from = this.getPersonNameFromTripById(name, trans.from);
-                    trans.owed = this.getPersonNameFromTripById(name, trans.owed);
+                    let name1 = trans.from;
+                    let name2 = trans.to;
+
+                    trans.from = this.getPersonNameFromTripById(name, name1)
+                    trans.to = this.getPersonNameFromTripById(name, name2)
+                    
                 }, this);
 
                 return transactionsCopy;
