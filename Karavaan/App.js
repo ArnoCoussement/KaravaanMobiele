@@ -3,12 +3,17 @@ import { AppRegistry, Image,FlatList, StyleSheet, Text, TextInput, View, Button,
 import { StackNavigator} from 'react-navigation';
 
 import MainView from './MainView';
+
 import AddTripView from './AddTripView';
 import AddPersonView from './AddPersonView';
-import TripOverview from './TripOverview';
 import AddExpenseView from './AddExpenseView';
+import AddTransferView from './AddTransferView';
+
+import TripOverview from './TripOverview';
+
 import ExpensePaidView from './ExpensePaidView';
 import ExpenseOwedView from './ExpenseOwedView';
+
 import SummaryView from './SummaryView';
 import TableByExpense from './TableByExpense';
 import TableByTrip from './TableByTrip';
@@ -38,28 +43,16 @@ export class Startup extends Component {
     const {navigate} = this.props.navigation;
     
     return(
-
-      
-      
         <Image style={styles.backgroundImage} source={require('./images/background.png')}>
-
           <Image style={styles.image} source={require('./images/logo.png')} />
-            
-
           <TouchableOpacity style={styles.button} 
-          onPress={() => navigate('MainView')} >
-          <Text style={styles.buttonText}>Show trips</Text>
+            onPress={() => navigate('MainView')} >
+            <Text style={styles.buttonText}>Show trips</Text>
           </TouchableOpacity>
-
-         </Image>
-        
-      
-      
+        </Image>
     );
   };
 };
-
-
 
 
 export default App = StackNavigator({
@@ -69,6 +62,7 @@ export default App = StackNavigator({
   AddTripScreen : {screen: AddTripView},
   AddPersonScreen : {screen: AddPersonView},
   AddExpenseScreen : {screen: AddExpenseView},
+  AddTransferScreen : {screen: AddTransferView},
   ExpensePaidScreen : {screen: ExpensePaidView},
   ExpenseOwedScreen : {screen: ExpenseOwedView},
   SummaryScreen : {screen: SummaryView},
