@@ -35,7 +35,7 @@ export default class AddTripView extends React.Component
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Enter a name for the trip:</Text>
-                <TextInput style={styles.textInput} placeholder='name' onChangeText={(text) => this.setState({text})}/>
+                <TextInput maxLength={100} style={styles.textInput} placeholder='name' onChangeText={(text) => this.setState({text})}/>
                 <Text style={styles.text}>Choose the associated currencies (default: EUR):</Text>
                 <ScrollView style={styles.scrollView}>
                     <SelectMultiple
@@ -45,7 +45,7 @@ export default class AddTripView extends React.Component
                     
                     
                 </ScrollView>
-                <TouchableOpacity style={styles.button} onPress={() => {
+                <TouchableOpacity style={styles.button} disabled={this.state.text.trim().length == 0} onPress={() => {
                         tripdb.addTrip(this.state.text, this.state.selectedCurrencies)
                         this.props.navigation.goBack()
                         this.props.navigation.state.params.refresh()
