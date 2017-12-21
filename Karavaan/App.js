@@ -21,6 +21,7 @@ import TableByCategory from './TableByCategory';
 import TableByCategoryPerPerson from './TableByCategoryPerPerson';
 import TableByPersonPerDay from './TableByPersonPerDay';
 import TableByTransaction from './TableByTransaction';
+import TableByTransactionPerPerson from './TableByTransactionPerPerson';
 
 import {TripDB} from './TripDB';
 import {Currencies} from './Currencies';
@@ -73,4 +74,5 @@ export default App = StackNavigator({
   TableByCategoryPerPersonScreen : {screen: TableByCategoryPerPerson},
   TableByPersonPerDayScreen : {screen: TableByPersonPerDay},
   TableByTransactionScreen : {screen: TableByTransaction},
+  TableByTransactionPerPersonScreen : {screen: TableByTransactionPerPerson},
 });
