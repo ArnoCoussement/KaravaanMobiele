@@ -23,9 +23,11 @@ export default class TripOverview extends Component {
       const {navigate} = this.props.navigation;
 
       peopleView = this.state.trip.persons.map( p => {
+        let result = Math.round((p.totalOwed-p.totalPaid) * 100) / 100;
+        console.log('paid: ' + p.totalPaid + '  owed: ' + p.totalOwed + '  Receives/To pay: ' + result);
         return (
           <Row
-            data={[p.name, p.totalPaid, p.totalOwed, p.totalOwed-p.totalPaid]}
+            data={[p.name, p.totalPaid, p.totalOwed, result]}
             style={styles.row}
             textStyle={styles.text}
           />
