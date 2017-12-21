@@ -16,7 +16,6 @@ export default class SummaryView extends Component {
   
     render() {
         const {navigate} = this.props.navigation;
-
         return (
             <Image style={styles.backgroundImage} source={require('./images/background.png')}>
             
@@ -38,6 +37,13 @@ export default class SummaryView extends Component {
                     <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} >
 
                     <Text style={styles.buttonText}>Expenses per Person per Day</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.button]} onPress={ () => navigate('TableByTransactionScreen', {tripName: this.state.tripName})} >
+                        <Text style={styles.buttonText}>Overview of Transactions</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button]} onPress={ () => navigate('TableByTransactionPerPersonScreen' , {tripName: this.state.tripName})} >
+                        <Text style={styles.buttonText}>Overview of Transactions per Person </Text>
                     </TouchableOpacity>
             </Image>
         );

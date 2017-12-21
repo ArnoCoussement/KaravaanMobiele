@@ -69,12 +69,15 @@ export class TripDB
 
     getPersonNameFromTripById(tripName, id) {
         var trip = this.getTrip(tripName);
-
-        trip.persons.forEach((element) => {
-            if (element.id == id) {
-                return element.name;
-            }
-        }, this);
+        var result = trip.persons.find( (element) => element.id === id ).name;
+        return result;
+        
+       // trip.persons.forEach((element) => {
+       //     if (element.id == id) {
+       //         console.log(`99999999 ${element.name} 99999`);
+       //         return element.name;
+       //     }
+       // }, this);
     }
 
 
@@ -125,8 +128,12 @@ export class TripDB
                 })
 
                 transactionsCopy.forEach((trans) => {
-                    trans.from = this.getPersonNameFromTripById(name, trans.from);
-                    trans.owed = this.getPersonNameFromTripById(name, trans.owed);
+                    let name1 = trans.from;
+                    let name2 = trans.to;
+
+                    trans.from = this.getPersonNameFromTripById(name, name1)
+                    trans.to = this.getPersonNameFromTripById(name, name2)
+                    
                 }, this);
 
                 return transactionsCopy;
@@ -139,15 +146,20 @@ export class TripDB
 
         var transactions = this.getTransactionsFromTrip(tripName);
 
+
+
         transactions.forEach( (trans) => {
-            var from = this.getPersonNameFromTripById(tripName, trans.from);
-            var to = this.getPersonNameFromTripById(tripName, trans.to);
+            var from = trans.from;
+            console.log(`Dit moet de naam voorstellen van de persoon: ${from}`);
+            var to = trans.to;
+            console.log(`Dit moet de tweede naam voorstellen van de transaction: ${to}`);
 
             if (!(trans.from in transByPers)) {
                 transByPers[trans.from] = {name:from, transactions:{}};
             }
-
-            transByPers[trans.from].transactions.push({from:from, to:to, date:trans.date, amount:trans.amount, currency:trans.currency});
+            var result = transByPers[trans.from].transactions;
+            result.push({from:from, to:to, date:trans.date, amount:trans.amount, currency:trans.currency});
+            //transByPers[trans.from].transactions.push({from:from, to:to, date:trans.date, amount:trans.amount, currency:trans.currency});
         }, this);
 
         return transByPers;
