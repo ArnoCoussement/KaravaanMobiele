@@ -16,6 +16,13 @@ const styles = React.StyleSheet.create({
     paddingBottom : 10,
   },
 
+  tripContainer: {
+    borderBottomWidth : 1,
+    margin : 2,
+    
+    
+  },
+
   listContainer : {
     flex: 1,
     justifyContent: 'flex-start',
@@ -26,12 +33,25 @@ const styles = React.StyleSheet.create({
     
   },
 
+  transparentContainer : {
+    backgroundColor : 'transparent',
+  },
+
   subject : {
     color : '#ebb800',
     fontWeight : 'bold',
     fontSize : 20,
     margin : 10,
   },
+
+  tripSubject : {
+    color : '#ebb800',
+    fontWeight : 'bold',
+    fontSize : 30,
+    margin : 5,
+  },
+
+
   button : {
     alignItems: 'center',
     backgroundColor: '#dee1e2',
@@ -43,8 +63,44 @@ const styles = React.StyleSheet.create({
     
   },
 
+  tableButton : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5,
+    marginBottom: 5
+    
+  },
+
+  summaryButton : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    padding: 10,
+    width : 300,
+    marginBottom : 20,
+  },
+
+  addTripButton : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    padding: 10,
+    width : 200,
+    marginBottom : 10,
+    borderWidth : 2,
+  },
+
+  buttonDisabled : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    padding: 10,
+    width : 200,
+    marginBottom : 10,
+    opacity : 0.5,
+  },
+
   buttonText : {
-    color : '#5dbaa6',
+    color : '#4d9280',
     fontWeight : 'bold',
     fontSize : 20,
   },
@@ -79,22 +135,55 @@ const styles = React.StyleSheet.create({
   },
 
   row: {
-    height: 30
+    height: 30,
+    backgroundColor: 'rgb(255,255,255)'
 },
+
+table : {
+  width : 400,
+},
+
+tableText : {
+  textAlign : 'center',
+  fontSize : 18,
+},
+
+tableTransactionText : {
+  textAlign : 'center',
+  fontSize : 14,
+},
+
+tableTotalText : {
+  textAlign : 'center',
+  fontSize : 18,
+  fontWeight : 'bold',
+},
+
+tableHeadText : {
+  textAlign : 'center',
+  fontWeight : 'bold',
+},
+
+
 
 head: {
   height: 40,
-  backgroundColor: '#f1f8ff'
+  backgroundColor: '#f1f8ff',
+  
 },
+
+headText : {
+  fontSize: 18,
+  fontWeight: 'bold'
+},
+
 
 text: {
 marginLeft: 5,
 fontSize : 20,
 },
 
-tableText : {
-  
-},
+
 
 textInput : {
   width : 300,
@@ -120,7 +209,12 @@ tableContainer: {
 scrollView : {
   marginBottom : 100,
   backgroundColor : 'white',
-}
+  
+},
+
+currencyCodes : {
+  width : 300,
+},
 
 
 });

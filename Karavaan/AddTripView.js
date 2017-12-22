@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, TextInput,Image, Text, Button, ScrollView, StyleSheet } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
 import {tripdb, currenciesdb} from './App';
 
@@ -33,26 +33,28 @@ export default class AddTripView extends React.Component
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Enter a name for the trip:</Text>
+            <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
+            
+                <Text style={[styles.text, styles.marginTop]}>Enter a name for the trip:</Text>
                 <TextInput maxLength={100} style={styles.textInput} placeholder='name' onChangeText={(text) => this.setState({text})}/>
-                <Text style={styles.text}>Choose the associated currencies (default: EUR):</Text>
+                <Text style={[styles.text, styles.marginTop]}>Choose the associated currencies (default: EUR):</Text>
                 <ScrollView style={styles.scrollView}>
                     <SelectMultiple
+                    style={styles.currencyCodes}
                         items={currenciesdb.getCodes()}
                         selectedItems={this.state.selectedCurrencies}
                         onSelectionsChange={this.onSelectionsChange}/>
                     
                     
                 </ScrollView>
-                <TouchableOpacity style={styles.button} disabled={this.state.text.trim().length == 0} onPress={() => {
+                <TouchableOpacity style={styles.addTripButton} disabled={this.state.text.trim().length == 0} onPress={() => {
                         tripdb.addTrip(this.state.text, this.state.selectedCurrencies)
                         this.props.navigation.goBack()
                         this.props.navigation.state.params.refresh()
                     }}>
                         <Text style={styles.buttonText}>Add Trip</Text>
                     </TouchableOpacity>
-            </View>
+            </Image>
         );
     }
 }

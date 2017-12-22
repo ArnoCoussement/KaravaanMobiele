@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput,Image, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import { Table, Row } from 'react-native-table-component';
 import {tripdb, currenciesdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
+
+
+const styles = require('./css/stylesheet.js')
 
 export default class TableByCategoryPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -28,7 +31,7 @@ export default class TableByCategoryPerPerson extends Component {
                 <Row
                     data={[exp.category, exp.paid, exp.owed, exp.currency]}
                     style={styles.row}
-                    textStyle={styles.text}
+                    textStyle={styles.tableText}
                 />
             )
             totalPaid += currenciesdb.convertToEURFrom(Number(exp.paid), exp.currency);
@@ -39,7 +42,7 @@ export default class TableByCategoryPerPerson extends Component {
             <Row
                 data={['Total:', totalPaid, totalOwed, 'EUR']}
                 style={styles.row}
-                textStyle={styles.textBold}
+                textStyle={styles.tableTotalText}
             />
         )
 
@@ -54,7 +57,7 @@ export default class TableByCategoryPerPerson extends Component {
                 <Row
                     data={[date]}
                     style={styles.row}
-                    textStyle={styles.text}
+                    textStyle={styles.tableText}
                 />
             )
             rows.push(this.expensesRow(values.dates[date]))
@@ -70,8 +73,8 @@ export default class TableByCategoryPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{this.state.expenses[id].name}</Text>
-                    <Table>
-                        <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                    <Table style={styles.table}>
+                        <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(this.state.expenses[id])}
                     </Table>
                 </View>
@@ -79,43 +82,14 @@ export default class TableByCategoryPerPerson extends Component {
         });
 
         return (
-            <ScrollView style={styles.container}>
+            <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
+            
+                <ScrollView style={styles.transparentContainer}>
                 {personView}
-            </ScrollView>
+                </ScrollView>
+            </Image>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 5,
-    },
-    headText: {
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    item: {
-        paddingTop: 15
-    },
-    head: {
-        height: 40,
-        backgroundColor: '#f1f8ff'
-    },
-    text: {
-        marginLeft: 5
-    },
-    textBold: {
-        marginLeft: 5,
-        fontWeight: 'bold'
-    },
-    row: {
-        height: 40
-    },
-    btn: {
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 5,
-        marginBottom: 5
-    },    
-});
+

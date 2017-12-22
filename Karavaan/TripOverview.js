@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView, Image } from 'react-native';
 import { Table, Row } from 'react-native-table-component';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
@@ -29,41 +29,48 @@ export default class TripOverview extends Component {
           <Row
             data={[p.name, p.totalPaid, p.totalOwed, result]}
             style={styles.row}
-            textStyle={styles.text}
+            textStyle={styles.tableText}
           />
       )});
 
       return (
-        <ScrollView contentContainerStyle={styles.tableContainer}>
-          <Table>
-            <Row data={tableHead} style={styles.head} textStyle={styles.tableText}/>
+      <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+        
+        <Table style={styles.table}>
+            <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
             {peopleView}
           </Table>
-          <View style={styles.container}>
+
+        <ScrollView contentContainerStyle={styles.tableContainer}>
+          
+          <View style={[styles.container, styles.transparentContainer]}>
             <TouchableOpacity style={styles.button}
                 onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add companion</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}  disabled={this.state.trip.persons.length == 0}
+          <View style={[styles.container, styles.transparentContainer]}>
+            <TouchableOpacity style={this.state.trip.persons.length == 0? styles.buttonDisabled : styles.button}  
+                disabled={this.state.trip.persons.length == 0}
                 onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
-              <Text style={styles.buttonText}>Add Expense</Text>
+              <Text style={styles.buttonText} >Add Expense</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}  disabled={this.state.trip.persons.length == 0}
+          <View style={[styles.container, styles.transparentContainer]}>
+            <TouchableOpacity style={this.state.trip.persons.length == 0? styles.buttonDisabled : styles.button}  
+                disabled={this.state.trip.persons.length == 0}
                 onPress={() => navigate('AddTransferScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add Transaction</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.container}>
+          <View style={[styles.container, styles.transparentContainer]}>
             <TouchableOpacity style={styles.button}
                 onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}>
               <Text style={styles.buttonText}>View Summary</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
+      </Image>
       );
     }
 

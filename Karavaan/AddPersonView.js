@@ -22,7 +22,7 @@ export default class AddPersonView extends React.Component
             
                 <Text style={styles.text}>Enter a name: {this.props.bar}</Text>
                 <TextInput maxLength={40} style={styles.textInput} placeholder='name' onChangeText={(text) => this.setState({text})}/>
-                <TouchableOpacity style={[styles.marginTop,styles.button]} disabled={this.state.text.trim().length == 0} onPress={() => {
+                <TouchableOpacity style={[this.state.text.trim().length == 0? styles.buttonDisabled : styles.marginTop,styles.button]} disabled={this.state.text.trim().length == 0} onPress={() => {
                     tripdb.addPersonToTrip(this.state.text, this.state.trip)
                     this.props.navigation.goBack()
                     this.props.navigation.state.params.refresh()
