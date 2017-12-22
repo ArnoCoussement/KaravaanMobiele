@@ -11,9 +11,9 @@ export class Currencies
         this.codes = [];
         
         this.currencies.push(new Currency('EUR', 1.0));
-        this.currencies.push(new Currency('AAA', 2.0));
+        //this.currencies.push(new Currency('AAA', 2.0));
         this.codes.push('EUR');
-        this.codes.push('AAA');
+        //this.codes.push('AAA');
         fetch('https://api.fixer.io/latest')
         .then((resp) => resp.json())
         .then((data) => this.addCurrenciesFromList(data.rates))
@@ -64,14 +64,14 @@ export class Currencies
     convertFromEURTo(amount, code)
     {
         let rate = this.getRate(code);
-        return amount * rate;
+        return Math.round((amount * rate) * 100) / 100;
     }
 
     convertToEURFrom(amount, code)
     {
         let rate = this.getRate(code);
         //console.log('rate: ' + rate);
-        return amount / rate; 
+        return Math.round((amount / rate) * 100) / 100;
     }
 
 }

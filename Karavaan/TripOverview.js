@@ -23,9 +23,11 @@ export default class TripOverview extends Component {
       const {navigate} = this.props.navigation;
 
       peopleView = this.state.trip.persons.map( p => {
+        let result = Math.round((p.totalOwed-p.totalPaid) * 100) / 100;
+        console.log('paid: ' + p.totalPaid + '  owed: ' + p.totalOwed + '  Receives/To pay: ' + result);
         return (
           <Row
-            data={[p.name, p.totalPaid, p.totalOwed, p.totalOwed-p.totalPaid]}
+            data={[p.name, p.totalPaid, p.totalOwed, result]}
             style={styles.row}
             textStyle={styles.text}
           />
@@ -38,20 +40,26 @@ export default class TripOverview extends Component {
             {peopleView}
           </Table>
           <View style={styles.container}>
-            <TouchableOpacity style={styles.button}  onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
-            <Text style={styles.buttonText}>Add companion</Text>
+            <TouchableOpacity style={styles.button}
+                onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
+              <Text style={styles.buttonText}>Add companion</Text>
             </TouchableOpacity>
-          
           </View>
           <View style={styles.container}>
             <TouchableOpacity style={styles.button}  disabled={this.state.trip.persons.length == 0}
-              onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
+                onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add Expense</Text>
             </TouchableOpacity>
-          
           </View>
           <View style={styles.container}>
-            <TouchableOpacity style={styles.button}  onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}>
+            <TouchableOpacity style={styles.button}  disabled={this.state.trip.persons.length == 0}
+                onPress={() => navigate('AddTransferScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
+              <Text style={styles.buttonText}>Add Transaction</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}
+                onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}>
               <Text style={styles.buttonText}>View Summary</Text>
             </TouchableOpacity>
           </View>

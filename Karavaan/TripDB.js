@@ -56,10 +56,113 @@ export class TripDB
         }
     }
 
+
+
+    /******************************
+     *          PERSONS           *
+     ******************************/
+
     addPersonToTrip(name, trip) {
         trip.addPerson(name);
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));
     }
+
+    getPersonNameFromTripById(tripName, id) {
+        var trip = this.getTrip(tripName);
+        var result = trip.persons.find( (element) => element.id === id ).name;
+        return result;
+        
+       // trip.persons.forEach((element) => {
+       //     if (element.id == id) {
+       //         console.log(`99999999 ${element.name} 99999`);
+       //         return element.name;
+       //     }
+       // }, this);
+    }
+
+
+
+    /******************************
+     *        TRANSACTIONS        *
+     ******************************/
+
+    addTransactionToTrip(transaction, trip) {
+        trip.persons.forEach( (pers) => {
+            if (pers.id == transaction.from) {
+                let paid = Number(transaction.amount);
+                paid = currenciesdb.convertToEURFrom(paid, transaction.currency);
+                pers.totalPaid += paid;
+            } else if (pers.id == transaction.to) {
+                let owed = Number(transaction.amount);
+                owed = currenciesdb.convertToEURFrom(owed, transaction.currency);
+                pers.totalOwed += owed;
+            }
+        }, this);
+
+        trip.addTransaction(transaction);
+        
+        AsyncStorage.setItem('trips', JSON.stringify(this.trips));
+    }
+
+    getTransactionsFromTrip(name) {
+        for(let i =0 ; i < this.trips.length; i++){
+            if(this.trips[i].name == name){
+                var transactionsCopy = this.trips[i].transactions;
+                transactionsCopy.sort(function(trans1, trans2) {
+                    var date1 = trans1.date.split("/")[0];
+                    var date2 = trans2.date.split("/")[0];
+                    
+                    return date1>date2?1:date1<date2?-1:0;
+                })
+                transactionsCopy.sort(function(trans1, trans2) {
+                    var date1 = trans1.date.split("/")[1];
+                    var date2 = trans2.date.split("/")[1];
+                    
+                    return date1>date2?1:date1<date2?-1:0;
+                })
+                transactionsCopy.sort(function(trans1, trans2) {
+                    var date1 = trans1.date.split("/")[2];
+                    var date2 = trans2.date.split("/")[2];
+                    
+                    return date1>date2?1:date1<date2?-1:0;
+                })
+
+                transactionsCopy.forEach((trans) => {
+                    let name1 = trans.from;
+                    let name2 = trans.to;
+
+                    trans.from = this.getPersonNameFromTripById(name, name1)
+                    trans.to = this.getPersonNameFromTripById(name, name2)
+                    
+                }, this);
+
+                return transactionsCopy;
+            }
+        }
+    }
+
+    getTransactionsByPerson(tripName) {
+        var transByPers = {};
+
+        var transactions = this.getTransactionsFromTrip(tripName);
+
+        transactions.forEach( (trans) => {
+            if (!(trans.from in transByPers)) {
+                transByPers[trans.from] = {transactions:[]};
+            }
+
+            transByPers[trans.from].transactions.push({from:trans.from, to:trans.to, date:trans.date, amount:trans.amount, currency:trans.currency});
+        }, this);
+
+        return transByPers;
+    }
+
+
+
+
+    /******************************
+     *          EXPENSES          *
+     ******************************/
 
     addExpenseToTrip(expense, trip) {
         trip.addExpense(expense);
@@ -68,15 +171,10 @@ export class TripDB
             trip.persons.forEach( (p2) => {
                 if(p1.id == p2.id) {
                     let paid = Number(p1.paid);
-                    let owed = Number(p1.owed);
-                    console.log('paid before: ' + paid);
-                    console.log('owed before: ' + owed);
                     paid = currenciesdb.convertToEURFrom(paid, expense.currency);
-                    owed = currenciesdb.convertToEURFrom(owed, expense.currency);
-                    console.log('paid after: ' + paid);
-                    console.log('owed after: ' + owed);
-
                     p2.totalPaid += paid;
+                    let owed = Number(p1.owed);
+                    owed = currenciesdb.convertToEURFrom(owed, expense.currency);
                     p2.totalOwed += owed;
                 }
             }, this);
@@ -165,12 +263,10 @@ export class TripDB
             }, this);
         }, this);
 
-        console.log(expByPers);
-
         return expByPers;
     }
 
-    deleteExpenseFromTrip(expense, name) {
+/*     deleteExpenseFromTrip(expense, name) {
         let newExpenses = [];
 
         var trip = this.getTrip(name);
@@ -183,14 +279,14 @@ export class TripDB
             trip.persons.forEach( (p2) => {
                 if(p1.id == p2.id) {
                     console.log(p1.paid);
-                    p2.totalPaid -= Number(p1.paid);
-                    p2.totalOwed -= Number(p1.owed);
+                    p2.totalPaid -= Number(currenciesdb.convertToEURFrom(p1.paid, expense.currency));
+                    p2.totalOwed -= Number(currenciesdb.convertToEURFrom(p1.owed, expense.currency));
                 }
             }, this);
         }, this);
-
         AsyncStorage.setItem('trips', JSON.stringify(this.trips));        
     }
+*/
 }
 
 function makeTripFromRawData(data) {

@@ -60,11 +60,9 @@ export class Expense extends React.Component
         var amount = Number(this.sharedAmount);
         amount /= this.expensePersons.length;
 
-        //amount = currenciesdb.convertToEURFrom(amount, this.currency);
-
         this.expensePersons.forEach( (element) => {
             var temp = Number(element.owed) + amount;
-            element.owed = temp;
+            element.owed = Math.round(temp * 100) / 100;
         })
     }
 
@@ -72,10 +70,8 @@ export class Expense extends React.Component
         var amount = this.getTotalPaid();
         amount /= this.expensePersons.length;
 
-        //amount = currenciesdb.convertToEURFrom(amount, this.currency);
-
         this.expensePersons.forEach( (element) => {
-            element.owed = amount;
+            element.owed = Math.round(amount * 100) / 100;
         })
     }
 
