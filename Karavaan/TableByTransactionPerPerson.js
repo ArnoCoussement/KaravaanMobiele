@@ -26,7 +26,7 @@ export default class TableByTransactionPerPerson extends Component {
     
     contentRow = (from) => {
         const rows = [];     
-        //console.log(`9999999999999 ${this.state.transactions[from].transactions[0].amount} 999999999999999999999999`)      
+            
         this.state.transactions[from].transactions.forEach((element) => {
             rows.push(
                 <Row
