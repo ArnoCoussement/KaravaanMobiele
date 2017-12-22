@@ -69,6 +69,7 @@ export class TripDB
 
     getPersonNameFromTripById(tripName, id) {
         var trip = this.getTrip(tripName);
+        console.log(`------ ${tripName} ------ ${id} ------`);
         var result = trip.persons.find( (element) => element.id === id ).name;
         return result;
         
@@ -107,7 +108,14 @@ export class TripDB
     getTransactionsFromTrip(name) {
         for(let i =0 ; i < this.trips.length; i++){
             if(this.trips[i].name == name){
-                var transactionsCopy = this.trips[i].transactions;
+                var transactionsCopy = [];
+                this.trips[i].transactions.forEach(trans => {
+                    var name1 = this.getPersonNameFromTripById(name, trans.from);
+                    var name2 = this.getPersonNameFromTripById(name, trans.to);
+
+                    transactionsCopy.push({from: name1, to: name2, date: trans.date, amount: trans.amount, currency: trans.currency});
+                }, this);
+
                 transactionsCopy.sort(function(trans1, trans2) {
                     var date1 = trans1.date.split("/")[0];
                     var date2 = trans2.date.split("/")[0];
@@ -126,15 +134,6 @@ export class TripDB
                     
                     return date1>date2?1:date1<date2?-1:0;
                 })
-
-                transactionsCopy.forEach((trans) => {
-                    let name1 = trans.from;
-                    let name2 = trans.to;
-
-                    trans.from = this.getPersonNameFromTripById(name, name1)
-                    trans.to = this.getPersonNameFromTripById(name, name2)
-                    
-                }, this);
 
                 return transactionsCopy;
             }
