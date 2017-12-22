@@ -69,6 +69,7 @@ export class TripDB
 
     getPersonNameFromTripById(tripName, id) {
         var trip = this.getTrip(tripName);
+        console.log(`------ ${tripName} ------ ${id} ------`);
         var result = trip.persons.find( (element) => element.id === id ).name;
         return result;
         
