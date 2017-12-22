@@ -9,6 +9,9 @@ export default class ExpensePaidView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who paid?`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)

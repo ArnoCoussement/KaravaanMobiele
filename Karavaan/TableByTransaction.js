@@ -10,6 +10,9 @@ const styles = require('./css/stylesheet.js');
 export default class TableByTransaction extends Component{
     static navigationOptions = ({navigation}) => ({
         title: `Overview of transactions`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
 

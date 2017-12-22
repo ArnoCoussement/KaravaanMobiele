@@ -9,6 +9,9 @@ export default class AddExpenseView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Add an expense`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)

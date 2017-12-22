@@ -10,6 +10,9 @@ const styles = require('./css/stylesheet.js');
 export default class TableByTransactionPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `Overview of transactions per person`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props) {

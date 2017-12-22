@@ -9,6 +9,9 @@ export default class ExpenseOwedView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who owes what?`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)

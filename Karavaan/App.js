@@ -34,6 +34,8 @@ const styles = require('./css/stylesheet.js');
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Let's get started!`,
+    headerTitleStyle :styles.headerTitleStyle,
+    headerStyle : styles.headerStyle,
   });
 
   constructor(props){

@@ -9,6 +9,9 @@ export default class AddTransferView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Add a Transaction`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)

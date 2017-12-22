@@ -11,6 +11,9 @@ const styles = require('./css/stylesheet.js');
 export default class TableByTrip extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `All Expenses of this Trip`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
       
     constructor(props) {

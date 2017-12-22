@@ -45,9 +45,9 @@ const styles = React.StyleSheet.create({
   },
 
   tripSubject : {
-    color : '#ebb800',
+    color : 'black',
     fontWeight : 'bold',
-    fontSize : 30,
+    fontSize : 25,
     margin : 5,
   },
 
@@ -58,6 +58,9 @@ const styles = React.StyleSheet.create({
     padding: 10,
     width : 200,
     marginBottom : 10,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
     
 
     
@@ -69,7 +72,10 @@ const styles = React.StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
     
   },
 
@@ -79,6 +85,9 @@ const styles = React.StyleSheet.create({
     padding: 10,
     width : 300,
     marginBottom : 20,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
   },
 
   addTripButton : {
@@ -88,7 +97,12 @@ const styles = React.StyleSheet.create({
     width : 200,
     marginBottom : 10,
     borderWidth : 2,
+    borderRadius:10,
+    
+    
   },
+
+  
 
   buttonDisabled : {
     alignItems: 'center',
@@ -97,6 +111,9 @@ const styles = React.StyleSheet.create({
     width : 200,
     marginBottom : 10,
     opacity : 0.5,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
   },
 
   buttonText : {
@@ -110,7 +127,10 @@ const styles = React.StyleSheet.create({
     backgroundColor: '#dee1e2',
     padding: 10,
     margin : 10,
-    width : 120,
+    width : 130,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
   },
 
   image : {
@@ -141,6 +161,7 @@ const styles = React.StyleSheet.create({
 
 table : {
   width : 400,
+  marginBottom : 20,
 },
 
 tableText : {
@@ -214,6 +235,15 @@ scrollView : {
 
 currencyCodes : {
   width : 300,
+},
+
+headerStyle : {
+  backgroundColor : '#dee1e2',
+},
+
+headerTitleStyle : {
+  alignSelf : 'center',
+  color : '#4d9280'
 },
 
 

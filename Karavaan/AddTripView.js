@@ -15,6 +15,9 @@ export default class AddTripView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Add A NEW Trip`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)
