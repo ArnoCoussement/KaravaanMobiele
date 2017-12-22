@@ -48,7 +48,7 @@ export class Startup extends Component {
     
     return(
         <Image style={styles.backgroundImage} source={require('./images/background.png')}>
-          <Image style={styles.image} source={require('./images/logoLong.gif')} />
+          <Image style={styles.image} source={require('./images/logo.gif')} />
           <TouchableOpacity style={styles.button} 
             onPress={() => navigate('MainView')} >
             <Text style={styles.buttonText}>Show trips</Text>
