@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text,Image, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import { Table, Row } from 'react-native-table-component';
 import {tripdb} from './App';
+
+
+const styles = require('./css/stylesheet.js')
 
 export default class TableByExpense extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -24,41 +27,24 @@ export default class TableByExpense extends Component {
                 <Row
                     data={[p.name, p.paid, p.owed, p.owed-p.paid]}
                     style={styles.row}
-                    textStyle={styles.text}
+                    textStyle={styles.tableText}
                 />
             )
         });
 
         return (
-            <ScrollView style={styles.container}>
-                <Text style={styles.text}>Currency for this expense: {this.state.expense.currency}</Text>
-                <Table>
-                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-                    {personView}
-                </Table>
-            </ScrollView>
+            <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
+            
+                <ScrollView style={styles.transparentContainer}>
+                    <Text style={styles.text}>Currency for this expense: {this.state.expense.currency}</Text>
+                    <Table style={styles.table}>
+                        <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
+                        {personView}
+                    </Table>
+                </ScrollView>
+            </Image>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 5,
-        paddingTop: 15
-    },
-    item: {
-        padding: 10,
-        fontSize: 18,
-    },
-    head: {
-        height: 40,
-        backgroundColor: '#f1f8ff'
-    },
-    text: {
-        marginLeft: 5
-    },
-    row: {
-        height: 30
-    }
-});
+

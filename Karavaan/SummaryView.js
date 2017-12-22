@@ -20,30 +20,30 @@ export default class SummaryView extends Component {
             <Image style={styles.backgroundImage} source={require('./images/background.png')}>
             
                 
-                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})}>
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={() => navigate('TableByTripScreen', {tripName: this.state.tripName})}>
                         <Text style={styles.buttonText}>Expenses</Text>
                     </TouchableOpacity>
                 
-                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} >
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={() => navigate('TableByCategoryScreen', {tripName: this.state.tripName})} >
 
                         <Text style={styles.buttonText}>Expenses by Category</Text>
                     </TouchableOpacity>
              
-                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} >
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={() => navigate('TableByCategoryPerPersonScreen', {tripName: this.state.tripName})} >
 
-                    <Text style={styles.buttonText}>Expenses by Category per Person</Text>
+                    <Text style={styles.buttonText}>Exp. by Category per Person</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={[styles.button]} onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} >
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={() => navigate('TableByPersonPerDayScreen', {tripName: this.state.tripName})} >
 
                     <Text style={styles.buttonText}>Expenses per Person per Day</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={[styles.button]} onPress={ () => navigate('TableByTransactionScreen', {tripName: this.state.tripName})} >
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={ () => navigate('TableByTransactionScreen', {tripName: this.state.tripName})} >
                         <Text style={styles.buttonText}>Overview of Transactions</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button]} onPress={ () => navigate('TableByTransactionPerPersonScreen' , {tripName: this.state.tripName})} >
-                        <Text style={styles.buttonText}>Overview of Transactions per Person </Text>
+                    <TouchableOpacity style={[styles.summaryButton]} onPress={ () => navigate('TableByTransactionPerPersonScreen' , {tripName: this.state.tripName})} >
+                        <Text style={styles.buttonText}>Transactions per Person </Text>
                     </TouchableOpacity>
             </Image>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView, Image } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import {tripdb} from './App';
 
@@ -23,8 +23,8 @@ export default class MainView extends Component {
 
     tripsView = this.state.trips.map( trip => {
       return(
-        <View style={styles.container}>
-          <Text style={styles.subject} key={trip.name}> {trip.name}</Text>
+        <View style={[styles.container, styles.tripContainer, styles.transparentContainer]}>
+          <Text style={styles.tripSubject} key={trip.name}> {trip.name}</Text>
 
           <View style={styles.listContainer}>
             <TouchableOpacity style={styles.listButton} onPress={() => navigate('TripProfileScreen', {trip: trip})} >
@@ -44,11 +44,12 @@ export default class MainView extends Component {
     
     return(
 
+    <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
       
-      <ScrollView style={{backgroundColor : 'white'}}>
+      <ScrollView style={styles.transparentContainer}>
         {tripsView}
-        <View style={styles.container}>
-          <TouchableOpacity style={[styles.button, styles.marginTop]}  
+        <View style={[styles.container,styles.transparentContainer]}>
+          <TouchableOpacity style={[styles.addTripButton, styles.marginTop]}  
           onPress={() => navigate('AddTripScreen', { refresh: this.refreshFunction })} 
           >
           
@@ -56,6 +57,7 @@ export default class MainView extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
+    </Image>
     );
   };
 

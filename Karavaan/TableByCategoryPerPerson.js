@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
+import { AppRegistry, FlatList, StyleSheet, Text,TouchableOpacity, Image, TextInput, View, Button, RefreshControl, ScrollView  } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import { Table, Row } from 'react-native-table-component';
 import {tripdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
+
+const styles = require('./css/stylesheet.js')
 
 export default class TableByCategoryPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -31,7 +33,7 @@ export default class TableByCategoryPerPerson extends Component {
                         values[id].owed - values[id].paid
                     ]}
                     style={styles.row}
-                    textStyle={styles.text}
+                    textStyle={styles.tableText}
                 />
             )
         })
@@ -46,8 +48,8 @@ export default class TableByCategoryPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{category}</Text>
-                    <Table>
-                        <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                    <Table style={styles.table}>
+                        <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(this.state.expenses[category])}
                     </Table>
                 </View>
@@ -55,39 +57,13 @@ export default class TableByCategoryPerPerson extends Component {
         });
 
         return (
-            <ScrollView style={styles.container}>
-                {categoryView}
-            </ScrollView>
+            <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
+            
+                <ScrollView style={styles.transparentContainer}>
+                    {categoryView}
+                </ScrollView>
+            </Image>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 5,
-    },
-    headText: {
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    item: {
-        paddingTop: 15
-    },
-    head: {
-        height: 40,
-        backgroundColor: '#f1f8ff'
-    },
-    text: {
-        marginLeft: 5
-    },
-    row: {
-        height: 40
-    },
-    btn: {
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 5,
-        marginBottom: 5
-    },    
-});

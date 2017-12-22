@@ -108,7 +108,11 @@ export class TripDB
     getTransactionsFromTrip(name) {
         for(let i =0 ; i < this.trips.length; i++){
             if(this.trips[i].name == name){
-                var transactionsCopy = this.trips[i].transactions;
+                var transactionsCopy = [];
+                this.trips[i].transactions.forEach(element => {
+                    transactionsCopy.push(element);
+                }, this);
+
                 transactionsCopy.sort(function(trans1, trans2) {
                     var date1 = trans1.date.split("/")[0];
                     var date2 = trans2.date.split("/")[0];
