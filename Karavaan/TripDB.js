@@ -146,24 +146,17 @@ export class TripDB
 
         var transactions = this.getTransactionsFromTrip(tripName);
 
-
-
         transactions.forEach( (trans) => {
-            var from = trans.from;
-            console.log(`Dit moet de naam voorstellen van de persoon: ${from}`);
-            var to = trans.to;
-            console.log(`Dit moet de tweede naam voorstellen van de transaction: ${to}`);
-
             if (!(trans.from in transByPers)) {
-                transByPers[trans.from] = {name:from, transactions:{}};
+                transByPers[trans.from] = {transactions:[]};
             }
-            var result = transByPers[trans.from].transactions;
-            result.push({from:from, to:to, date:trans.date, amount:trans.amount, currency:trans.currency});
-            //transByPers[trans.from].transactions.push({from:from, to:to, date:trans.date, amount:trans.amount, currency:trans.currency});
+
+            transByPers[trans.from].transactions.push({from:trans.from, to:trans.to, date:trans.date, amount:trans.amount, currency:trans.currency});
         }, this);
 
         return transByPers;
     }
+
 
 
 
