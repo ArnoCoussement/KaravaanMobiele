@@ -29,7 +29,7 @@ export default class TableByTransactionPerPerson extends Component {
                 <Row
                     data={[element.from , element.to , element.date, element.amount, element.currency]}
                     style={styles.row}
-                    textStyle={styles.tableText}
+                    textStyle={styles.tableTransactionText}
                 />
             )
         }, this);
@@ -45,8 +45,8 @@ export default class TableByTransactionPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{from}</Text>
-                    <Table>
-                        <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                    <Table style={styles.table}>
+                        <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(from)}
                     </Table>
                 </View>

@@ -34,7 +34,7 @@ export default class TripOverview extends Component {
       )});
 
       return (
-      <Image style={styles.backgroundImage} source={require('./images/background.png')}>
+      <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
         
         <Table style={styles.table}>
             <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
