@@ -10,6 +10,9 @@ const styles = require('./css/stylesheet.js')
 export default class TableByExpense extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `Table by expense`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
       
     constructor(props) {

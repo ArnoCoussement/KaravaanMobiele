@@ -11,6 +11,9 @@ const styles = require('./css/stylesheet.js')
 export default class TableByCategory extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `Expense per Category`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
       
     constructor(props) {

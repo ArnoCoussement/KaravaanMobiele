@@ -34,6 +34,8 @@ const styles = require('./css/stylesheet.js');
 export class Startup extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Let's get started!`,
+    headerTitleStyle :styles.headerTitleStyle,
+    headerStyle : styles.headerStyle,
   });
 
   constructor(props){
@@ -46,7 +48,7 @@ export class Startup extends Component {
     
     return(
         <Image style={styles.backgroundImage} source={require('./images/background.png')}>
-          <Image style={styles.image} source={require('./images/logo.png')} />
+          <Image style={styles.image} source={require('./images/logo.gif')} />
           <TouchableOpacity style={styles.button} 
             onPress={() => navigate('MainView')} >
             <Text style={styles.buttonText}>Show trips</Text>

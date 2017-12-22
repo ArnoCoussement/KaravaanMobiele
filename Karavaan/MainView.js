@@ -9,6 +9,10 @@ const styles = require('./css/stylesheet.js')
 export default class MainView extends Component {
   static navigationOptions = ({navigation}) => ({
     title: `Trip list`,
+     
+    headerRight: (<View></View>),
+    headerTitleStyle :styles.headerTitleStyle,
+    headerStyle : styles.headerStyle,
   });
 
   constructor(props){
@@ -26,7 +30,7 @@ export default class MainView extends Component {
         <View style={[styles.container, styles.tripContainer, styles.transparentContainer]}>
           <Text style={styles.tripSubject} key={trip.name}> {trip.name}</Text>
 
-          <View style={styles.listContainer}>
+          <View style={[styles.listContainer,styles.transparentContainer]}>
             <TouchableOpacity style={styles.listButton} onPress={() => navigate('TripProfileScreen', {trip: trip})} >
 
               <Text style={styles.buttonText}>Show Trip</Text>

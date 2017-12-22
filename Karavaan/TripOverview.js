@@ -4,12 +4,15 @@ import { Table, Row } from 'react-native-table-component';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
 
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity,TouchableHighlight} from 'react-native';
 const styles = require('./css/stylesheet.js');
 
 export default class TripOverview extends Component {
     static navigationOptions = ({navigation}) => ({
       title: `Trip to ${navigation.state.params.trip.name}`,
+      headerRight: (<View></View>),
+      headerTitleStyle :styles.headerTitleStyle,
+      headerStyle : styles.headerStyle,
     });
     
     constructor(props)
@@ -43,27 +46,29 @@ export default class TripOverview extends Component {
 
         <ScrollView contentContainerStyle={styles.tableContainer}>
           
-          <View style={[styles.container, styles.transparentContainer]}>
+          <View style={[styles.marginBottom, styles.transparentContainer]}>
             <TouchableOpacity style={styles.button}
                 onPress={() => navigate('AddPersonScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add companion</Text>
             </TouchableOpacity>
           </View>
-          <View style={[styles.container, styles.transparentContainer]}>
-            <TouchableOpacity style={this.state.trip.persons.length == 0? styles.buttonDisabled : styles.button}  
+          <View style={[styles.marginBottom, styles.transparentContainer]}>
+            <TouchableHighlight style={[styles.button,{opacity : this.state.trip.persons.length == 0? 0.5 : 1 } ]}  
+                underlayColor = 'white'
                 disabled={this.state.trip.persons.length == 0}
                 onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText} >Add Expense</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
-          <View style={[styles.container, styles.transparentContainer]}>
-            <TouchableOpacity style={this.state.trip.persons.length == 0? styles.buttonDisabled : styles.button}  
-                disabled={this.state.trip.persons.length == 0}
+          <View style={[styles.marginBottom, styles.transparentContainer]}>
+            <TouchableHighlight style={[styles.button,{opacity : this.state.trip.expenses.length == 0? 0.5 : 1 } ]}  
+                underlayColor = 'white'
+                disabled={this.state.trip.expenses.length == 0}
                 onPress={() => navigate('AddTransferScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add Transaction</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
-          <View style={[styles.container, styles.transparentContainer]}>
+          <View style={[styles.marginBottom, styles.transparentContainer]}>
             <TouchableOpacity style={styles.button}
                 onPress={() => navigate('SummaryScreen', { tripName: this.state.trip.name})}>
               <Text style={styles.buttonText}>View Summary</Text>

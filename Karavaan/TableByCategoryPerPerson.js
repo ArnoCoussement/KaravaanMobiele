@@ -10,6 +10,9 @@ const styles = require('./css/stylesheet.js')
 export default class TableByCategoryPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `Expense per Category per Person`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
       
     constructor(props) {

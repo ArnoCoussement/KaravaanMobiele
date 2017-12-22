@@ -10,6 +10,9 @@ const styles = require('./css/stylesheet.js');
 export default class TableByTransactionPerPerson extends Component {
     static navigationOptions = ({navigation}) => ({
         title: `Overview of transactions per person`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props) {
@@ -23,7 +26,7 @@ export default class TableByTransactionPerPerson extends Component {
     
     contentRow = (from) => {
         const rows = [];     
-        //console.log(`9999999999999 ${this.state.transactions[from].transactions[0].amount} 999999999999999999999999`)      
+            
         this.state.transactions[from].transactions.forEach((element) => {
             rows.push(
                 <Row

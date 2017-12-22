@@ -1,6 +1,6 @@
 import React from 'react';
 import {SPLITMETHOD} from './SplitMethods';
-import { View, TextInput, Text, Button,TouchableOpacity,Image } from 'react-native';
+import { View, TextInput, Text, Button,TouchableOpacity,TouchableHighlight,Image } from 'react-native';
 import {tripdb} from './App';
 
 const styles = require('./css/stylesheet.js')
@@ -9,6 +9,9 @@ export default class ExpenseOwedView extends React.Component
 {
     static navigationOptions = ({navigation}) => ({
         title: `Who owes what?`,
+        headerRight: (<View></View>),
+        headerTitleStyle :styles.headerTitleStyle,
+        headerStyle : styles.headerStyle,
     });
 
     constructor(props)
@@ -20,7 +23,8 @@ export default class ExpenseOwedView extends React.Component
             trip : this.props.navigation.state.params.trip,
             sharedAmount: 0,
             key: this.props.navigation.state.params.key,
-            toBeOwed:this.props.navigation.state.params.expense.getTotalPaid()
+            toBeOwed:this.props.navigation.state.params.expense.getTotalPaid(),
+            
         };
     }
 
@@ -46,6 +50,7 @@ export default class ExpenseOwedView extends React.Component
 
     onChanged = (id, amount) => {
         // Set oweAmount to the given amount
+        
         this.state.expense.setOweAmount(id, amount);
 
         // calculate what's been owed.
@@ -59,7 +64,7 @@ export default class ExpenseOwedView extends React.Component
         if (Number(totalOwed) < Number(0)) {
             this.state.expense.setOweAmount(id, 0);
             totalOwed += Number(amount);
-            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.");
+            alert("Please enter a valid number");
         }
         this.setState({toBeOwed : totalOwed});
     }
@@ -78,7 +83,7 @@ export default class ExpenseOwedView extends React.Component
         if (Number(totalOwed) < Number(0)) {
             this.state.expense.sharedAmount = 0;
             totalOwed += Number(amount);
-            alert("You ninconpoop, couldn't you give something that works? I will reset what you've done just to keep it working.");
+            alert("Please enter a valid number");
         }
         this.setState({sharedAmount:amount, toBeOwed : totalOwed});
     }
@@ -97,7 +102,7 @@ export default class ExpenseOwedView extends React.Component
                     this.props.navigation.state.params.refresh();
                 }
             } else {
-                alert("You stupid morron! Couldn't you give valid numbers?\nExample: 12.34");
+                alert("Please enter a valid number\nExample: 12.34");
             }
         }
     
@@ -111,7 +116,11 @@ export default class ExpenseOwedView extends React.Component
                         keyboardType = 'numeric'
                         value = {String(p.owed)}
                         placeholder = { this.state.expense.currency }
-                        onChangeText = {(amount)=> this.onChanged(p.id, amount)}
+                        onChangeText = {(amount)=> 
+                        this.onChanged(p.id, amount)
+                        
+                        }
+                        
                     />
                 </View>
             )
@@ -122,7 +131,8 @@ export default class ExpenseOwedView extends React.Component
                 <Text style={[styles.text, styles.marginBottom]}>To be divided among travellers: {this.state.toBeOwed} {this.state.expense.currency}</Text>
                 {peopleView}
                 <SharedExpenses placeholder={this.state.expense.currency} splitMethod={this.state.expense.splitMethod.name} current={this.state.expense.sharedAmount} onChangeText={this.setShared}/>
-                <TouchableOpacity style={[styles.button,styles.marginTop]}  onPress={() => {
+                <TouchableOpacity underlayColor='white'
+                style={[styles.button,styles.marginTop]}  onPress={() => {
                     addEvent()
                 }}>
 
