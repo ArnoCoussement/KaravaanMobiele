@@ -20,12 +20,13 @@ export default class TableByTransactionPerPerson extends Component {
     }
 
     
-    contentRow = (transactions) => {
-        const rows = [];            
-        this.state.transactions.forEach((element) => {
+    contentRow = (from) => {
+        const rows = [];     
+        //console.log(`9999999999999 ${this.state.transactions[from].transactions[0].amount} 999999999999999999999999`)      
+        this.state.transactions[from].transactions.forEach((element) => {
             rows.push(
                 <Row
-                    data={[element.from, element.to, element.date, element.amount, element.currency]}
+                    data={[element.from , element.to , element.date, element.amount, element.currency]}
                     style={styles.row}
                     textStyle={styles.text}
                 />
@@ -39,15 +40,13 @@ export default class TableByTransactionPerPerson extends Component {
     render() {
         const tableHead = ['From', 'To', 'Date', 'Amount', 'Currency'];
 
-        transactionview = Object.keys(this.state.transactions).map( trans => {
-
-           // console.log(`9999999999999999 ${trans.from} 88888888888`)
+        transactionview = Object.keys(this.state.transactions).map( from => {
             return(
                 <View style={styles.item}>
-                    <Text style={styles.headText}>{trans}</Text>
+                    <Text style={styles.headText}>{from}</Text>
                     <Table>
                         <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-                        {this.contentRow(trans)}
+                        {this.contentRow(from)}
                     </Table>
                 </View>
             )
