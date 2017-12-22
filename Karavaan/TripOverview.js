@@ -4,7 +4,7 @@ import { Table, Row } from 'react-native-table-component';
 import {PersonDB} from './InMemoryDatabase';
 import {Trip} from './Trip';
 
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity,TouchableHighlight} from 'react-native';
 const styles = require('./css/stylesheet.js');
 
 export default class TripOverview extends Component {
@@ -53,18 +53,20 @@ export default class TripOverview extends Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.marginBottom, styles.transparentContainer]}>
-            <TouchableOpacity style={this.state.trip.persons.length == 0? styles.buttonDisabled : styles.button}  
+            <TouchableHighlight style={[styles.button,{opacity : this.state.trip.persons.length == 0? 0.5 : 1 } ]}  
+                underlayColor = 'white'
                 disabled={this.state.trip.persons.length == 0}
                 onPress={() => navigate('AddExpenseScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText} >Add Expense</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
           <View style={[styles.marginBottom, styles.transparentContainer]}>
-            <TouchableOpacity style={this.state.trip.expenses.length == 0? styles.buttonDisabled : styles.button}  
+            <TouchableHighlight style={[styles.button,{opacity : this.state.trip.expenses.length == 0? 0.5 : 1 } ]}  
+                underlayColor = 'white'
                 disabled={this.state.trip.expenses.length == 0}
                 onPress={() => navigate('AddTransferScreen', { trip: this.state.trip, refresh: this.refreshFunction })}>
               <Text style={styles.buttonText}>Add Transaction</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
           <View style={[styles.marginBottom, styles.transparentContainer]}>
             <TouchableOpacity style={styles.button}

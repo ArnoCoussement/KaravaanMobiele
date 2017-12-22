@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, Button,TouchableOpacity,Image } from 'react-native';
+import { View, TextInput, Text, Button,TouchableHighlight,Image } from 'react-native';
 import {tripdb} from './App';
 import {SPLITMETHOD} from './SplitMethods';
 
@@ -59,7 +59,7 @@ export default class ExpensePaidView extends React.Component
                     navigate("ExpenseOwedScreen", {expense: this.state.expense, trip: this.state.trip, key: this.state.key, refresh: this.props.navigation.state.params.refresh });
                 }
             } else {
-                alert("You stupid morron! Couldn't you give valid numbers?\nExample: 12.34");
+                alert("Please enter a valid number\nExample: 12.34");
             }
         }
     
@@ -83,12 +83,12 @@ export default class ExpensePaidView extends React.Component
             <Image style={styles.backgroundImage} source={require('./images/background.png')}>
             
                 {peopleView}
-                <TouchableOpacity style={[styles.button,styles.marginTop]} onPress={() => {
+                <TouchableHighlight underlayColor='white' style={[styles.button,styles.marginTop]} onPress={() => {
                     nextEvent()
                 }}>
 
                     <Text style={styles.buttonText}>NEXT</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
             </Image>
         );
     }

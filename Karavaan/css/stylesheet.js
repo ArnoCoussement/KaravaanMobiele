@@ -162,6 +162,7 @@ const styles = React.StyleSheet.create({
 table : {
   width : 400,
   marginBottom : 20,
+  marginTop : 20,
 },
 
 tableText : {
