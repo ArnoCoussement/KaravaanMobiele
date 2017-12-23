@@ -32,7 +32,7 @@ export default class TableByCategoryPerPerson extends Component {
         values.forEach( exp => {
             rows.push(
                 <Row
-                    data={[exp.category, exp.paid, exp.owed, exp.currency]}
+                    data={[exp.category, Number(exp.paid).toFixed(2), Number(exp.owed).toFixed(2), exp.currency]}
                     style={styles.row}
                     textStyle={styles.tableTransactionText}
                 />

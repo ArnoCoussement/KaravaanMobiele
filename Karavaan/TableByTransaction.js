@@ -28,7 +28,7 @@ export default class TableByTransaction extends Component{
 
         transactionview = this.state.transactions.map( trans => {
             return(
-                <Row data={[trans.from, trans.to, trans.date, trans.amount, trans.currency]} style={styles.row} textStyle={styles.tableTransactionText}/>
+                <Row data={[trans.from, trans.to, trans.date, Number(trans.amount).toFixed(2), trans.currency]} style={styles.row} textStyle={styles.tableTransactionText}/>
             )
         });
 

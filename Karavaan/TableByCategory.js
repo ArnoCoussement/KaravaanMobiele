@@ -23,7 +23,8 @@ export default class TableByCategory extends Component {
             expenses : tripdb.getExpensesByCategory(this.props.navigation.state.params.tripName)
         };
     }
-
+ 
+    
     getTotalPaid(expense) {
         var amount = Number(0);
         expense.expensePersons.forEach( (element) => {
