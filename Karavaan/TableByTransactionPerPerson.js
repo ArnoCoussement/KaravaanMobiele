@@ -30,7 +30,7 @@ export default class TableByTransactionPerPerson extends Component {
         this.state.transactions[from].transactions.forEach((element) => {
             rows.push(
                 <Row
-                    data={[element.from , element.to , element.date, element.amount, element.currency]}
+                    data={[element.from , element.to , element.date, Number(element.amount).toFixed(2), element.currency]}
                     style={styles.row}
                     textStyle={styles.tableTransactionText}
                 />

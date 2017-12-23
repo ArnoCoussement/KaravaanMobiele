@@ -26,9 +26,10 @@ export default class TableByExpense extends Component {
         const tableHead = ['Name', 'Paid', 'Owed', 'Receives/Still needs to pay'];
 
         personView = this.state.expense.expensePersons.map( p => {
+            console.log('p.paid: ' + p.paid)
             return(
                 <Row
-                    data={[p.name, p.paid.toFixed(2), p.owed.toFixed(2), (p.owed-p.paid).toFixed(2)]}
+                    data={[p.name, Number(p.paid).toFixed(2), Number(p.owed).toFixed(2), Number(p.owed-p.paid).toFixed(2)]}
                     style={styles.row}
                     textStyle={styles.tableText}
                 />
