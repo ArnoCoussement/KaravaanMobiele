@@ -48,7 +48,7 @@ export default class TableByTransactionPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{from}</Text>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(from)}
                     </Table>

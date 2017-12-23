@@ -34,7 +34,7 @@ export default class TableByCategoryPerPerson extends Component {
                 <Row
                     data={[exp.category, exp.paid, exp.owed, exp.currency]}
                     style={styles.row}
-                    textStyle={styles.tableText}
+                    textStyle={styles.tableTransactionText}
                 />
             )
             totalPaid += currenciesdb.convertToEURFrom(Number(exp.paid), exp.currency);
@@ -43,7 +43,7 @@ export default class TableByCategoryPerPerson extends Component {
 
         rows.push(
             <Row
-                data={['Total:', totalPaid, totalOwed, 'EUR']}
+                data={['Total:', totalPaid.toFixed(2), totalOwed.toFixed(2), 'EUR']}
                 style={styles.row}
                 textStyle={styles.tableTotalText}
             />
@@ -76,7 +76,7 @@ export default class TableByCategoryPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{this.state.expenses[id].name}</Text>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(this.state.expenses[id])}
                     </Table>

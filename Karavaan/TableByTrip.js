@@ -51,7 +51,7 @@ export default class TableByTrip extends Component {
                 <Row
                     data={[expense.date, expense.category, expense.currency, butInfo(expense)]}
                     style={styles.row}
-                    textStyle={styles.tableText}
+                    textStyle={styles.tableTransactionText}
                 />
             )
         });
@@ -60,7 +60,7 @@ export default class TableByTrip extends Component {
             <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
             
                 <ScrollView style={styles.transparentContainer}>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {expensesView}
                     </Table>

@@ -31,9 +31,9 @@ export default class TableByCategoryPerPerson extends Component {
                 <Row
                     data={[
                         values[id].name,
-                        values[id].paid,
-                        values[id].owed,
-                        values[id].owed - values[id].paid
+                        values[id].paid.toFixed(2),
+                        values[id].owed.toFixed(2),
+                        (values[id].owed - values[id].paid).toFixed(2)
                     ]}
                     style={styles.row}
                     textStyle={styles.tableText}
@@ -51,7 +51,7 @@ export default class TableByCategoryPerPerson extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{category}</Text>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(this.state.expenses[category])}
                     </Table>

@@ -46,7 +46,7 @@ export default class TableByCategory extends Component {
         this.state.expenses[category].forEach((element) => {
             rows.push(
                 <Row
-                    data={[element.date, this.getTotalPaid(element), element.currency, butInfo(element)]}
+                    data={[element.date, this.getTotalPaid(element).toFixed(2), element.currency, butInfo(element)]}
                     style={styles.row}
                     textStyle={styles.tableText}
                 />
@@ -63,7 +63,7 @@ export default class TableByCategory extends Component {
             return(
                 <View style={styles.item}>
                     <Text style={styles.headText}>{category}</Text>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {this.contentRow(category)}
                     </Table>

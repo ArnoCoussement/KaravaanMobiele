@@ -28,7 +28,7 @@ export default class TableByExpense extends Component {
         personView = this.state.expense.expensePersons.map( p => {
             return(
                 <Row
-                    data={[p.name, p.paid, p.owed, p.owed-p.paid]}
+                    data={[p.name, p.paid.toFixed(2), p.owed.toFixed(2), (p.owed-p.paid).toFixed(2)]}
                     style={styles.row}
                     textStyle={styles.tableText}
                 />
@@ -40,7 +40,7 @@ export default class TableByExpense extends Component {
             
                 <ScrollView style={styles.transparentContainer}>
                     <Text style={styles.text}>Currency for this expense: {this.state.expense.currency}</Text>
-                    <Table style={styles.table}>
+                    <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                         <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                         {personView}
                     </Table>

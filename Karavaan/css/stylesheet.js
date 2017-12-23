@@ -133,9 +133,22 @@ const styles = React.StyleSheet.create({
     borderColor : '#fff',
   },
 
-  image : {
-    marginBottom: 100
+  mainButton : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    padding: 10,
+    width : 200,
+    marginBottom : 150,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
   },
+
+  image : {
+    marginBottom: 50
+  },
+
+
 
   backgroundImage : {
     
@@ -162,7 +175,13 @@ const styles = React.StyleSheet.create({
 table : {
   width : 400,
   marginBottom : 20,
-  marginTop : 20,
+  marginTop : 10,
+  
+},
+
+tableBorderStyle : {
+  borderWidth: 0.5,
+  borderColor: '#c8e1ff',
 },
 
 tableText : {
@@ -190,7 +209,7 @@ tableHeadText : {
 
 head: {
   height: 40,
-  backgroundColor: '#f1f8ff',
+  backgroundColor: '#4d9280',
   
 },
 

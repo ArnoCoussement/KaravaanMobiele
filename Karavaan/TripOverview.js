@@ -30,7 +30,7 @@ export default class TripOverview extends Component {
         console.log('paid: ' + p.totalPaid + '  owed: ' + p.totalOwed + '  Receives/To pay: ' + result);
         return (
           <Row
-            data={[p.name, p.totalPaid, p.totalOwed, result]}
+            data={[p.name, p.totalPaid.toFixed(2), p.totalOwed.toFixed(2), result.toFixed(2)]}
             style={styles.row}
             textStyle={styles.tableText}
           />
@@ -39,7 +39,7 @@ export default class TripOverview extends Component {
       return (
       <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
         
-        <Table style={styles.table}>
+        <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
             <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
             {peopleView}
           </Table>

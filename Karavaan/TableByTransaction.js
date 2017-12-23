@@ -36,7 +36,7 @@ export default class TableByTransaction extends Component{
             <Image style={styles.backgroundImage} source={require('./images/background2.png')}>
             
                     <ScrollView style={styles.transparentContainer}>
-                        <Table style={styles.table}>
+                        <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#4d9280'}}>
                             <Row data={tableHead} style={styles.head} textStyle={styles.tableHeadText}/>
                             {transactionview}
                         </Table>
