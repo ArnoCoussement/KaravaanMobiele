@@ -90,6 +90,17 @@ const styles = React.StyleSheet.create({
     borderColor : '#fff',
   },
 
+  summaryButtonBottom : {
+    alignItems: 'center',
+    backgroundColor: '#dee1e2',
+    padding: 10,
+    width : 300,
+    marginBottom : 40,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor : '#fff',
+  },
+
   addTripButton : {
     alignItems: 'center',
     backgroundColor: '#dee1e2',

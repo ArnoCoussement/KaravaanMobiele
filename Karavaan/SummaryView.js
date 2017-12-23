@@ -45,7 +45,7 @@ export default class SummaryView extends Component {
                     <TouchableOpacity style={[styles.summaryButton]} onPress={ () => navigate('TableByTransactionScreen', {tripName: this.state.tripName})} >
                         <Text style={styles.buttonText}>Overview of Transactions</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.summaryButton]} onPress={ () => navigate('TableByTransactionPerPersonScreen' , {tripName: this.state.tripName})} >
+                    <TouchableOpacity style={[styles.summaryButtonBottom]} onPress={ () => navigate('TableByTransactionPerPersonScreen' , {tripName: this.state.tripName})} >
                         <Text style={styles.buttonText}>Transactions per Person </Text>
                     </TouchableOpacity>
             </Image>
